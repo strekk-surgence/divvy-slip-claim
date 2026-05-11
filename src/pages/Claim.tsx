@@ -62,7 +62,40 @@ export default function Claim() {
   }
 
   return (
-    <main className="min-h-screen divvy-bg">
+    <main className="min-h-screen divvy-bg relative">
+      {gateOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-md animate-fade-in p-4">
+          <div className="surface relative max-w-md w-full p-8 text-center border hairline">
+            <div className="label-caps text-electric-green">One last step</div>
+            <h2 className="font-serif-display text-3xl mt-3">
+              Follow <span className="italic text-electric-green">@divvybet</span> on X
+            </h2>
+            <p className="text-foreground/70 text-sm mt-3 leading-relaxed">
+              Stay in the loop on Season 1 drops, leaderboard updates, and bonus windows.
+              Follow to reveal your Slip.
+            </p>
+            <div className="mt-7 space-y-3">
+              <Button
+                onClick={openFollow}
+                className="w-full h-12 rounded-none bg-electric-green text-background hover:bg-electric-green/90 font-semibold tracking-wide glow-green"
+              >
+                Follow @divvybet on X
+              </Button>
+              <Button
+                onClick={revealSlip}
+                disabled={!followClicked}
+                variant="outline"
+                className="w-full h-12 rounded-none border-foreground/30 bg-transparent text-foreground hover:bg-foreground/5 font-semibold tracking-wide disabled:opacity-40"
+              >
+                {followClicked ? "Reveal my Slip →" : "Follow first to reveal"}
+              </Button>
+            </div>
+            <p className="text-xs text-foreground/40 mt-5">
+              We can't verify the follow — please don't unfollow after.
+            </p>
+          </div>
+        </div>
+      )}
       <header className="container flex items-center justify-between py-6">
         <Link to="/" className="font-serif-display text-xl tracking-wide">DIVVY</Link>
         <Link to="/dashboard" className="label-caps underline-offset-4 hover:underline">My Slip ›</Link>
