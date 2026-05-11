@@ -4,108 +4,121 @@
 
 @layer base {
   :root {
-    /* Vintage betting receipt palette */
-    --background: 46 50% 90%;          /* cream #F4EDD8 */
-    --foreground: 0 0% 10%;            /* deep black #1A1A1A */
+    /* Divvy dark theme */
+    --background: 218 43% 7%;          /* #0A0F1A */
+    --foreground: 0 0% 94%;            /* #F0F0F0 */
 
-    --paper: 46 50% 90%;
+    --surface: 218 38% 10%;
+    --surface-2: 218 32% 14%;
+    --hairline: 0 0% 100%;
+
+    --electric-green: 162 65% 48%;     /* #22D3A6 */
+    --electric-blue: 217 91% 60%;      /* #3B82F6 */
+
+    /* Paper palette — preserved for the Slip artifact */
+    --paper: 46 50% 90%;               /* cream #F4EDD8 */
     --paper-deep: 44 38% 82%;
     --ink: 0 0% 10%;
     --ink-soft: 0 0% 25%;
     --stamp: 0 70% 32%;                /* red #8B1818 */
 
-    --card: 44 50% 94%;
-    --card-foreground: 0 0% 10%;
+    --card: 218 38% 10%;
+    --card-foreground: 0 0% 94%;
 
-    --popover: 46 50% 90%;
-    --popover-foreground: 0 0% 10%;
+    --popover: 218 38% 10%;
+    --popover-foreground: 0 0% 94%;
 
-    --primary: 0 0% 10%;
-    --primary-foreground: 46 50% 90%;
+    --primary: 162 65% 48%;
+    --primary-foreground: 218 43% 7%;
 
-    --secondary: 44 38% 82%;
-    --secondary-foreground: 0 0% 10%;
+    --secondary: 218 32% 14%;
+    --secondary-foreground: 0 0% 94%;
 
-    --muted: 44 28% 78%;
-    --muted-foreground: 0 0% 30%;
+    --muted: 218 28% 18%;
+    --muted-foreground: 218 12% 65%;
 
-    --accent: 0 70% 32%;
-    --accent-foreground: 46 50% 95%;
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 70% 32%;
-    --destructive-foreground: 46 50% 95%;
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 18%;
-    --input: 0 0% 30%;
-    --ring: 0 0% 10%;
+    --border: 0 0% 100% / 0.08;
+    --input: 0 0% 100% / 0.12;
+    --ring: 162 65% 48%;
 
     --radius: 0.25rem;
 
-    --sidebar-background: 46 50% 90%;
-    --sidebar-foreground: 0 0% 10%;
-    --sidebar-primary: 0 0% 10%;
-    --sidebar-primary-foreground: 46 50% 90%;
-    --sidebar-accent: 44 38% 82%;
-    --sidebar-accent-foreground: 0 0% 10%;
-    --sidebar-border: 0 0% 18%;
-    --sidebar-ring: 0 0% 10%;
+    --sidebar-background: 218 43% 7%;
+    --sidebar-foreground: 0 0% 94%;
+    --sidebar-primary: 162 65% 48%;
+    --sidebar-primary-foreground: 218 43% 7%;
+    --sidebar-accent: 218 32% 14%;
+    --sidebar-accent-foreground: 0 0% 94%;
+    --sidebar-border: 0 0% 100% / 0.08;
+    --sidebar-ring: 162 65% 48%;
 
     --font-serif: 'Playfair Display', 'DM Serif Display', Georgia, serif;
     --font-sans: 'Inter', system-ui, sans-serif;
     --font-mono: 'IBM Plex Mono', 'Space Mono', ui-monospace, monospace;
   }
-
-  .dark {
-    --background: 46 50% 90%;
-    --foreground: 0 0% 10%;
-  }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
+  * { @apply border-border; }
 
   html, body {
-    @apply bg-background text-foreground;
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv11";
   }
 }
 
 @layer components {
-  /* Paper grain — subtle noise via layered gradients */
-  .paper-grain {
-    background-color: hsl(var(--paper));
-    background-image:
-      radial-gradient(hsl(0 0% 0% / 0.035) 1px, transparent 1px),
-      radial-gradient(hsl(0 0% 0% / 0.025) 1px, transparent 1px),
-      linear-gradient(180deg, hsl(46 50% 92%) 0%, hsl(44 45% 86%) 100%);
-    background-size: 3px 3px, 7px 7px, 100% 100%;
-    background-position: 0 0, 1px 2px, 0 0;
+  /* Dark background with subtle radial gradient toward centre */
+  .divvy-bg {
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 30%, hsl(218 38% 13% / 0.9) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 80% at 80% 90%, hsl(162 50% 18% / 0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 70% 70% at 10% 80%, hsl(217 60% 22% / 0.15) 0%, transparent 60%),
+      hsl(var(--background));
   }
 
+  .surface {
+    background: hsl(var(--surface));
+    border: 1px solid hsl(0 0% 100% / 0.08);
+  }
+  .surface-soft {
+    background: linear-gradient(180deg, hsl(218 36% 11%) 0%, hsl(218 38% 9%) 100%);
+    border: 1px solid hsl(0 0% 100% / 0.08);
+  }
+
+  .hairline { border-color: hsl(0 0% 100% / 0.10); }
+
+  /* Paper grain — for the Slip artifact only */
   .paper-grain-soft {
-    background-color: hsl(var(--card));
+    background-color: hsl(var(--paper));
     background-image:
       radial-gradient(hsl(0 0% 0% / 0.04) 1px, transparent 1px),
       radial-gradient(hsl(0 0% 0% / 0.02) 1.5px, transparent 1.5px);
     background-size: 4px 4px, 9px 9px;
     background-position: 0 0, 2px 3px;
+    color: hsl(var(--ink));
   }
 
-  .font-serif-display {
-    font-family: var(--font-serif);
-    font-weight: 700;
-    letter-spacing: 0.01em;
-  }
-
-  .font-mono-num {
-    font-family: var(--font-mono);
-    font-feature-settings: "tnum";
-  }
+  .font-serif-display { font-family: var(--font-serif); font-weight: 700; letter-spacing: 0.01em; }
+  .font-mono-num { font-family: var(--font-mono); font-feature-settings: "tnum"; }
 
   .label-caps {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: hsl(218 12% 65%);
+  }
+  .label-caps-paper {
     font-family: var(--font-sans);
     font-size: 0.65rem;
     letter-spacing: 0.18em;
@@ -114,22 +127,14 @@
     color: hsl(var(--ink-soft));
   }
 
-  /* Perforated edge — dotted holes */
-  .perforated-right {
-    background-image: radial-gradient(circle at 6px 50%, hsl(var(--paper)) 4px, transparent 4.5px);
-    background-size: 12px 14px;
-    background-repeat: repeat-y;
-    background-position: right center;
-  }
-
+  /* Perforated edge — holes punched into paper. The hole color matches dark page so card reads as torn from a sheet. */
   .perforated-left {
-    background-image: radial-gradient(circle at 6px 50%, hsl(var(--paper)) 4px, transparent 4.5px);
+    background-image: radial-gradient(circle at 6px 50%, hsl(var(--background)) 4px, transparent 4.5px);
     background-size: 12px 14px;
     background-repeat: repeat-y;
     background-position: left center;
   }
 
-  /* Rubber stamp */
   .stamp {
     color: hsl(var(--stamp));
     border: 3px solid hsl(var(--stamp));
@@ -144,27 +149,15 @@
     background: hsl(var(--stamp) / 0.04);
   }
 
-  /* Barcode — vertical stripes generated from text hash */
-  .barcode {
-    display: flex;
-    align-items: stretch;
-    height: 38px;
-    gap: 1px;
-  }
-  .barcode > span {
-    display: block;
-    background: hsl(var(--ink));
-  }
+  .barcode { display: flex; align-items: stretch; height: 38px; gap: 1px; }
+  .barcode > span { display: block; background: hsl(var(--ink)); }
 
-  .ticket-edge-top,
-  .ticket-edge-bottom {
-    --notch: 8px;
-    -webkit-mask:
-      radial-gradient(circle var(--notch) at var(--notch) 0, transparent 98%, #000 100%) top left,
-      radial-gradient(circle var(--notch) at calc(100% - var(--notch)) 0, transparent 98%, #000 100%) top right,
-      radial-gradient(circle var(--notch) at var(--notch) 100%, transparent 98%, #000 100%) bottom left,
-      radial-gradient(circle var(--notch) at calc(100% - var(--notch)) 100%, transparent 98%, #000 100%) bottom right,
-      linear-gradient(#000, #000);
-    -webkit-mask-composite: source-over;
-  }
+  /* Glow accents */
+  .glow-green { box-shadow: 0 0 0 1px hsl(var(--electric-green) / 0.35), 0 10px 40px -10px hsl(var(--electric-green) / 0.45); }
+  .glow-blue  { box-shadow: 0 0 0 1px hsl(var(--electric-blue) / 0.35),  0 10px 40px -10px hsl(var(--electric-blue) / 0.45); }
+
+  .text-electric-green { color: hsl(var(--electric-green)); }
+  .text-electric-blue  { color: hsl(var(--electric-blue)); }
+  .bg-electric-green   { background-color: hsl(var(--electric-green)); }
+  .bg-electric-blue    { background-color: hsl(var(--electric-blue)); }
 }

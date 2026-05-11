@@ -20,6 +20,11 @@ export default {
         paper: { DEFAULT: "hsl(var(--paper))", deep: "hsl(var(--paper-deep))" },
         ink: { DEFAULT: "hsl(var(--ink))", soft: "hsl(var(--ink-soft))" },
         stamp: "hsl(var(--stamp))",
+        electric: {
+          green: "hsl(var(--electric-green))",
+          blue: "hsl(var(--electric-blue))",
+        },
+        surface: { DEFAULT: "hsl(var(--surface))", 2: "hsl(var(--surface-2))" },
         primary: { DEFAULT: "hsl(var(--primary))", foreground: "hsl(var(--primary-foreground))" },
         secondary: { DEFAULT: "hsl(var(--secondary))", foreground: "hsl(var(--secondary-foreground))" },
         destructive: { DEFAULT: "hsl(var(--destructive))", foreground: "hsl(var(--destructive-foreground))" },
