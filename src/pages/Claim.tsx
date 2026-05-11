@@ -11,9 +11,23 @@ export default function Claim() {
   const nav = useNavigate();
   const cardRef = useRef<HTMLDivElement>(null);
   const [busy, setBusy] = useState(false);
+  const [gateOpen, setGateOpen] = useState(() => {
+    if (typeof window === "undefined") return true;
+    return localStorage.getItem("divvy_followed_x") !== "1";
+  });
+  const [followClicked, setFollowClicked] = useState(false);
 
   useEffect(() => { if (!slip) nav("/"); }, [slip, nav]);
   if (!slip) return null;
+
+  function openFollow() {
+    window.open("https://x.com/intent/follow?screen_name=divvybet", "_blank", "noopener,noreferrer");
+    setFollowClicked(true);
+  }
+  function revealSlip() {
+    localStorage.setItem("divvy_followed_x", "1");
+    setGateOpen(false);
+  }
 
   const referralUrl = buildReferralUrl(slip.referral_code);
   const tweet = `Just claimed my Divvy Season 1 Slip — No. ${slip.slip_no}. $10 first-bet credit + 100 Slip Points locked in. Join me before the World Cup → ${referralUrl}`;
