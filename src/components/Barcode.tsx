@@ -24,7 +24,7 @@ export function Barcode({ value, className }: Props) {
           <span key={i} style={{ width: `${w}px`, opacity: i % 5 === 0 ? 0.95 : 0.85 }} />
         ))}
       </div>
-      <div className="font-mono-num text-[10px] tracking-[0.3em] mt-1.5 text-ink-soft text-center">
+      <div className="font-mono-num text-[10px] tracking-[0.3em] mt-1.5 text-ink/60 text-center">
         {value.replace(/^https?:\/\//, "").toUpperCase()}
       </div>
     </div>

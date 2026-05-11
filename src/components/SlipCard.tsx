@@ -38,12 +38,12 @@ export const SlipCard = forwardRef<HTMLDivElement, Props>(({ slip, animate }, re
           <div className="font-serif-display text-[1.35rem] leading-none tracking-wide">
             DIVVY <span className="text-ink-soft">·</span> SEASON 1
           </div>
-          <div className="label-caps mt-2">Official Claim Receipt</div>
+          <div className="label-caps-paper mt-2">Official Claim Receipt</div>
         </div>
 
         {/* Slip No */}
         <div className="mt-5">
-          <div className="label-caps">Slip No.</div>
+          <div className="label-caps-paper">Slip No.</div>
           <div className="font-mono-num text-[2.6rem] leading-none tracking-tight mt-1">
             {slip.slip_no}
           </div>
@@ -61,11 +61,11 @@ export const SlipCard = forwardRef<HTMLDivElement, Props>(({ slip, animate }, re
 
         <div className="grid grid-cols-2 gap-3 text-[11px]">
           <div>
-            <div className="label-caps">Ref. Code</div>
+            <div className="label-caps-paper">Ref. Code</div>
             <div className="font-mono-num text-base mt-0.5">{slip.referral_code.toUpperCase()}</div>
           </div>
           <div className="text-right">
-            <div className="label-caps">Status</div>
+            <div className="label-caps-paper">Status</div>
             <div className="font-mono-num text-base mt-0.5">VALID</div>
           </div>
         </div>
@@ -84,7 +84,7 @@ function Field({
 }: { label: string; value: string; mono?: boolean; italic?: boolean; className?: string }) {
   return (
     <div className={className}>
-      <div className="label-caps">{label}</div>
+      <div className="label-caps-paper">{label}</div>
       <div className={`mt-0.5 text-ink ${mono ? "font-mono-num text-[0.95rem]" : "text-[0.95rem]"} ${italic ? "italic font-serif-display font-normal" : ""}`}>
         {value}
       </div>
