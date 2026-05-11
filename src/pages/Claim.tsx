@@ -16,6 +16,7 @@ export default function Claim() {
     return localStorage.getItem("divvy_followed_x") !== "1";
   });
   const [followClicked, setFollowClicked] = useState(false);
+  const [shared, setShared] = useState(() => typeof window !== "undefined" && localStorage.getItem("divvy_shared_x") === "1");
 
   useEffect(() => { if (!slip) nav("/"); }, [slip, nav]);
   if (!slip) return null;
@@ -48,6 +49,8 @@ export default function Claim() {
       }
       if (intent === "share") {
         window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweet)}`, "_blank", "noopener,noreferrer");
+        localStorage.setItem("divvy_shared_x", "1");
+        setShared(true);
       }
     } catch {
       toast({ title: "Couldn't render slip", description: "Try Copy Link instead." });
@@ -137,12 +140,21 @@ export default function Claim() {
           </Button>
         </div>
 
-        <Button
-          asChild
-          className="mt-3 w-full h-12 rounded-none bg-electric-blue text-white hover:bg-electric-blue/90 font-semibold tracking-wide glow-blue"
-        >
-          <a href="https://divvy.bet" target="_blank" rel="noreferrer">Claim on Divvy →</a>
-        </Button>
+        {shared ? (
+          <Button
+            asChild
+            className="mt-3 w-full h-12 rounded-none bg-electric-blue text-white hover:bg-electric-blue/90 font-semibold tracking-wide glow-blue animate-fade-up"
+          >
+            <a href="https://divvy.bet" target="_blank" rel="noreferrer">Claim on Divvy →</a>
+          </Button>
+        ) : (
+          <Button
+            disabled
+            className="mt-3 w-full h-12 rounded-none bg-foreground/10 text-foreground/40 font-semibold tracking-wide cursor-not-allowed disabled:opacity-100"
+          >
+            Share to X to unlock
+          </Button>
+        )}
 
         <button
           onClick={() => downloadAndShare("download")}
