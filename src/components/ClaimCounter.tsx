@@ -14,9 +14,9 @@ export function ClaimCounter() {
   const digits = n.toLocaleString("en-US").split("");
 
   return (
-    <div className="inline-flex items-baseline gap-3 border-t border-b border-ink/30 py-3 px-5 paper-grain-soft">
+    <div className="inline-flex items-baseline gap-3 surface py-3 px-5">
       <span className="label-caps">Slips claimed</span>
-      <span className="font-mono-num text-2xl tracking-tight">
+      <span className="font-mono-num text-2xl tracking-tight text-electric-green">
         {digits.map((d, i) => (
           <span key={`${i}-${d}`} className="inline-block animate-tick">{d}</span>
         ))}
