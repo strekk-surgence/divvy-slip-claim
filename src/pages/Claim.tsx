@@ -16,6 +16,7 @@ export default function Claim() {
     return localStorage.getItem("divvy_followed_x") !== "1";
   });
   const [followClicked, setFollowClicked] = useState(false);
+  const [shared, setShared] = useState(() => typeof window !== "undefined" && localStorage.getItem("divvy_shared_x") === "1");
 
   useEffect(() => { if (!slip) nav("/"); }, [slip, nav]);
   if (!slip) return null;
