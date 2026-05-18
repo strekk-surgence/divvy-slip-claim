@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import html2canvas from "html2canvas";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SlipCard } from "@/components/SlipCard";
 import { useNavigate, Link } from "react-router-dom";
 import { buildReferralUrl, getCurrentSlip } from "@/lib/divvy";
 import { toast } from "@/hooks/use-toast";
 import Dashboard from "./Dashboard";
+import slipImage from "@/assets/slip.png";
 
 export default function Claim() {
   const slip = getCurrentSlip();
@@ -131,8 +131,8 @@ export default function Claim() {
 
             <div className="animate-fade-up relative" style={{ animationDelay: "120ms" }}>
               <div className="absolute -inset-8 bg-electric-green/10 blur-3xl rounded-full pointer-events-none" />
-              <div className="relative">
-                <SlipCard ref={cardRef} slip={slip} animate />
+              <div ref={cardRef} className="relative mx-auto max-w-sm">
+                <img src={slipImage} alt={`Divvy Season 1 Slip No. ${slip.slip_no}`} className="w-full h-auto block" />
               </div>
             </div>
 
