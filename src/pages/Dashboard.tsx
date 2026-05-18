@@ -42,6 +42,18 @@ export default function Dashboard() {
   const nav = useNavigate();
   const [copied, setCopied] = useState(false);
   const [showAllBoard, setShowAllBoard] = useState(false);
+  const [claimed, setClaimed] = useState<Record<string, boolean>>(() => {
+    if (typeof window === "undefined") return {};
+    try { return JSON.parse(localStorage.getItem("divvy_earn_claimed") || "{}"); } catch { return {}; }
+  });
+
+  function claimEarn(p: EarnPath) {
+    if (claimed[p.id]) return;
+    if (p.url) window.open(p.url, "_blank", "noopener,noreferrer");
+    const next = { ...claimed, [p.id]: true };
+    setClaimed(next);
+    localStorage.setItem("divvy_earn_claimed", JSON.stringify(next));
+  }
   useEffect(() => { if (!slip) nav("/"); }, [slip, nav]);
   if (!slip) return null;
 
