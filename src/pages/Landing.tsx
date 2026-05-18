@@ -84,13 +84,13 @@ export default function Landing() {
             tag="Refer + Earn"
             tagColor="blue"
             title="Compounding rewards"
-            sub="+100 Slip Points per friend who claims. +250 when they connect a wallet on Divvy. 5% lifetime compounding from every referred wallet's points."
+            sub="+100 Slip Points per friend who claims. +250 when they connect a wallet on Divvy."
           />
           <ValueCard
             tag="Season One Standings"
             tagColor="green"
-            title="$DVY every Sunday"
-            sub="Top 100 wallets win tier payouts each week. Top wallet ~$1K. Top 10 split $2.25K. Top 50 split $1K. Top 100 split $750."
+            title="TBD"
+            sub="Details coming soon."
           />
         </div>
       </section>
