@@ -147,15 +147,29 @@ export default function Dashboard() {
               <div className="font-serif-display text-2xl mt-1">Ways to climb</div>
             </div>
             <div className="mt-4">
-              {EARN_PATHS.map((p, i) => (
-                <div
-                  key={i}
-                  className="flex items-center justify-between px-5 py-3 border-b hairline last:border-b-0"
-                >
-                  <div className="text-sm md:text-[15px] text-foreground/85">{p.label}</div>
-                  <div className="font-mono-num text-sm text-electric-green shrink-0 ml-4">{p.pts}</div>
-                </div>
-              ))}
+              {EARN_PATHS.map((p) => {
+                const isClaimed = !!claimed[p.id];
+                return (
+                  <button
+                    key={p.id}
+                    onClick={() => claimEarn(p)}
+                    disabled={isClaimed}
+                    className={`w-full flex items-center justify-between px-5 py-3 border-b hairline last:border-b-0 text-left transition-colors ${
+                      isClaimed
+                        ? "opacity-50 cursor-not-allowed"
+                        : "hover:bg-electric-green/5 cursor-pointer"
+                    }`}
+                  >
+                    <div className={`text-sm md:text-[15px] flex items-center gap-2 ${isClaimed ? "text-foreground/50 line-through" : "text-foreground/85"}`}>
+                      {p.label}
+                      {isClaimed && <Check className="h-3.5 w-3.5 text-electric-green" />}
+                    </div>
+                    <div className={`font-mono-num text-sm shrink-0 ml-4 ${isClaimed ? "text-foreground/40" : "text-electric-green"}`}>
+                      {isClaimed ? "Claimed" : p.pts}
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           </div>
 
