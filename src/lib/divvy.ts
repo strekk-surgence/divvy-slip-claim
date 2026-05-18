@@ -116,7 +116,7 @@ export function getLeaderboardPosition(handle: string): number {
 }
 
 export function buildReferralUrl(code: string): string {
-  return `${window.location.origin}/?ref=${code}`;
+  return `https://divvy.bet/?ref=${code}`;
 }
 
 export function getReferralCodeFromUrl(): string | undefined {
