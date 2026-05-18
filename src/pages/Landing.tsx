@@ -64,7 +64,7 @@ export default function Landing() {
               <div className="label-caps-paper mt-6">Issued To</div>
               <div className="font-mono-num text-sm text-ink">@your_handle</div>
               <div className="label-caps-paper mt-4">Selection</div>
-              <div className="text-sm text-ink">Season One · $DVY</div>
+              <div className="text-sm text-ink">Season One</div>
               <div className="absolute right-3 top-3"><div className="stamp text-[10px]">Issued</div></div>
             </div>
           </div>
