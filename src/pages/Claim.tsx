@@ -33,7 +33,7 @@ export default function Claim() {
   }
 
   const referralUrl = buildReferralUrl(slip.referral_code);
-  const tweet = `Just claimed my Divvy Season 1 Slip — No. ${slip.slip_no}. $10 first-bet credit + 100 Slip Points locked in. Join me before the World Cup → ${referralUrl}`;
+  const tweet = `Just claimed my Divvy Season One Slip — No. ${slip.slip_no}. 100 Slip Points locked in. Climb the standings with me → ${referralUrl}`;
 
   async function downloadAndShare(intent: "share" | "download") {
     if (!cardRef.current) return;
@@ -127,8 +127,7 @@ export default function Claim() {
               Slip No. <span className="font-mono-num align-middle">{slip.slip_no}</span> claimed.
             </h1>
             <p className="text-foreground/70 mt-3 max-w-md mx-auto">
-              You've unlocked <span className="text-electric-green font-semibold">$10 first-bet bonus</span> +{" "}
-              <span className="text-electric-blue font-semibold">100 Slip Points</span>.
+              You're in Season One. <span className="text-electric-green font-semibold">100 Slip Points</span> credited. Climb the leaderboard.
             </p>
           </div>
 
