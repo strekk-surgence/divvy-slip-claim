@@ -124,6 +124,9 @@ export default function Claim() {
               <h1 className="font-serif-display text-3xl md:text-4xl mt-3">
                 Slip No. <span className="font-mono-num align-middle">{slip.slip_no}</span> claimed.
               </h1>
+              <p className="font-serif-display italic text-foreground/85 mt-3 text-base md:text-lg">
+                You now hold one of the first <span className="font-mono-num not-italic">{Number(slip.slip_no).toLocaleString()}</span> slips issued.
+              </p>
               <p className="text-foreground/70 mt-3 max-w-md mx-auto">
                 You're in Season One. <span className="text-electric-green font-semibold">100 Slip Points</span> credited. Climb the leaderboard.
               </p>

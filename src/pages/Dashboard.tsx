@@ -173,6 +173,29 @@ export default function Dashboard() {
             </div>
           </div>
 
+          {/* Top Rewards This Season */}
+          <div className="surface">
+            <div className="px-5 pt-5">
+              <div className="label-caps text-electric-green">Top Rewards This Season</div>
+              <div className="font-serif-display text-2xl mt-1">What you're climbing for</div>
+              <p className="text-xs text-foreground/55 mt-2">Rewards revealed soon. Placeholders below.</p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-foreground/10 mt-4 border-t hairline">
+              {[
+                { tag: "Prize Pool", title: "Season prize pool", sub: "Top wallets paid out at season close." },
+                { tag: "Status", title: "Founder status", sub: "Permanent badge for early Season One holders." },
+                { tag: "Access", title: "Exclusive perks", sub: "Private drops, early features, gated rooms." },
+                { tag: "Seasonal", title: "Seasonal rewards", sub: "Recurring drops across the season." },
+              ].map((r) => (
+                <div key={r.title} className="bg-background p-5">
+                  <div className="label-caps text-electric-green">{r.tag}</div>
+                  <div className="font-serif-display text-xl mt-1">{r.title}</div>
+                  <p className="text-xs text-foreground/60 mt-2 leading-snug">{r.sub}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* Leaderboard */}
           <div className="surface">
             <div className="flex items-baseline justify-between px-5 pt-5">
