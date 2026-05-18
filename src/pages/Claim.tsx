@@ -197,13 +197,6 @@ export default function Claim() {
               </Button>
             </div>
 
-            <Button
-              onClick={() => nav("/dashboard")}
-              variant="outline"
-              className="mt-3 w-full h-12 rounded-none border-foreground/30 bg-transparent text-foreground hover:bg-foreground/5 font-semibold tracking-wide"
-            >
-              Skip →
-            </Button>
 
             <button
               onClick={() => downloadAndShare("download")}
