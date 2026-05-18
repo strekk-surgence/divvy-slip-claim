@@ -52,6 +52,10 @@ export default function Landing() {
               X OAuth. No wallet required to claim.
             </span>
           </div>
+
+          <div className="mt-6 label-caps animate-fade-up" style={{ animationDelay: "260ms" }}>
+            Claim → Share → Climb
+          </div>
         </div>
 
         <div className="hidden lg:flex justify-center animate-fade-up" style={{ animationDelay: "300ms" }}>
