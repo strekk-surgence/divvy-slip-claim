@@ -73,10 +73,10 @@ export default function Claim() {
         <Dashboard />
       </div>
 
-      {/* Claim experience as a full-screen overlay */}
-      <div className="fixed inset-0 z-40 overflow-y-auto bg-background/95 backdrop-blur-xl animate-fade-in">
+      {/* Claim experience as a centered modal popup over the dashboard */}
+      <div className="fixed inset-0 z-40 overflow-y-auto bg-background/40 backdrop-blur-sm animate-fade-in flex items-start md:items-center justify-center p-4">
         {gateOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-md animate-fade-in p-4">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/70 backdrop-blur-md animate-fade-in p-4">
             <div className="surface relative max-w-md w-full p-8 text-center border hairline">
               <div className="label-caps text-electric-green">One last step</div>
               <h2 className="font-serif-display text-3xl mt-3">
@@ -109,88 +109,70 @@ export default function Claim() {
           </div>
         )}
 
-        <header className="container flex items-center justify-between py-6">
-          <Link to="/" className="font-serif-display text-xl tracking-wide">DIVVY</Link>
+        <div className="relative w-full max-w-xl my-8 surface border hairline shadow-[0_40px_80px_-20px_rgba(0,0,0,0.7)] bg-background/95 backdrop-blur-xl">
           <button
             onClick={() => nav("/dashboard")}
             aria-label="Close and go to dashboard"
-            className="h-10 w-10 inline-flex items-center justify-center rounded-full border hairline hover:bg-foreground/5 transition-colors"
+            className="absolute top-4 right-4 h-10 w-10 inline-flex items-center justify-center rounded-full border hairline hover:bg-foreground/5 transition-colors z-10"
           >
             <X className="h-4 w-4" />
           </button>
-        </header>
 
-        <section className="container py-6 md:py-10 max-w-xl">
-          <div className="text-center mb-8 animate-fade-up">
-            <div className="label-caps text-electric-green">Stamped & issued</div>
-            <h1 className="font-serif-display text-3xl md:text-4xl mt-3">
-              Slip No. <span className="font-mono-num align-middle">{slip.slip_no}</span> claimed.
-            </h1>
-            <p className="text-foreground/70 mt-3 max-w-md mx-auto">
-              You're in Season One. <span className="text-electric-green font-semibold">100 Slip Points</span> credited. Climb the leaderboard.
-            </p>
-          </div>
-
-          <div className="animate-fade-up relative" style={{ animationDelay: "120ms" }}>
-            <div className="absolute -inset-8 bg-electric-green/10 blur-3xl rounded-full pointer-events-none" />
-            <div className="relative">
-              <SlipCard ref={cardRef} slip={slip} animate />
+          <section className="px-6 md:px-10 py-10">
+            <div className="text-center mb-8 animate-fade-up">
+              <div className="label-caps text-electric-green">Stamped & issued</div>
+              <h1 className="font-serif-display text-3xl md:text-4xl mt-3">
+                Slip No. <span className="font-mono-num align-middle">{slip.slip_no}</span> claimed.
+              </h1>
+              <p className="text-foreground/70 mt-3 max-w-md mx-auto">
+                You're in Season One. <span className="text-electric-green font-semibold">100 Slip Points</span> credited. Climb the leaderboard.
+              </p>
             </div>
-          </div>
 
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-3 animate-fade-up" style={{ animationDelay: "260ms" }}>
+            <div className="animate-fade-up relative" style={{ animationDelay: "120ms" }}>
+              <div className="absolute -inset-8 bg-electric-green/10 blur-3xl rounded-full pointer-events-none" />
+              <div className="relative">
+                <SlipCard ref={cardRef} slip={slip} animate />
+              </div>
+            </div>
+
+            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-3 animate-fade-up" style={{ animationDelay: "260ms" }}>
+              <Button
+                onClick={() => downloadAndShare("share")}
+                disabled={busy}
+                className="h-12 rounded-none bg-electric-green text-background hover:bg-electric-green/90 font-semibold tracking-wide glow-green"
+              >
+                {busy ? "Preparing image…" : "Share to X"}
+              </Button>
+              <Button
+                onClick={copyLink}
+                variant="outline"
+                className="h-12 rounded-none border-foreground/30 bg-transparent text-foreground hover:bg-foreground/5 font-semibold tracking-wide"
+              >
+                Copy Link
+              </Button>
+            </div>
+
             <Button
-              onClick={() => downloadAndShare("share")}
-              disabled={busy}
-              className="h-12 rounded-none bg-electric-green text-background hover:bg-electric-green/90 font-semibold tracking-wide glow-green"
-            >
-              {busy ? "Preparing image…" : "Share to X"}
-            </Button>
-            <Button
-              onClick={copyLink}
-              variant="outline"
-              className="h-12 rounded-none border-foreground/30 bg-transparent text-foreground hover:bg-foreground/5 font-semibold tracking-wide"
-            >
-              Copy Link
-            </Button>
-          </div>
-
-          {shared ? (
-            <Button
-              asChild
-              className="mt-3 w-full h-12 rounded-none bg-electric-blue text-white hover:bg-electric-blue/90 font-semibold tracking-wide glow-blue animate-fade-up"
-            >
-              <a href="https://divvy.bet" target="_blank" rel="noreferrer">Claim on Divvy →</a>
-            </Button>
-          ) : (
-            <Button
-              disabled
-              className="mt-3 w-full h-12 rounded-none bg-foreground/10 text-foreground/40 font-semibold tracking-wide cursor-not-allowed disabled:opacity-100"
-            >
-              Share to X to unlock
-            </Button>
-          )}
-
-          <button
-            onClick={() => downloadAndShare("download")}
-            className="mt-5 label-caps underline-offset-4 hover:underline mx-auto block"
-          >
-            Just download the PNG
-          </button>
-
-          <p className="text-xs text-foreground/50 text-center mt-6 leading-relaxed">
-            Your Slip image will download. Attach it to the X compose window for best timeline preview.
-          </p>
-
-          <div className="mt-8 text-center">
-            <button
               onClick={() => nav("/dashboard")}
-              className="label-caps underline underline-offset-4 hover:text-electric-green"
+              variant="outline"
+              className="mt-3 w-full h-12 rounded-none border-foreground/30 bg-transparent text-foreground hover:bg-foreground/5 font-semibold tracking-wide"
             >
-              Skip to my dashboard →
+              Skip →
+            </Button>
+
+            <button
+              onClick={() => downloadAndShare("download")}
+              className="mt-5 label-caps underline-offset-4 hover:underline mx-auto block"
+            >
+              Just download the PNG
             </button>
-          </div>
-        </section>
+
+            <p className="text-xs text-foreground/50 text-center mt-6 leading-relaxed">
+              Your Slip image will download. Attach it to the X compose window for best timeline preview.
+            </p>
+          </section>
+        </div>
       </div>
     </>
   );
