@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SlipCard } from "@/components/SlipCard";
+import slipImage from "@/assets/slip.png";
 import { Flywheel } from "@/components/Flywheel";
 import { buildReferralUrl, getCurrentSlip, getLeaderboard, getLeaderboardPosition, getReferralsFor } from "@/lib/divvy";
 import { toast } from "@/hooks/use-toast";
@@ -111,7 +111,7 @@ export default function Dashboard() {
           <div className="label-caps mb-3">Your Slip</div>
           <div className="relative">
             <div className="absolute -inset-6 bg-electric-green/10 blur-3xl rounded-full pointer-events-none" />
-            <div className="relative"><SlipCard slip={slip} /></div>
+            <div className="relative"><img src={slipImage} alt={`Divvy Season 1 Slip No. ${slip.slip_no}`} className="w-full h-auto block" /></div>
           </div>
         </div>
 
