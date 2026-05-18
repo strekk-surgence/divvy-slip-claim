@@ -24,16 +24,17 @@ function useCountUp(target: number, duration = 900) {
   return n;
 }
 
-const EARN_PATHS: Array<{ label: string; pts: string }> = [
-  { label: "Share Slip on X (one-time)", pts: "100 pts" },
-  { label: "Refer a Slip claim", pts: "100 pts each" },
-  { label: "Refer a wallet connect on Divvy", pts: "250 pts each" },
-  { label: "Share on Instagram", pts: "50 pts" },
-  { label: "Share on Telegram", pts: "50 pts" },
-  { label: "Share on Reddit or other social", pts: "50 pts" },
-  { label: "Join Divvy Discord", pts: "200 pts" },
-  { label: "Join Divvy Telegram", pts: "200 pts" },
-  { label: "Sign up on divvy.bet · wallet connect", pts: "500 pts" },
+type EarnPath = { id: string; label: string; pts: string; url?: string };
+
+const EARN_PATHS: EarnPath[] = [
+  { id: "share_x", label: "Share Slip on X (one-time)", pts: "100 pts", url: "https://twitter.com/intent/tweet?text=Just%20claimed%20my%20Divvy%20Season%20One%20Slip" },
+  { id: "refer_claim", label: "Refer a Slip claim", pts: "100 pts each" },
+  { id: "refer_wallet", label: "Refer a wallet connect on Divvy", pts: "250 pts each" },
+  { id: "share_ig", label: "Share on Instagram", pts: "50 pts", url: "https://www.instagram.com/" },
+  { id: "share_tg", label: "Share on Telegram", pts: "50 pts", url: "https://t.me/share/url?url=https://divvy.bet" },
+  { id: "join_discord", label: "Join Divvy Discord", pts: "200 pts", url: "https://discord.gg/divvy" },
+  { id: "join_tg", label: "Join Divvy Telegram", pts: "200 pts", url: "https://t.me/divvybet" },
+  { id: "wallet_connect", label: "Sign up on divvy.bet · wallet connect", pts: "500 pts", url: "https://divvy.bet" },
 ];
 
 export default function Dashboard() {
@@ -41,6 +42,18 @@ export default function Dashboard() {
   const nav = useNavigate();
   const [copied, setCopied] = useState(false);
   const [showAllBoard, setShowAllBoard] = useState(false);
+  const [claimed, setClaimed] = useState<Record<string, boolean>>(() => {
+    if (typeof window === "undefined") return {};
+    try { return JSON.parse(localStorage.getItem("divvy_earn_claimed") || "{}"); } catch { return {}; }
+  });
+
+  function claimEarn(p: EarnPath) {
+    if (claimed[p.id]) return;
+    if (p.url) window.open(p.url, "_blank", "noopener,noreferrer");
+    const next = { ...claimed, [p.id]: true };
+    setClaimed(next);
+    localStorage.setItem("divvy_earn_claimed", JSON.stringify(next));
+  }
   useEffect(() => { if (!slip) nav("/"); }, [slip, nav]);
   if (!slip) return null;
 
@@ -134,15 +147,29 @@ export default function Dashboard() {
               <div className="font-serif-display text-2xl mt-1">Ways to climb</div>
             </div>
             <div className="mt-4">
-              {EARN_PATHS.map((p, i) => (
-                <div
-                  key={i}
-                  className="flex items-center justify-between px-5 py-3 border-b hairline last:border-b-0"
-                >
-                  <div className="text-sm md:text-[15px] text-foreground/85">{p.label}</div>
-                  <div className="font-mono-num text-sm text-electric-green shrink-0 ml-4">{p.pts}</div>
-                </div>
-              ))}
+              {EARN_PATHS.map((p) => {
+                const isClaimed = !!claimed[p.id];
+                return (
+                  <button
+                    key={p.id}
+                    onClick={() => claimEarn(p)}
+                    disabled={isClaimed}
+                    className={`w-full flex items-center justify-between px-5 py-3 border-b hairline last:border-b-0 text-left transition-colors ${
+                      isClaimed
+                        ? "opacity-50 cursor-not-allowed"
+                        : "hover:bg-electric-green/5 cursor-pointer"
+                    }`}
+                  >
+                    <div className={`text-sm md:text-[15px] flex items-center gap-2 ${isClaimed ? "text-foreground/50 line-through" : "text-foreground/85"}`}>
+                      {p.label}
+                      {isClaimed && <Check className="h-3.5 w-3.5 text-electric-green" />}
+                    </div>
+                    <div className={`font-mono-num text-sm shrink-0 ml-4 ${isClaimed ? "text-foreground/40" : "text-electric-green"}`}>
+                      {isClaimed ? "Claimed" : p.pts}
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           </div>
 
