@@ -111,7 +111,7 @@ export default function Dashboard() {
           <div className="label-caps mb-3">Your Slip</div>
           <div className="relative">
             <div className="absolute -inset-6 bg-electric-green/10 blur-3xl rounded-full pointer-events-none" />
-            <div className="relative"><SlipCard slip={slip} /></div>
+            <div className="relative"><img src={slipImage} alt={`Divvy Season 1 Slip No. ${slip.slip_no}`} className="w-full h-auto block" /></div>
           </div>
         </div>
 
