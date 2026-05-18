@@ -54,7 +54,7 @@ export const SlipCard = forwardRef<HTMLDivElement, Props>(({ slip, animate }, re
           <Field label="Issued" value={formatDate(slip.issued_at)} mono />
           <Field label="Selection" value="Season 1 · World Cup" />
           <Field label="Stake" value="your call" italic />
-          <Field label="Potential" value="Slip Points → DVY" className="col-span-2" />
+          <Field label="Potential" value="Slip Points" className="col-span-2" />
         </div>
 
         <div className="my-4 border-t border-dashed border-ink/40" />
