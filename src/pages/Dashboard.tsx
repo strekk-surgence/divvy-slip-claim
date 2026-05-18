@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SlipCard } from "@/components/SlipCard";
 import { Flywheel } from "@/components/Flywheel";
-import { getCurrentSlip, getReferralsFor, getLeaderboardPosition } from "@/lib/divvy";
+import { buildReferralUrl, getCurrentSlip, getLeaderboard, getLeaderboardPosition, getReferralsFor } from "@/lib/divvy";
+import { toast } from "@/hooks/use-toast";
 
 function useCountUp(target: number, duration = 900) {
   const [n, setN] = useState(0);
@@ -25,11 +27,14 @@ function useCountUp(target: number, duration = 900) {
 export default function Dashboard() {
   const slip = getCurrentSlip();
   const nav = useNavigate();
+  const [copied, setCopied] = useState(false);
   useEffect(() => { if (!slip) nav("/"); }, [slip, nav]);
   if (!slip) return null;
 
   const refs = getReferralsFor(slip.x_handle);
   const position = getLeaderboardPosition(slip.x_handle);
+  const board = getLeaderboard(slip.x_handle).slice(0, 10);
+  const referralUrl = buildReferralUrl(slip.referral_code);
 
   const slipPoints = 100 + refs.length * 50;
   const bonusUsd = 10 + refs.length * 5;
@@ -39,12 +44,42 @@ export default function Dashboard() {
   const animBonus = useCountUp(bonusUsd);
   const animRefPts = useCountUp(refPoints);
 
+  async function copyRef() {
+    await navigator.clipboard.writeText(referralUrl);
+    setCopied(true);
+    toast({ title: "Referral link copied" });
+    setTimeout(() => setCopied(false), 1800);
+  }
+
   return (
     <main className="min-h-screen divvy-bg">
       <header className="container flex items-center justify-between py-6 border-b hairline">
         <Link to="/" className="font-serif-display text-xl tracking-wide">DIVVY</Link>
         <Link to="/claim" className="label-caps underline-offset-4 hover:underline">‹ Back to Slip</Link>
       </header>
+
+      {/* Top CTA bar: referral link + claim on Divvy */}
+      <section className="container pt-8">
+        <div className="surface p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-3 md:gap-4">
+          <div className="min-w-0 flex-1">
+            <div className="label-caps mb-1">Your referral link</div>
+            <div className="font-mono-num text-sm md:text-base truncate text-foreground/90">{referralUrl}</div>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <Button
+              onClick={copyRef}
+              variant="outline"
+              className="h-11 rounded-none border-foreground/20 hover:bg-foreground/5 px-4"
+            >
+              {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+              {copied ? "Copied" : "Copy link"}
+            </Button>
+            <Button asChild className="h-11 rounded-none bg-electric-blue text-white hover:bg-electric-blue/90 font-semibold tracking-wide px-5 glow-blue">
+              <a href="https://divvy.bet" target="_blank" rel="noreferrer">Claim on Divvy →</a>
+            </Button>
+          </div>
+        </div>
+      </section>
 
       <section className="container py-10 md:py-14 grid lg:grid-cols-[minmax(0,340px)_1fr] gap-12 items-start">
         <div>
@@ -81,9 +116,42 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <Button asChild className="h-12 rounded-none bg-electric-blue text-white hover:bg-electric-blue/90 font-semibold tracking-wide px-6 glow-blue">
-            <a href="https://divvy.bet" target="_blank" rel="noreferrer">Go bet on Divvy →</a>
-          </Button>
+          {/* Leaderboard */}
+          <div className="surface">
+            <div className="flex items-baseline justify-between px-5 pt-5">
+              <div>
+                <div className="label-caps">Season 1 Leaderboard</div>
+                <div className="font-serif-display text-2xl mt-1">Top Slippers</div>
+              </div>
+              <div className="label-caps">You · #{String(position).padStart(3, "0")}</div>
+            </div>
+            <div className="mt-4">
+              <div className="grid grid-cols-[60px_1fr_100px_120px] label-caps px-5 pb-2 border-b hairline">
+                <div>Rank</div><div>Handle</div><div className="text-right">Refs</div><div className="text-right">Points</div>
+              </div>
+              {board.map((row, i) => {
+                const isMe = row.handle === slip.x_handle;
+                return (
+                  <div
+                    key={row.handle}
+                    className={`grid grid-cols-[60px_1fr_100px_120px] px-5 py-3 border-b hairline last:border-b-0 items-center ${
+                      isMe ? "bg-electric-green/10" : ""
+                    }`}
+                  >
+                    <div className={`font-mono-num ${i < 3 ? "text-electric-green" : "text-foreground/70"}`}>
+                      #{String(i + 1).padStart(2, "0")}
+                    </div>
+                    <div className="truncate">
+                      @{row.handle}{" "}
+                      {isMe && <span className="ml-2 text-xs label-caps text-electric-green">You</span>}
+                    </div>
+                    <div className="font-mono-num text-right">{row.referrals}</div>
+                    <div className="font-mono-num text-right">{row.points.toLocaleString()}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
 
           <div className="pt-6 border-t hairline">
             <div className="label-caps mb-4">How it works</div>
