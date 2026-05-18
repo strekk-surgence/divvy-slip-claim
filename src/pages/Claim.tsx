@@ -131,8 +131,8 @@ export default function Claim() {
 
             <div className="animate-fade-up relative" style={{ animationDelay: "120ms" }}>
               <div className="absolute -inset-8 bg-electric-green/10 blur-3xl rounded-full pointer-events-none" />
-              <div className="relative">
-                <SlipCard ref={cardRef} slip={slip} animate />
+              <div ref={cardRef} className="relative mx-auto max-w-sm">
+                <img src={slipImage} alt={`Divvy Season 1 Slip No. ${slip.slip_no}`} className="w-full h-auto block" />
               </div>
             </div>
 
