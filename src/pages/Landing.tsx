@@ -87,10 +87,10 @@ export default function Landing() {
             sub="+100 Slip Points per friend who claims. +250 when they connect a wallet on Divvy."
           />
           <ValueCard
-            tag="Season One Standings"
+            tag="Season One Prize Pool"
             tagColor="green"
             title="TBD"
-            sub="Details coming soon."
+            sub="Leaderboard rewards and seasonal prizes will be revealed soon."
           />
         </div>
       </section>
