@@ -55,6 +55,7 @@ export default function Claim() {
         window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweet)}`, "_blank", "noopener,noreferrer");
         localStorage.setItem("divvy_shared_x", "1");
         setShared(true);
+        nav("/dashboard");
       }
     } catch {
       toast({ title: "Couldn't render slip", description: "Try Copy Link instead." });
