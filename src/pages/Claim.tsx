@@ -17,6 +17,8 @@ export default function Claim() {
     if (typeof window === "undefined") return true;
     return localStorage.getItem("divvy_followed_x") !== "1";
   });
+  const [gateStep, setGateStep] = useState<"connect" | "follow">("connect");
+  const [connected, setConnected] = useState(false);
   const [followClicked, setFollowClicked] = useState(false);
   const [shared, setShared] = useState(() => typeof window !== "undefined" && localStorage.getItem("divvy_shared_x") === "1");
 
@@ -78,42 +80,69 @@ export default function Claim() {
         {gateOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/70 backdrop-blur-md animate-fade-in p-4">
             <div className="surface relative max-w-md w-full p-8 text-center border hairline">
-              <div className="label-caps text-electric-green">One last step</div>
-              <h2 className="font-serif-display text-3xl mt-3">
-                Follow <span className="italic text-electric-green">@divvybet</span> on X
-              </h2>
-              <p className="text-foreground/70 text-sm mt-3 leading-relaxed">
-                Stay in the loop on Season 1 drops, leaderboard updates, and bonus windows.
-                Follow to reveal your Slip.
-              </p>
-              <div className="mt-7 space-y-3">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <Button
-                    onClick={openFollow}
-                    className="h-12 rounded-none bg-electric-green text-background hover:bg-electric-green/90 font-semibold tracking-wide glow-green"
+              {gateStep === "connect" ? (
+                <>
+                  <div className="label-caps text-electric-green">Step 1 of 2</div>
+                  <h2 className="font-serif-display text-3xl mt-3">
+                    Connect your <span className="italic text-electric-green">X account</span>
+                  </h2>
+                  <p className="text-foreground/70 text-sm mt-3 leading-relaxed">
+                    We link your Slip to your handle so points, referrals, and leaderboard rank stick to you.
+                  </p>
+                  <div className="mt-7 space-y-3">
+                    <Button
+                      onClick={() => {
+                        window.open("https://x.com/i/oauth2/authorize", "_blank", "noopener,noreferrer");
+                        setConnected(true);
+                      }}
+                      className="w-full h-12 rounded-none bg-electric-green text-background hover:bg-electric-green/90 font-semibold tracking-wide glow-green"
+                    >
+                      Connect X account
+                    </Button>
+                    <Button
+                      onClick={() => setGateStep("follow")}
+                      disabled={!connected}
+                      variant="outline"
+                      className="w-full h-12 rounded-none border-foreground/30 bg-transparent text-foreground hover:bg-foreground/5 font-semibold tracking-wide disabled:opacity-40"
+                    >
+                      {connected ? "Continue →" : "Connect first to continue"}
+                    </Button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="label-caps text-electric-green">Step 2 of 2</div>
+                  <h2 className="font-serif-display text-3xl mt-3">
+                    Follow <span className="italic text-electric-green">@divvybet</span> on X
+                  </h2>
+                  <p className="text-foreground/70 text-sm mt-3 leading-relaxed">
+                    Stay in the loop on Season 1 drops, leaderboard updates, and bonus windows.
+                    Follow to reveal your Slip.
+                  </p>
+                  <div className="mt-7 space-y-3">
+                    <Button
+                      onClick={openFollow}
+                      className="w-full h-12 rounded-none bg-electric-green text-background hover:bg-electric-green/90 font-semibold tracking-wide glow-green"
+                    >
+                      Follow @divvybet on X
+                    </Button>
+                    <Button
+                      onClick={revealSlip}
+                      disabled={!followClicked}
+                      variant="outline"
+                      className="w-full h-12 rounded-none border-foreground/30 bg-transparent text-foreground hover:bg-foreground/5 font-semibold tracking-wide disabled:opacity-40"
+                    >
+                      {followClicked ? "Reveal my Slip →" : "Follow first to reveal"}
+                    </Button>
+                  </div>
+                  <button
+                    onClick={() => setGateStep("connect")}
+                    className="label-caps mt-5 text-foreground/50 hover:text-foreground/80 underline-offset-4 hover:underline"
                   >
-                    Follow @divvybet
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      window.open("https://x.com/i/oauth2/authorize", "_blank", "noopener,noreferrer");
-                      setFollowClicked(true);
-                    }}
-                    variant="outline"
-                    className="h-12 rounded-none border-foreground/40 bg-foreground/5 text-foreground hover:bg-foreground/10 font-semibold tracking-wide"
-                  >
-                    Connect X account
-                  </Button>
-                </div>
-                <Button
-                  onClick={revealSlip}
-                  disabled={!followClicked}
-                  variant="outline"
-                  className="w-full h-12 rounded-none border-foreground/30 bg-transparent text-foreground hover:bg-foreground/5 font-semibold tracking-wide disabled:opacity-40"
-                >
-                  {followClicked ? "Reveal my Slip →" : "Follow or connect to reveal"}
-                </Button>
-              </div>
+                    ← Back
+                  </button>
+                </>
+              )}
               <p className="text-xs text-foreground/40 mt-5">
                 We can't verify the follow — please don't unfollow after.
               </p>
