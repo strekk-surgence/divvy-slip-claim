@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SlipCard } from "@/components/SlipCard";
+import slipImage from "@/assets/slip.png";
 import { Flywheel } from "@/components/Flywheel";
 import { buildReferralUrl, getCurrentSlip, getLeaderboard, getLeaderboardPosition, getReferralsFor } from "@/lib/divvy";
 import { toast } from "@/hooks/use-toast";
