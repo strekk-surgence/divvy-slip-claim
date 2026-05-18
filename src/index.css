@@ -4,16 +4,16 @@
 
 @layer base {
   :root {
-    /* Divvy dark theme */
-    --background: 218 43% 7%;          /* #0A0F1A */
-    --foreground: 0 0% 94%;            /* #F0F0F0 */
+    /* Divvy.bet theme — deep teal-navy with vivid green + violet */
+    --background: 200 60% 4%;          /* near-black teal */
+    --foreground: 0 0% 96%;
 
-    --surface: 218 38% 10%;
-    --surface-2: 218 32% 14%;
+    --surface: 195 45% 7%;
+    --surface-2: 195 40% 11%;
     --hairline: 0 0% 100%;
 
-    --electric-green: 162 65% 48%;     /* #22D3A6 */
-    --electric-blue: 217 91% 60%;      /* #3B82F6 */
+    --electric-green: 145 85% 55%;     /* vivid lime-green */
+    --electric-blue: 262 75% 62%;      /* violet accent */
 
     /* Paper palette — preserved for the Slip artifact */
     --paper: 46 50% 90%;               /* cream #F4EDD8 */
@@ -28,16 +28,16 @@
     --popover: 218 38% 10%;
     --popover-foreground: 0 0% 94%;
 
-    --primary: 162 65% 48%;
-    --primary-foreground: 218 43% 7%;
+    --primary: 145 85% 55%;
+    --primary-foreground: 200 60% 4%;
 
-    --secondary: 218 32% 14%;
-    --secondary-foreground: 0 0% 94%;
+    --secondary: 195 40% 11%;
+    --secondary-foreground: 0 0% 96%;
 
-    --muted: 218 28% 18%;
-    --muted-foreground: 218 12% 65%;
+    --muted: 195 30% 16%;
+    --muted-foreground: 195 12% 65%;
 
-    --accent: 217 91% 60%;
+    --accent: 262 75% 62%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 70% 45%;
@@ -45,18 +45,18 @@
 
     --border: 0 0% 100% / 0.08;
     --input: 0 0% 100% / 0.12;
-    --ring: 162 65% 48%;
+    --ring: 145 85% 55%;
 
     --radius: 0.25rem;
 
-    --sidebar-background: 218 43% 7%;
-    --sidebar-foreground: 0 0% 94%;
-    --sidebar-primary: 162 65% 48%;
-    --sidebar-primary-foreground: 218 43% 7%;
-    --sidebar-accent: 218 32% 14%;
-    --sidebar-accent-foreground: 0 0% 94%;
+    --sidebar-background: 200 60% 4%;
+    --sidebar-foreground: 0 0% 96%;
+    --sidebar-primary: 145 85% 55%;
+    --sidebar-primary-foreground: 200 60% 4%;
+    --sidebar-accent: 195 40% 11%;
+    --sidebar-accent-foreground: 0 0% 96%;
     --sidebar-border: 0 0% 100% / 0.08;
-    --sidebar-ring: 162 65% 48%;
+    --sidebar-ring: 145 85% 55%;
 
     --font-serif: 'Playfair Display', 'DM Serif Display', Georgia, serif;
     --font-sans: 'Inter', system-ui, sans-serif;
@@ -79,9 +79,9 @@
   /* Dark background with subtle radial gradient toward centre */
   .divvy-bg {
     background:
-      radial-gradient(ellipse 80% 60% at 50% 30%, hsl(218 38% 13% / 0.9) 0%, transparent 70%),
-      radial-gradient(ellipse 60% 80% at 80% 90%, hsl(162 50% 18% / 0.18) 0%, transparent 60%),
-      radial-gradient(ellipse 70% 70% at 10% 80%, hsl(217 60% 22% / 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 90% 60% at 50% 20%, hsl(160 70% 14% / 0.85) 0%, transparent 70%),
+      radial-gradient(ellipse 70% 80% at 85% 90%, hsl(262 60% 22% / 0.35) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 70% at 10% 80%, hsl(145 70% 18% / 0.25) 0%, transparent 60%),
       hsl(var(--background));
   }
 
