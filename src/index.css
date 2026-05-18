@@ -79,9 +79,9 @@
   /* Dark background with subtle radial gradient toward centre */
   .divvy-bg {
     background:
-      radial-gradient(ellipse 80% 60% at 50% 30%, hsl(218 38% 13% / 0.9) 0%, transparent 70%),
-      radial-gradient(ellipse 60% 80% at 80% 90%, hsl(162 50% 18% / 0.18) 0%, transparent 60%),
-      radial-gradient(ellipse 70% 70% at 10% 80%, hsl(217 60% 22% / 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 90% 60% at 50% 20%, hsl(160 70% 14% / 0.85) 0%, transparent 70%),
+      radial-gradient(ellipse 70% 80% at 85% 90%, hsl(262 60% 22% / 0.35) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 70% at 10% 80%, hsl(145 70% 18% / 0.25) 0%, transparent 60%),
       hsl(var(--background));
   }
 
