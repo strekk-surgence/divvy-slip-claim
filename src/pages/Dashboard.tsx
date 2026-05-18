@@ -133,10 +133,16 @@ export default function Dashboard() {
               <div className="font-mono-num text-2xl mt-1">
                 +<span className="text-electric-green">{animRefPts.toLocaleString()}</span> pts
               </div>
+              <div className="text-right sm:text-left mt-3">
+                <div className="label-caps">Friends claimed</div>
+                <div className="font-mono-num text-2xl mt-1">{refs.length}</div>
+              </div>
             </div>
             <div className="text-right">
-              <div className="label-caps">Friends claimed</div>
-              <div className="font-mono-num text-2xl mt-1">{refs.length}</div>
+              <div className="font-mono-num font-bold text-electric-green text-5xl md:text-6xl leading-none glow-green">
+                50+
+              </div>
+              <div className="label-caps text-electric-green mt-2">per referral</div>
             </div>
           </div>
 

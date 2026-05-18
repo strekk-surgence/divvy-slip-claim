@@ -87,19 +87,31 @@ export default function Claim() {
                 Follow to reveal your Slip.
               </p>
               <div className="mt-7 space-y-3">
-                <Button
-                  onClick={openFollow}
-                  className="w-full h-12 rounded-none bg-electric-green text-background hover:bg-electric-green/90 font-semibold tracking-wide glow-green"
-                >
-                  Follow @divvybet on X
-                </Button>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <Button
+                    onClick={openFollow}
+                    className="h-12 rounded-none bg-electric-green text-background hover:bg-electric-green/90 font-semibold tracking-wide glow-green"
+                  >
+                    Follow @divvybet
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      window.open("https://x.com/i/oauth2/authorize", "_blank", "noopener,noreferrer");
+                      setFollowClicked(true);
+                    }}
+                    variant="outline"
+                    className="h-12 rounded-none border-foreground/40 bg-foreground/5 text-foreground hover:bg-foreground/10 font-semibold tracking-wide"
+                  >
+                    Connect X account
+                  </Button>
+                </div>
                 <Button
                   onClick={revealSlip}
                   disabled={!followClicked}
                   variant="outline"
                   className="w-full h-12 rounded-none border-foreground/30 bg-transparent text-foreground hover:bg-foreground/5 font-semibold tracking-wide disabled:opacity-40"
                 >
-                  {followClicked ? "Reveal my Slip →" : "Follow first to reveal"}
+                  {followClicked ? "Reveal my Slip →" : "Follow or connect to reveal"}
                 </Button>
               </div>
               <p className="text-xs text-foreground/40 mt-5">
