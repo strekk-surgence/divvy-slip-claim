@@ -23,21 +23,21 @@ export default function Landing() {
     <main className="min-h-screen divvy-bg text-foreground">
       <header className="container flex items-center justify-between py-6">
         <div className="font-serif-display text-xl tracking-wide">DIVVY</div>
-        <div className="label-caps hidden sm:block">Season 1 · Claim Window Open</div>
+        <div className="label-caps hidden sm:block">Season One · Claim Window Open</div>
       </header>
 
       <section className="container pt-10 pb-16 md:pt-20 md:pb-24 grid lg:grid-cols-[1.2fr_1fr] gap-10 items-center">
         <div>
           <div className="label-caps mb-6 animate-fade-up">
-            <span className="text-electric-green">●</span>&nbsp;&nbsp;Free to Claim · Limited Window
+            <span className="text-electric-green">●</span>&nbsp;&nbsp;Free to Claim · X Auth, No Wallet
           </div>
           <h1 className="font-serif-display text-[2.4rem] sm:text-5xl md:text-6xl leading-[1.05] animate-fade-up" style={{ animationDelay: "60ms" }}>
             Claim your{" "}
-            <span className="italic text-electric-green">Divvy Season 1 Slip.</span>
+            <span className="italic text-electric-green">Divvy Season One Slip.</span>
           </h1>
           <p className="mt-6 text-lg text-foreground/70 max-w-xl animate-fade-up" style={{ animationDelay: "140ms" }}>
-            Get <span className="text-electric-green font-semibold">$10 first-bet credit</span> +{" "}
-            <span className="text-electric-blue font-semibold">100 Slip Points</span>. Earn more for every friend who claims through you.
+            Earn Slip Points. Climb the Season One standings. Win{" "}
+            <span className="text-electric-green font-semibold">$DVY</span> every week.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 animate-fade-up" style={{ animationDelay: "220ms" }}>
@@ -50,12 +50,11 @@ export default function Landing() {
               {loading ? "Issuing your Slip…" : "Connect X"}
             </Button>
             <span className="text-sm text-foreground/60 max-w-[280px] leading-snug">
-              No wallet needed. Bonuses credit to your wallet when you bet on Divvy.
+              X OAuth. No wallet required to claim.
             </span>
           </div>
         </div>
 
-        {/* Specimen slip preview, paper on dark */}
         <div className="hidden lg:flex justify-center animate-fade-up" style={{ animationDelay: "300ms" }}>
           <div className="relative rotate-[4deg]">
             <div className="absolute -inset-6 bg-electric-green/10 blur-3xl rounded-full" />
@@ -66,7 +65,7 @@ export default function Landing() {
               <div className="label-caps-paper mt-6">Issued To</div>
               <div className="font-mono-num text-sm text-ink">@your_handle</div>
               <div className="label-caps-paper mt-4">Selection</div>
-              <div className="text-sm text-ink">Season 1 · World Cup</div>
+              <div className="text-sm text-ink">Season One · $DVY</div>
               <div className="absolute right-3 top-3"><div className="stamp text-[10px]">Issued</div></div>
             </div>
           </div>
@@ -77,22 +76,22 @@ export default function Landing() {
       <section className="container py-10 border-t hairline">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <ValueCard
-            tag="Bonus"
+            tag="Slip Points"
             tagColor="green"
-            title="$10 first-bet bonus"
-            sub="Credited when you place your first bet on Divvy."
+            title="100 to start"
+            sub="Starting allocation. Earn more by sharing, referring, and joining the community."
           />
           <ValueCard
-            tag="Allocation"
+            tag="Refer + Earn"
             tagColor="blue"
-            title="100 Slip Points"
-            sub="Starting allocation. Earn more by betting, referring, and staking."
+            title="Compounding rewards"
+            sub="+100 Slip Points per friend who claims. +250 when they connect a wallet on Divvy. 5% lifetime compounding from every referred wallet's points."
           />
           <ValueCard
-            tag="Multiplier"
+            tag="Season One Standings"
             tagColor="green"
-            title="Refer + earn"
-            sub="+50 Slip Points and $5 credit per friend who claims through your Slip."
+            title="$DVY every Sunday"
+            sub="Top 100 wallets win tier payouts each week. Top wallet ~$1K. Top 10 split $2.25K. Top 50 split $1K. Top 100 split $750."
           />
         </div>
       </section>
@@ -103,7 +102,7 @@ export default function Landing() {
 
       <footer className="container py-8 border-t hairline flex flex-col sm:flex-row gap-2 justify-between text-sm text-foreground/50">
         <span>© Divvy · Built for fans, not bookies.</span>
-        <span className="label-caps">Form. Stamp. Issue. Share.</span>
+        <span className="label-caps">Claim. Share. Climb.</span>
       </footer>
     </main>
   );
