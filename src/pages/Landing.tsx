@@ -36,8 +36,7 @@ export default function Landing() {
             <span className="italic text-electric-green">Divvy Season One Slip.</span>
           </h1>
           <p className="mt-6 text-lg text-foreground/70 max-w-xl animate-fade-up" style={{ animationDelay: "140ms" }}>
-            Earn Slip Points. Climb the Season One standings. Win{" "}
-            <span className="text-electric-green font-semibold">$DVY</span> every week.
+            Earn Slip Points. Climb the Season One standings.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 animate-fade-up" style={{ animationDelay: "220ms" }}>
