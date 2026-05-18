@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import html2canvas from "html2canvas";
+import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SlipCard } from "@/components/SlipCard";
 import { useNavigate, Link } from "react-router-dom";
 import { buildReferralUrl, getCurrentSlip } from "@/lib/divvy";
 import { toast } from "@/hooks/use-toast";
+import Dashboard from "./Dashboard";
 
 export default function Claim() {
   const slip = getCurrentSlip();
