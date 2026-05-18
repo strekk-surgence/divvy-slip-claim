@@ -36,8 +36,7 @@ export default function Landing() {
             <span className="italic text-electric-green">Divvy Season One Slip.</span>
           </h1>
           <p className="mt-6 text-lg text-foreground/70 max-w-xl animate-fade-up" style={{ animationDelay: "140ms" }}>
-            Earn Slip Points. Climb the Season One standings. Win{" "}
-            <span className="text-electric-green font-semibold">$DVY</span> every week.
+            Earn Slip Points. Climb the Season One standings.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 animate-fade-up" style={{ animationDelay: "220ms" }}>
@@ -65,7 +64,7 @@ export default function Landing() {
               <div className="label-caps-paper mt-6">Issued To</div>
               <div className="font-mono-num text-sm text-ink">@your_handle</div>
               <div className="label-caps-paper mt-4">Selection</div>
-              <div className="text-sm text-ink">Season One · $DVY</div>
+              <div className="text-sm text-ink">Season One</div>
               <div className="absolute right-3 top-3"><div className="stamp text-[10px]">Issued</div></div>
             </div>
           </div>
@@ -85,13 +84,13 @@ export default function Landing() {
             tag="Refer + Earn"
             tagColor="blue"
             title="Compounding rewards"
-            sub="+100 Slip Points per friend who claims. +250 when they connect a wallet on Divvy. 5% lifetime compounding from every referred wallet's points."
+            sub="+100 Slip Points per friend who claims. +250 when they connect a wallet on Divvy."
           />
           <ValueCard
             tag="Season One Standings"
             tagColor="green"
-            title="$DVY every Sunday"
-            sub="Top 100 wallets win tier payouts each week. Top wallet ~$1K. Top 10 split $2.25K. Top 50 split $1K. Top 100 split $750."
+            title="TBD"
+            sub="Details coming soon."
           />
         </div>
       </section>

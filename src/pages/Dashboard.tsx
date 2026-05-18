@@ -156,7 +156,7 @@ export default function Dashboard() {
               <div className="label-caps">You · #{String(position).padStart(3, "0")}</div>
             </div>
             <p className="px-5 mt-3 text-xs text-foreground/60 leading-relaxed">
-              Top 100 wallets every Sunday win $DVY tier payouts. Standings lock every Sunday at 23:59 UTC.
+              Season One standings TBD.
             </p>
             <div className="mt-4">
               <div className="grid grid-cols-[60px_1fr_80px_100px] label-caps px-5 pb-2 border-b hairline">
@@ -204,7 +204,7 @@ export default function Dashboard() {
       </section>
 
       <footer className="container py-8 text-sm text-foreground/55 border-t hairline">
-        Slip Points credit to your wallet when you connect on Divvy. Standings lock every Sunday at 23:59 UTC.
+        Slip Points credit to your wallet when you connect on Divvy. Season One standings TBD.
       </footer>
     </main>
   );
