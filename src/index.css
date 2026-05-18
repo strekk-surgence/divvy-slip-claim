@@ -4,16 +4,16 @@
 
 @layer base {
   :root {
-    /* Divvy dark theme */
-    --background: 218 43% 7%;          /* #0A0F1A */
-    --foreground: 0 0% 94%;            /* #F0F0F0 */
+    /* Divvy.bet theme — deep teal-navy with vivid green + violet */
+    --background: 200 60% 4%;          /* near-black teal */
+    --foreground: 0 0% 96%;
 
-    --surface: 218 38% 10%;
-    --surface-2: 218 32% 14%;
+    --surface: 195 45% 7%;
+    --surface-2: 195 40% 11%;
     --hairline: 0 0% 100%;
 
-    --electric-green: 162 65% 48%;     /* #22D3A6 */
-    --electric-blue: 217 91% 60%;      /* #3B82F6 */
+    --electric-green: 145 85% 55%;     /* vivid lime-green */
+    --electric-blue: 262 75% 62%;      /* violet accent */
 
     /* Paper palette — preserved for the Slip artifact */
     --paper: 46 50% 90%;               /* cream #F4EDD8 */
