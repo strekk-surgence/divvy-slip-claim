@@ -92,16 +92,27 @@ export function getReferralsFor(handle: string): Referral[] {
   return getAllReferrals().filter((r) => r.referrer_handle === handle);
 }
 
-export function getLeaderboardPosition(handle: string): number {
+export type LeaderboardRow = { handle: string; referrals: number; points: number };
+
+export function getLeaderboard(handle?: string): LeaderboardRow[] {
   const counts = new Map<string, number>();
   for (const r of getAllReferrals()) counts.set(r.referrer_handle, (counts.get(r.referrer_handle) || 0) + 1);
-  // Add some mock noise so the leaderboard isn't empty
-  if (!counts.has(handle)) counts.set(handle, getReferralsFor(handle).length);
-  const seeded = ["sundayparlay", "boot_room", "extra_time_xi", "the_punter", "stoppage99"];
-  seeded.forEach((h, i) => { if (!counts.has(h)) counts.set(h, 14 - i * 2); });
-  const sorted = [...counts.entries()].sort((a, b) => b[1] - a[1]);
-  const idx = sorted.findIndex(([h]) => h === handle);
-  return idx === -1 ? sorted.length + 1 : idx + 1;
+  if (handle && !counts.has(handle)) counts.set(handle, getReferralsFor(handle).length);
+  const seeded: Array<[string, number]> = [
+    ["sundayparlay", 14], ["boot_room", 12], ["extra_time_xi", 10],
+    ["the_punter", 8], ["stoppage99", 6], ["paper_oracle", 5],
+    ["bracket_king", 4], ["longshot_lou", 3],
+  ];
+  seeded.forEach(([h, n]) => { if (!counts.has(h)) counts.set(h, n); });
+  return [...counts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(([h, n]) => ({ handle: h, referrals: n, points: 100 + n * 50 }));
+}
+
+export function getLeaderboardPosition(handle: string): number {
+  const board = getLeaderboard(handle);
+  const idx = board.findIndex((r) => r.handle === handle);
+  return idx === -1 ? board.length + 1 : idx + 1;
 }
 
 export function buildReferralUrl(code: string): string {
