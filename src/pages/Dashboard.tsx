@@ -24,16 +24,17 @@ function useCountUp(target: number, duration = 900) {
   return n;
 }
 
-const EARN_PATHS: Array<{ label: string; pts: string }> = [
-  { label: "Share Slip on X (one-time)", pts: "100 pts" },
-  { label: "Refer a Slip claim", pts: "100 pts each" },
-  { label: "Refer a wallet connect on Divvy", pts: "250 pts each" },
-  { label: "Share on Instagram", pts: "50 pts" },
-  { label: "Share on Telegram", pts: "50 pts" },
-  { label: "Share on Reddit or other social", pts: "50 pts" },
-  { label: "Join Divvy Discord", pts: "200 pts" },
-  { label: "Join Divvy Telegram", pts: "200 pts" },
-  { label: "Sign up on divvy.bet · wallet connect", pts: "500 pts" },
+type EarnPath = { id: string; label: string; pts: string; url?: string };
+
+const EARN_PATHS: EarnPath[] = [
+  { id: "share_x", label: "Share Slip on X (one-time)", pts: "100 pts", url: "https://twitter.com/intent/tweet?text=Just%20claimed%20my%20Divvy%20Season%20One%20Slip" },
+  { id: "refer_claim", label: "Refer a Slip claim", pts: "100 pts each" },
+  { id: "refer_wallet", label: "Refer a wallet connect on Divvy", pts: "250 pts each" },
+  { id: "share_ig", label: "Share on Instagram", pts: "50 pts", url: "https://www.instagram.com/" },
+  { id: "share_tg", label: "Share on Telegram", pts: "50 pts", url: "https://t.me/share/url?url=https://divvy.bet" },
+  { id: "join_discord", label: "Join Divvy Discord", pts: "200 pts", url: "https://discord.gg/divvy" },
+  { id: "join_tg", label: "Join Divvy Telegram", pts: "200 pts", url: "https://t.me/divvybet" },
+  { id: "wallet_connect", label: "Sign up on divvy.bet · wallet connect", pts: "500 pts", url: "https://divvy.bet" },
 ];
 
 export default function Dashboard() {
