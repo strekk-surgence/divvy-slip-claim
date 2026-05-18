@@ -24,24 +24,36 @@ function useCountUp(target: number, duration = 900) {
   return n;
 }
 
+const EARN_PATHS: Array<{ label: string; pts: string }> = [
+  { label: "Share Slip on X (one-time)", pts: "100 pts" },
+  { label: "Refer a Slip claim", pts: "100 pts each" },
+  { label: "Refer a wallet connect on Divvy", pts: "250 pts each" },
+  { label: "Share on Instagram", pts: "50 pts" },
+  { label: "Share on Telegram", pts: "50 pts" },
+  { label: "Share on Reddit or other social", pts: "50 pts" },
+  { label: "Join Divvy Discord", pts: "200 pts" },
+  { label: "Join Divvy Telegram", pts: "200 pts" },
+  { label: "Sign up on divvy.bet · wallet connect", pts: "500 pts" },
+];
+
 export default function Dashboard() {
   const slip = getCurrentSlip();
   const nav = useNavigate();
   const [copied, setCopied] = useState(false);
+  const [showAllBoard, setShowAllBoard] = useState(false);
   useEffect(() => { if (!slip) nav("/"); }, [slip, nav]);
   if (!slip) return null;
 
   const refs = getReferralsFor(slip.x_handle);
   const position = getLeaderboardPosition(slip.x_handle);
-  const board = getLeaderboard(slip.x_handle).slice(0, 10);
+  const fullBoard = getLeaderboard(slip.x_handle);
+  const board = showAllBoard ? fullBoard : fullBoard.slice(0, 10);
   const referralUrl = buildReferralUrl(slip.referral_code);
 
-  const slipPoints = 100 + refs.length * 50;
-  const bonusUsd = 10 + refs.length * 5;
-  const refPoints = refs.length * 50;
+  const slipPoints = 100 + refs.length * 100;
+  const refPoints = refs.length * 100;
 
   const animPoints = useCountUp(slipPoints);
-  const animBonus = useCountUp(bonusUsd);
   const animRefPts = useCountUp(refPoints);
 
   async function copyRef() {
@@ -74,8 +86,8 @@ export default function Dashboard() {
               {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
               {copied ? "Copied" : "Copy link"}
             </Button>
-            <Button asChild className="h-11 rounded-none bg-electric-blue text-white hover:bg-electric-blue/90 font-semibold tracking-wide px-5 glow-blue">
-              <a href="https://divvy.bet" target="_blank" rel="noreferrer">Claim on Divvy →</a>
+            <Button asChild className="h-11 rounded-none bg-electric-green text-background hover:bg-electric-green/90 font-semibold tracking-wide px-5 glow-green">
+              <a href={referralUrl} target="_blank" rel="noreferrer">Claim on Divvy →</a>
             </Button>
           </div>
         </div>
@@ -96,9 +108,8 @@ export default function Dashboard() {
             <h1 className="font-serif-display text-4xl md:text-5xl mt-1">@{slip.x_handle}</h1>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-3 gap-3">
             <Stat label="Slip Points" value={animPoints.toLocaleString()} accent="green" />
-            <Stat label="Bonus Credit" value={`$${animBonus}`} accent="blue" />
             <Stat label="Referrals" value={String(refs.length).padStart(2, "0")} />
             <Stat label="Leaderboard" value={`#${String(position).padStart(3, "0")}`} />
           </div>
@@ -116,17 +127,39 @@ export default function Dashboard() {
             </div>
           </div>
 
+          {/* Earn More Points */}
+          <div className="surface">
+            <div className="px-5 pt-5">
+              <div className="label-caps">Earn More Points</div>
+              <div className="font-serif-display text-2xl mt-1">Ways to climb</div>
+            </div>
+            <div className="mt-4">
+              {EARN_PATHS.map((p, i) => (
+                <div
+                  key={i}
+                  className="flex items-center justify-between px-5 py-3 border-b hairline last:border-b-0"
+                >
+                  <div className="text-sm md:text-[15px] text-foreground/85">{p.label}</div>
+                  <div className="font-mono-num text-sm text-electric-green shrink-0 ml-4">{p.pts}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* Leaderboard */}
           <div className="surface">
             <div className="flex items-baseline justify-between px-5 pt-5">
               <div>
-                <div className="label-caps">Season 1 Leaderboard</div>
+                <div className="label-caps">Season One Leaderboard</div>
                 <div className="font-serif-display text-2xl mt-1">Top Slippers</div>
               </div>
               <div className="label-caps">You · #{String(position).padStart(3, "0")}</div>
             </div>
+            <p className="px-5 mt-3 text-xs text-foreground/60 leading-relaxed">
+              Top 100 wallets every Sunday win $DVY tier payouts. Standings lock every Sunday at 23:59 UTC.
+            </p>
             <div className="mt-4">
-              <div className="grid grid-cols-[60px_1fr_100px_120px] label-caps px-5 pb-2 border-b hairline">
+              <div className="grid grid-cols-[60px_1fr_80px_100px] label-caps px-5 pb-2 border-b hairline">
                 <div>Rank</div><div>Handle</div><div className="text-right">Refs</div><div className="text-right">Points</div>
               </div>
               {board.map((row, i) => {
@@ -134,7 +167,7 @@ export default function Dashboard() {
                 return (
                   <div
                     key={row.handle}
-                    className={`grid grid-cols-[60px_1fr_100px_120px] px-5 py-3 border-b hairline last:border-b-0 items-center ${
+                    className={`grid grid-cols-[60px_1fr_80px_100px] px-5 py-3 border-b hairline last:border-b-0 items-center ${
                       isMe ? "bg-electric-green/10" : ""
                     }`}
                   >
@@ -151,6 +184,16 @@ export default function Dashboard() {
                 );
               })}
             </div>
+            {fullBoard.length > 10 && (
+              <div className="px-5 py-4 border-t hairline">
+                <button
+                  onClick={() => setShowAllBoard((v) => !v)}
+                  className="label-caps text-electric-green underline-offset-4 hover:underline"
+                >
+                  {showAllBoard ? "Collapse leaderboard" : "View Full Leaderboard →"}
+                </button>
+              </div>
+            )}
           </div>
 
           <div className="pt-6 border-t hairline">
@@ -161,7 +204,7 @@ export default function Dashboard() {
       </section>
 
       <footer className="container py-8 text-sm text-foreground/55 border-t hairline">
-        Bonuses and Slip Points credit to your wallet when you connect on Divvy and place your first bet.
+        Slip Points credit to your wallet when you connect on Divvy. Standings lock every Sunday at 23:59 UTC.
       </footer>
     </main>
   );
