@@ -126,9 +126,9 @@ export default function Dashboard() {
           </div>
 
           <div className="grid grid-cols-3 gap-3">
-            <Stat label="Slip Points" value={animPoints.toLocaleString()} accent="green" />
-            <Stat label="Referrals" value={String(refs.length).padStart(2, "0")} />
-            <Stat label="Leaderboard" value={`#${String(position).padStart(3, "0")}`} />
+            <Stat label="Tickets" value={animPoints.toLocaleString()} accent="green" />
+            <Stat label="Pool Entries" value={String(refs.length + 1).padStart(2, "0")} />
+            <Stat label="Status" value="Active" accent="green" />
           </div>
 
           <div className="surface p-5 flex items-center justify-between gap-4">
