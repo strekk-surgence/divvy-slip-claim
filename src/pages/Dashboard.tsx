@@ -24,17 +24,21 @@ function useCountUp(target: number, duration = 900) {
   return n;
 }
 
-type EarnPath = { id: string; label: string; pts: string; url?: string };
+type EarnPath = { id: string; label: string; pts: string; url?: string; group: "social" | "wager" };
 
 const EARN_PATHS: EarnPath[] = [
-  { id: "share_x", label: "Share Slip on X (one-time)", pts: "100 pts", url: "https://twitter.com/intent/tweet?text=Just%20claimed%20my%20Divvy%20Season%20One%20Slip" },
-  { id: "refer_claim", label: "Refer a Slip claim", pts: "100 pts each" },
-  { id: "refer_wallet", label: "Refer a wallet connect on Divvy", pts: "250 pts each" },
-  { id: "share_ig", label: "Share on Instagram", pts: "50 pts", url: "https://www.instagram.com/" },
-  { id: "share_tg", label: "Share on Telegram", pts: "50 pts", url: "https://t.me/share/url?url=https://divvy.bet" },
-  { id: "join_discord", label: "Join Divvy Discord", pts: "200 pts", url: "https://discord.gg/divvy" },
-  { id: "join_tg", label: "Join Divvy Telegram", pts: "200 pts", url: "https://t.me/divvybet" },
-  { id: "wallet_connect", label: "Sign up on divvy.bet · wallet connect", pts: "500 pts", url: "https://divvy.bet" },
+  { id: "share_x", group: "social", label: "Share Slip on X (one-time)", pts: "1 ticket", url: "https://twitter.com/intent/tweet?text=Just%20claimed%20my%20Divvy%20Season%20One%20Lottery%20Ticket" },
+  { id: "refer_claim", group: "social", label: "Refer a Slip claim", pts: "1 ticket each" },
+  { id: "refer_wallet", group: "social", label: "Refer a wallet connect on Divvy", pts: "3 tickets each" },
+  { id: "share_ig", group: "social", label: "Share on Instagram", pts: "1 ticket", url: "https://www.instagram.com/" },
+  { id: "share_tg", group: "social", label: "Share on Telegram", pts: "1 ticket", url: "https://t.me/share/url?url=https://divvy.bet" },
+  { id: "join_discord", group: "social", label: "Join Divvy Discord", pts: "2 tickets", url: "https://discord.gg/divvy" },
+  { id: "join_tg", group: "social", label: "Join Divvy Telegram", pts: "2 tickets", url: "https://t.me/divvybet" },
+  { id: "wallet_connect", group: "social", label: "Sign up on divvy.bet", pts: "5 tickets", url: "https://divvy.bet" },
+  { id: "wager_5", group: "wager", label: "Every $5 wager on Divvy", pts: "1 ticket", url: "https://divvy.bet" },
+  { id: "wager_sol", group: "wager", label: "Every 0.05 SOL on WC Champions Series", pts: "1 ticket", url: "https://divvy.bet" },
+  { id: "mint_champ", group: "wager", label: "Mint a Champions Series entry", pts: "3 tickets per entry", url: "https://divvy.bet" },
+  { id: "match_night", group: "wager", label: "Place a Match Night wager", pts: "2 tickets per wager", url: "https://divvy.bet" },
 ];
 
 export default function Dashboard() {
@@ -122,9 +126,9 @@ export default function Dashboard() {
           </div>
 
           <div className="grid grid-cols-3 gap-3">
-            <Stat label="Slip Points" value={animPoints.toLocaleString()} accent="green" />
-            <Stat label="Referrals" value={String(refs.length).padStart(2, "0")} />
-            <Stat label="Leaderboard" value={`#${String(position).padStart(3, "0")}`} />
+            <Stat label="Tickets" value={animPoints.toLocaleString()} accent="green" />
+            <Stat label="Pool Entries" value={String(refs.length + 1).padStart(2, "0")} />
+            <Stat label="Status" value="Active" accent="green" />
           </div>
 
           <div className="surface p-5 flex items-center justify-between gap-4">
@@ -146,14 +150,19 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Earn More Points */}
+          {/* Stack More Tickets */}
           <div className="surface">
             <div className="px-5 pt-5">
-              <div className="label-caps">Earn More Points</div>
-              <div className="font-serif-display text-2xl mt-1">Ways to climb</div>
+              <div className="label-caps">Stack More Tickets</div>
+              <div className="font-serif-display text-2xl mt-1">Ways to stack</div>
             </div>
+
             <div className="mt-4">
-              {EARN_PATHS.map((p) => {
+              <div className="px-5 py-2 border-b hairline flex items-center justify-between bg-foreground/[0.02]">
+                <div className="label-caps">Social actions</div>
+                <div className="label-caps text-foreground/50">Lighter weight</div>
+              </div>
+              {EARN_PATHS.filter((p) => p.group === "social").map((p) => {
                 const isClaimed = !!claimed[p.id];
                 return (
                   <button
@@ -161,12 +170,36 @@ export default function Dashboard() {
                     onClick={() => claimEarn(p)}
                     disabled={isClaimed}
                     className={`w-full flex items-center justify-between px-5 py-3 border-b hairline last:border-b-0 text-left transition-colors ${
-                      isClaimed
-                        ? "opacity-50 cursor-not-allowed"
-                        : "hover:bg-electric-green/5 cursor-pointer"
+                      isClaimed ? "opacity-50 cursor-not-allowed" : "hover:bg-electric-green/5 cursor-pointer"
                     }`}
                   >
                     <div className={`text-sm md:text-[15px] flex items-center gap-2 ${isClaimed ? "text-foreground/50 line-through" : "text-foreground/85"}`}>
+                      {p.label}
+                      {isClaimed && <Check className="h-3.5 w-3.5 text-electric-green" />}
+                    </div>
+                    <div className={`font-mono-num text-sm shrink-0 ml-4 ${isClaimed ? "text-foreground/40" : "text-electric-green"}`}>
+                      {isClaimed ? "Claimed" : p.pts}
+                    </div>
+                  </button>
+                );
+              })}
+
+              <div className="px-5 py-2 border-y hairline flex items-center justify-between bg-electric-green/5">
+                <div className="label-caps text-electric-green">Wagering on Divvy</div>
+                <div className="label-caps text-electric-green">Stack faster ▲</div>
+              </div>
+              {EARN_PATHS.filter((p) => p.group === "wager").map((p) => {
+                const isClaimed = !!claimed[p.id];
+                return (
+                  <button
+                    key={p.id}
+                    onClick={() => claimEarn(p)}
+                    disabled={isClaimed}
+                    className={`w-full flex items-center justify-between px-5 py-3 border-b hairline last:border-b-0 text-left transition-colors border-l-2 border-l-electric-green/60 ${
+                      isClaimed ? "opacity-50 cursor-not-allowed" : "hover:bg-electric-green/5 cursor-pointer"
+                    }`}
+                  >
+                    <div className={`text-sm md:text-[15px] flex items-center gap-2 font-medium ${isClaimed ? "text-foreground/50 line-through" : "text-foreground/90"}`}>
                       {p.label}
                       {isClaimed && <Check className="h-3.5 w-3.5 text-electric-green" />}
                     </div>
