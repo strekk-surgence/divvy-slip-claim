@@ -84,7 +84,6 @@ export default function Dashboard() {
     <main className="min-h-screen divvy-bg">
       <header className="container flex items-center justify-between py-6 border-b hairline">
         <Link to="/" className="font-serif-display text-xl tracking-wide">DIVVY</Link>
-        <Link to="/claim" className="label-caps underline-offset-4 hover:underline">‹ Back to Slip</Link>
       </header>
 
       {/* Top CTA bar: referral link + claim on Divvy */}
