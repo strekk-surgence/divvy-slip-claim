@@ -239,7 +239,7 @@ export default function Landing() {
           </div>
         </div>
 
-        <div className="relative">
+        <div className="relative lg:scale-125 lg:-mr-16 xl:scale-[1.4] xl:-mr-24">
           <div className="absolute -inset-10 bg-[#00D87E]/10 blur-3xl rounded-full pointer-events-none" />
           <img
             src={ticketImage}
