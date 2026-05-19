@@ -6,7 +6,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { buildReferralUrl, getCurrentSlip } from "@/lib/divvy";
 import { toast } from "@/hooks/use-toast";
 import Dashboard from "./Dashboard";
-import slipImage from "@/assets/slip.png";
+import slipImage from "@/assets/ticket.png";
 
 export default function Claim() {
   const slip = getCurrentSlip();
