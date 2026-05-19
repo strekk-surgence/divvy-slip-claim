@@ -7,6 +7,7 @@ import {
   getReferralCodeFromUrl,
   getCurrentSlip,
 } from "@/lib/divvy";
+import ticketImage from "@/assets/ticket.png";
 
 const DRAW_DATE = new Date("2026-07-26T18:00:00Z");
 
