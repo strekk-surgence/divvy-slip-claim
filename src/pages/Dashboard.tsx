@@ -158,33 +158,7 @@ export default function Dashboard() {
             </div>
 
             <div className="mt-4">
-              <div className="px-5 py-2 border-b hairline flex items-center justify-between bg-foreground/[0.02]">
-                <div className="label-caps">Social actions</div>
-                <div className="label-caps text-foreground/50">Lighter weight</div>
-              </div>
-              {EARN_PATHS.filter((p) => p.group === "social").map((p) => {
-                const isClaimed = !!claimed[p.id];
-                return (
-                  <button
-                    key={p.id}
-                    onClick={() => claimEarn(p)}
-                    disabled={isClaimed}
-                    className={`w-full flex items-center justify-between px-5 py-3 border-b hairline last:border-b-0 text-left transition-colors ${
-                      isClaimed ? "opacity-50 cursor-not-allowed" : "hover:bg-electric-green/5 cursor-pointer"
-                    }`}
-                  >
-                    <div className={`text-sm md:text-[15px] flex items-center gap-2 ${isClaimed ? "text-foreground/50 line-through" : "text-foreground/85"}`}>
-                      {p.label}
-                      {isClaimed && <Check className="h-3.5 w-3.5 text-electric-green" />}
-                    </div>
-                    <div className={`font-mono-num text-sm shrink-0 ml-4 ${isClaimed ? "text-foreground/40" : "text-electric-green"}`}>
-                      {isClaimed ? "Claimed" : p.pts}
-                    </div>
-                  </button>
-                );
-              })}
-
-              <div className="px-5 py-2 border-y hairline flex items-center justify-between bg-electric-green/5">
+              <div className="px-5 py-2 border-b hairline flex items-center justify-between bg-electric-green/5">
                 <div className="label-caps text-electric-green">Wagering on Divvy</div>
                 <div className="label-caps text-electric-green">Stack faster ▲</div>
               </div>
@@ -200,6 +174,32 @@ export default function Dashboard() {
                     }`}
                   >
                     <div className={`text-sm md:text-[15px] flex items-center gap-2 font-medium ${isClaimed ? "text-foreground/50 line-through" : "text-foreground/90"}`}>
+                      {p.label}
+                      {isClaimed && <Check className="h-3.5 w-3.5 text-electric-green" />}
+                    </div>
+                    <div className={`font-mono-num text-sm shrink-0 ml-4 ${isClaimed ? "text-foreground/40" : "text-electric-green"}`}>
+                      {isClaimed ? "Claimed" : p.pts}
+                    </div>
+                  </button>
+                );
+              })}
+
+              <div className="px-5 py-2 border-y hairline flex items-center justify-between bg-foreground/[0.02]">
+                <div className="label-caps">Social actions</div>
+                <div className="label-caps text-foreground/50">Lighter weight</div>
+              </div>
+              {EARN_PATHS.filter((p) => p.group === "social").map((p) => {
+                const isClaimed = !!claimed[p.id];
+                return (
+                  <button
+                    key={p.id}
+                    onClick={() => claimEarn(p)}
+                    disabled={isClaimed}
+                    className={`w-full flex items-center justify-between px-5 py-3 border-b hairline last:border-b-0 text-left transition-colors ${
+                      isClaimed ? "opacity-50 cursor-not-allowed" : "hover:bg-electric-green/5 cursor-pointer"
+                    }`}
+                  >
+                    <div className={`text-sm md:text-[15px] flex items-center gap-2 ${isClaimed ? "text-foreground/50 line-through" : "text-foreground/85"}`}>
                       {p.label}
                       {isClaimed && <Check className="h-3.5 w-3.5 text-electric-green" />}
                     </div>
