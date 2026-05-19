@@ -7,6 +7,7 @@ import {
   getReferralCodeFromUrl,
   getCurrentSlip,
 } from "@/lib/divvy";
+import ticketImage from "@/assets/ticket.png";
 
 const DRAW_DATE = new Date("2026-07-26T18:00:00Z");
 
@@ -239,7 +240,12 @@ export default function Landing() {
         </div>
 
         <div className="relative">
-          <TicketPreview />
+          <div className="absolute -inset-10 bg-[#00D87E]/10 blur-3xl rounded-full pointer-events-none" />
+          <img
+            src={ticketImage}
+            alt="Divvy.bet World Cup 2026 Grand Jackpot entry ticket"
+            className="relative w-full h-auto block rounded-lg shadow-[0_40px_80px_-30px_rgba(0,0,0,0.9)]"
+          />
         </div>
       </section>
 
