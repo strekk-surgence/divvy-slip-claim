@@ -113,7 +113,7 @@ export default function Dashboard() {
         <div className="lg:sticky lg:top-8">
           <div className="label-caps mb-3">Your Slip</div>
           <div className="relative -mx-8 -my-6">
-            <img src={slipImage} alt={`Divvy Season 1 Slip No. ${slip.slip_no}`} className="w-[125%] max-w-none h-auto block -ml-[12%]" />
+            <img src={slipImage} alt={`Divvy Season 1 Slip No. ${slip.slip_no}`} className="w-[125%] max-w-none h-auto block -ml-[12%] object-fill" />
           </div>
         </div>
 
