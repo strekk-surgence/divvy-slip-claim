@@ -35,10 +35,10 @@ const EARN_PATHS: EarnPath[] = [
   { id: "join_discord", group: "social", label: "Join Divvy Discord", pts: "2 tickets", url: "https://discord.gg/divvy" },
   { id: "join_tg", group: "social", label: "Join Divvy Telegram", pts: "2 tickets", url: "https://t.me/divvybet" },
   { id: "wallet_connect", group: "social", label: "Sign up on divvy.bet", pts: "5 tickets", url: "https://divvy.bet" },
-  { id: "wager_5", group: "wager", label: "Every $5 wager on Divvy", pts: "1 ticket", url: "https://divvy.bet" },
-  { id: "wager_sol", group: "wager", label: "Every 0.05 SOL on WC Champions Series", pts: "1 ticket", url: "https://divvy.bet" },
-  { id: "mint_champ", group: "wager", label: "Mint a Champions Series entry", pts: "3 tickets per entry", url: "https://divvy.bet" },
-  { id: "match_night", group: "wager", label: "Place a Match Night wager", pts: "2 tickets per wager", url: "https://divvy.bet" },
+  { id: "wager_5", group: "wager", label: "Every $5 wager on Divvy", pts: "10 tickets", url: "https://divvy.bet" },
+  { id: "wager_sol", group: "wager", label: "Every 0.05 SOL on WC Champions Series", pts: "10 tickets", url: "https://divvy.bet" },
+  { id: "mint_champ", group: "wager", label: "Mint a Champions Series entry", pts: "30 tickets per entry", url: "https://divvy.bet" },
+  { id: "match_night", group: "wager", label: "Place a Match Night wager", pts: "20 tickets per wager", url: "https://divvy.bet" },
 ];
 
 export default function Dashboard() {
