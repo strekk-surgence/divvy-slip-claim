@@ -84,7 +84,6 @@ export default function Dashboard() {
     <main className="min-h-screen divvy-bg">
       <header className="container flex items-center justify-between py-6 border-b hairline">
         <Link to="/" className="font-serif-display text-xl tracking-wide">DIVVY</Link>
-        <Link to="/claim" className="label-caps underline-offset-4 hover:underline">‹ Back to Slip</Link>
       </header>
 
       {/* Top CTA bar: referral link + claim on Divvy */}
@@ -110,11 +109,10 @@ export default function Dashboard() {
         </div>
       </section>
 
-      <section className="container py-10 md:py-14 grid lg:grid-cols-[minmax(0,680px)_1fr] gap-12 items-start">
+      <section className="container py-10 md:py-14 grid lg:grid-cols-[minmax(0,560px)_1fr] gap-6 lg:gap-8 items-start">
         <div className="lg:sticky lg:top-8">
           <div className="label-caps mb-3">Your Slip</div>
           <div className="relative">
-            <div className="absolute -inset-6 bg-electric-green/10 blur-3xl rounded-full pointer-events-none" />
             <div className="relative"><img src={slipImage} alt={`Divvy Season 1 Slip No. ${slip.slip_no}`} className="w-full h-auto block" /></div>
           </div>
         </div>
