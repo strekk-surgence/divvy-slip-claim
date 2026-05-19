@@ -24,17 +24,21 @@ function useCountUp(target: number, duration = 900) {
   return n;
 }
 
-type EarnPath = { id: string; label: string; pts: string; url?: string };
+type EarnPath = { id: string; label: string; pts: string; url?: string; group: "social" | "wager" };
 
 const EARN_PATHS: EarnPath[] = [
-  { id: "share_x", label: "Share Slip on X (one-time)", pts: "100 pts", url: "https://twitter.com/intent/tweet?text=Just%20claimed%20my%20Divvy%20Season%20One%20Slip" },
-  { id: "refer_claim", label: "Refer a Slip claim", pts: "100 pts each" },
-  { id: "refer_wallet", label: "Refer a wallet connect on Divvy", pts: "250 pts each" },
-  { id: "share_ig", label: "Share on Instagram", pts: "50 pts", url: "https://www.instagram.com/" },
-  { id: "share_tg", label: "Share on Telegram", pts: "50 pts", url: "https://t.me/share/url?url=https://divvy.bet" },
-  { id: "join_discord", label: "Join Divvy Discord", pts: "200 pts", url: "https://discord.gg/divvy" },
-  { id: "join_tg", label: "Join Divvy Telegram", pts: "200 pts", url: "https://t.me/divvybet" },
-  { id: "wallet_connect", label: "Sign up on divvy.bet · wallet connect", pts: "500 pts", url: "https://divvy.bet" },
+  { id: "share_x", group: "social", label: "Share Slip on X (one-time)", pts: "1 ticket", url: "https://twitter.com/intent/tweet?text=Just%20claimed%20my%20Divvy%20Season%20One%20Lottery%20Ticket" },
+  { id: "refer_claim", group: "social", label: "Refer a Slip claim", pts: "1 ticket each" },
+  { id: "refer_wallet", group: "social", label: "Refer a wallet connect on Divvy", pts: "3 tickets each" },
+  { id: "share_ig", group: "social", label: "Share on Instagram", pts: "1 ticket", url: "https://www.instagram.com/" },
+  { id: "share_tg", group: "social", label: "Share on Telegram", pts: "1 ticket", url: "https://t.me/share/url?url=https://divvy.bet" },
+  { id: "join_discord", group: "social", label: "Join Divvy Discord", pts: "2 tickets", url: "https://discord.gg/divvy" },
+  { id: "join_tg", group: "social", label: "Join Divvy Telegram", pts: "2 tickets", url: "https://t.me/divvybet" },
+  { id: "wallet_connect", group: "social", label: "Sign up on divvy.bet", pts: "5 tickets", url: "https://divvy.bet" },
+  { id: "wager_5", group: "wager", label: "Every $5 wager on Divvy", pts: "1 ticket", url: "https://divvy.bet" },
+  { id: "wager_sol", group: "wager", label: "Every 0.05 SOL on WC Champions Series", pts: "1 ticket", url: "https://divvy.bet" },
+  { id: "mint_champ", group: "wager", label: "Mint a Champions Series entry", pts: "3 tickets per entry", url: "https://divvy.bet" },
+  { id: "match_night", group: "wager", label: "Place a Match Night wager", pts: "2 tickets per wager", url: "https://divvy.bet" },
 ];
 
 export default function Dashboard() {
