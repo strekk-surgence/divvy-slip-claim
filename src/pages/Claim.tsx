@@ -151,7 +151,7 @@ export default function Claim() {
           </div>
         )}
 
-        <div className="relative w-full max-w-xl my-8 surface border hairline shadow-[0_40px_80px_-20px_rgba(0,0,0,0.7)] bg-background/95 backdrop-blur-xl">
+        <div className="relative w-full max-w-3xl my-8 surface border hairline shadow-[0_40px_80px_-20px_rgba(0,0,0,0.7)] bg-background/95 backdrop-blur-xl">
           <button
             onClick={() => nav("/dashboard")}
             aria-label="Close and go to dashboard"
