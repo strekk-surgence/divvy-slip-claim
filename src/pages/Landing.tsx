@@ -6,258 +6,179 @@ import {
   claimSlip,
   getReferralCodeFromUrl,
   getCurrentSlip,
-  totalClaimedDisplay,
 } from "@/lib/divvy";
 
-const WC_KICKOFF = new Date("2026-06-11T00:00:00Z");
+const DRAW_DATE = new Date("2026-07-26T18:00:00Z");
 
-function useDaysUntil(target: Date) {
-  const [days, setDays] = useState(() =>
-    Math.max(0, Math.ceil((target.getTime() - Date.now()) / (1000 * 60 * 60 * 24)))
-  );
+function useCountdown(target: Date) {
+  const calc = () => {
+    const diff = Math.max(0, target.getTime() - Date.now());
+    const d = Math.floor(diff / 86_400_000);
+    const h = Math.floor((diff / 3_600_000) % 24);
+    const m = Math.floor((diff / 60_000) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+    return { d, h, m, s };
+  };
+  const [t, setT] = useState(calc);
   useEffect(() => {
-    const id = setInterval(() => {
-      setDays(Math.max(0, Math.ceil((target.getTime() - Date.now()) / (1000 * 60 * 60 * 24))));
-    }, 60_000);
+    const id = setInterval(() => setT(calc()), 1000);
     return () => clearInterval(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [target]);
-  return days;
+  return t;
 }
 
-/* ---------- Decorative atoms ---------- */
-
-function Star({ className = "" }: { className?: string }) {
+/* ---------- Divvy "D" house mark ---------- */
+function DMark({ className = "", glow = false }: { className?: string; glow?: boolean }) {
   return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
-      <path d="M12 2l2.6 6.6L22 9.6l-5.4 4.6L18.4 22 12 18.2 5.6 22l1.8-7.8L2 9.6l7.4-1z" />
+    <div className={`relative inline-flex items-center justify-center ${className}`}>
+      {glow && (
+        <div
+          className="absolute inset-0 rounded-full"
+          style={{
+            background: "linear-gradient(135deg, #7C02FF 0%, #00D87E 100%)",
+            filter: "blur(28px)",
+            opacity: 0.6,
+          }}
+        />
+      )}
+      <div
+        className="relative h-full w-full rounded-md flex items-center justify-center font-serif-display text-white font-bold"
+        style={{
+          background: "linear-gradient(135deg, #7C02FF 0%, #00D87E 100%)",
+        }}
+      >
+        <span style={{ fontSize: "0.7em", lineHeight: 1 }}>D</span>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Ticket preview (v3 spec) ---------- */
+function TicketPreview() {
+  return (
+    <div
+      className="relative w-full max-w-md mx-auto"
+      style={{
+        aspectRatio: "5 / 3",
+        background: "linear-gradient(180deg, #1A1A1A 0%, #0E0E0E 100%)",
+        border: "1px solid rgba(255,255,255,0.08)",
+        borderRadius: 8,
+        boxShadow: "0 40px 80px -30px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.04)",
+      }}
+    >
+      {/* perforated divider */}
+      <div
+        className="absolute top-3 bottom-3 pointer-events-none"
+        style={{
+          left: "26%",
+          width: 1,
+          backgroundImage:
+            "linear-gradient(to bottom, rgba(255,255,255,0.25) 50%, transparent 50%)",
+          backgroundSize: "1px 8px",
+        }}
+      />
+
+      {/* Left stub */}
+      <div className="absolute inset-y-0 left-0 w-[26%] flex flex-col items-center justify-between py-5 px-3">
+        <DMark glow className="h-14 w-14" />
+        <div className="text-[9px] text-white/60 font-mono-num uppercase tracking-[0.25em] [writing-mode:vertical-rl] rotate-180">
+          Grand Jackpot
+        </div>
+        <div className="font-mono-num text-white text-lg">342</div>
+      </div>
+
+      {/* Right body */}
+      <div className="absolute inset-y-0 right-0 left-[26%] p-5 flex flex-col">
+        <div className="flex items-baseline justify-between">
+          <div className="font-serif-display text-white text-base tracking-wide">
+            Divvy.bet
+          </div>
+          <div className="font-mono-num text-[9px] text-white/50 uppercase tracking-[0.25em]">
+            No. <span className="text-white/80">00342</span>
+          </div>
+        </div>
+        <div className="font-mono-num text-[10px] text-white/55 uppercase tracking-[0.3em] mt-0.5">
+          World Cup 2026
+        </div>
+
+        <div className="mt-3 font-mono-num text-[10px] uppercase tracking-[0.25em] text-win-green">
+          Official Grand Jackpot Entry
+        </div>
+
+        <div className="mt-auto grid grid-cols-2 gap-3">
+          <div>
+            <div className="text-[9px] uppercase tracking-[0.2em] text-white/40">Holder</div>
+            <div className="flex items-center gap-1.5 mt-1">
+              <div className="h-4 w-4 rounded-full bg-white/15" />
+              <div className="font-mono-num text-xs text-white/90">@your_handle</div>
+            </div>
+          </div>
+          <div className="text-right">
+            <div className="text-[9px] uppercase tracking-[0.2em] text-white/40">Draw Date</div>
+            <div className="font-mono-num text-xs text-white/90 mt-1">26 JULY 2026</div>
+          </div>
+        </div>
+
+        <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between">
+          <div className="text-[9px] uppercase tracking-[0.2em] text-white/40">Pool</div>
+          <div className="font-mono-num text-[10px] text-white/80 uppercase tracking-[0.2em]">
+            WC Grand Jackpot
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Icons (white outline) ---------- */
+function StackIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={className}>
+      <rect x="3" y="13" width="18" height="7" rx="1" />
+      <rect x="5" y="8" width="14" height="3" rx="0.5" />
+      <rect x="7" y="4" width="10" height="2" rx="0.5" />
+    </svg>
+  );
+}
+function TrophyIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={className}>
+      <path d="M7 4h10v5a5 5 0 0 1-10 0V4z" />
+      <path d="M7 6H4v2a3 3 0 0 0 3 3" />
+      <path d="M17 6h3v2a3 3 0 0 1-3 3" />
+      <path d="M10 14h4v3h-4z" />
+      <path d="M8 20h8" />
+    </svg>
+  );
+}
+function XIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d="M18.244 2H21l-6.52 7.45L22 22h-6.78l-5.31-6.94L3.78 22H1l7.02-8.02L1.5 2h6.92l4.8 6.34L18.244 2zm-2.38 18h1.88L8.22 4H6.26l9.604 16z" />
+    </svg>
+  );
+}
+function DiscordIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d="M20 4.5A18 18 0 0 0 15.6 3l-.2.5a14 14 0 0 0-6.8 0L8.4 3A18 18 0 0 0 4 4.5C1.5 8.5 1 12.4 1.2 16.2A18 18 0 0 0 6.8 19l.5-.7a12 12 0 0 1-2-1 6 6 0 0 0 .4-.3 13 13 0 0 0 10.6 0l.4.3a12 12 0 0 1-2 1l.5.7a18 18 0 0 0 5.6-2.8c.3-4.4-.4-8.3-1.8-11.7zM8.7 14.2c-1 0-1.9-1-1.9-2.2s.8-2.2 1.9-2.2 1.9 1 1.9 2.2-.9 2.2-1.9 2.2zm6.6 0c-1 0-1.9-1-1.9-2.2s.8-2.2 1.9-2.2 1.9 1 1.9 2.2-.8 2.2-1.9 2.2z" />
+    </svg>
+  );
+}
+function TelegramIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d="M21.5 3.5L2.7 10.9c-1 .4-1 1 .2 1.3l4.7 1.5 1.8 5.7c.2.7.6.8 1.1.3l2.6-2.4 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.5c.3-1.2-.4-1.8-1.3-1.4zM9.4 14.7l11.2-7c.5-.3.9-.1.5.3l-9.4 8.5-.4 3.7-1.9-5.5z" />
     </svg>
   );
 }
 
-function PerfDivider() {
-  return (
-    <div className="relative my-16 flex items-center gap-4">
-      <div className="flex-1 border-t border-dashed border-electric-green/30" />
-      <Star className="w-3 h-3 text-electric-green/70" />
-      <div className="flex-1 border-t border-dashed border-electric-green/30" />
-    </div>
-  );
-}
-
-function Stamp({ className = "", label = "Stamped" }: { className?: string; label?: string }) {
-  return (
-    <div
-      className={`inline-block px-2 py-1 text-[10px] font-mono-num uppercase tracking-[0.2em] border-2 border-electric-green/70 text-electric-green/80 rotate-[-8deg] opacity-80 ${className}`}
-    >
-      {label}
-    </div>
-  );
-}
-
-/* ---------- Hero ticket (big, photoreal-style, 7deg) ---------- */
-
-function HeroTicket() {
-  return (
-    <div className="relative mx-auto" style={{ perspective: "1200px" }}>
-      <div className="absolute -inset-10 bg-electric-green/10 blur-[80px] rounded-full pointer-events-none" />
-      <div
-        className="relative paper-grain-soft border border-ink/15 shadow-[0_60px_120px_-30px_rgba(0,0,0,0.85),0_15px_40px_-15px_rgba(0,0,0,0.6)]"
-        style={{
-          width: "min(560px, 90vw)",
-          aspectRatio: "5 / 3",
-          transform: "rotate(7deg)",
-          borderRadius: 6,
-        }}
-      >
-        {/* perforated edges */}
-        <div className="absolute top-0 left-0 h-full w-3 perforated-left pointer-events-none" />
-        <div
-          className="absolute top-0 right-0 h-full w-3 pointer-events-none"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at calc(100% - 6px) 50%, hsl(var(--background)) 4px, transparent 4.5px)",
-            backgroundSize: "12px 14px",
-            backgroundRepeat: "repeat-y",
-            backgroundPosition: "right center",
-          }}
-        />
-
-        {/* corner stars */}
-        <Star className="absolute top-3 left-6 w-3 h-3 text-ink/50" />
-        <Star className="absolute top-3 right-6 w-3 h-3 text-ink/50" />
-        <Star className="absolute bottom-3 left-6 w-3 h-3 text-ink/50" />
-        <Star className="absolute bottom-3 right-6 w-3 h-3 text-ink/50" />
-
-        {/* double-line green border */}
-        <div className="absolute inset-3 border-2 border-double border-ink/30 pointer-events-none" />
-
-        <div className="h-full grid grid-cols-[1fr_auto] gap-6 px-10 py-7">
-          <div className="flex flex-col">
-            <div className="font-serif-display text-xl tracking-wide leading-tight">
-              DIVVY <span className="text-ink-soft">·</span> SEASON ONE
-            </div>
-            <div className="label-caps-paper mt-1">Official Lottery Ticket · World Cup 2026</div>
-
-            <div className="mt-5">
-              <div className="label-caps-paper">Ticket No.</div>
-              <div className="font-mono-num text-5xl leading-none mt-1 text-ink tracking-tight">
-                00<span className="text-stamp">342</span>
-              </div>
-            </div>
-
-            <div className="mt-auto grid grid-cols-2 gap-3">
-              <div>
-                <div className="label-caps-paper">Holder</div>
-                <div className="font-mono-num text-sm text-ink">@your_handle</div>
-              </div>
-              <div>
-                <div className="label-caps-paper">Draw</div>
-                <div className="font-mono-num text-sm text-ink">11 · JUN · 26</div>
-              </div>
-            </div>
-          </div>
-
-          {/* stub */}
-          <div className="relative pl-5 border-l-2 border-dashed border-ink/40 flex flex-col items-center justify-between py-1">
-            <div className="label-caps-paper text-[9px] [writing-mode:vertical-rl] rotate-180">
-              Admit · One · Lottery
-            </div>
-            <div className="font-mono-num text-2xl text-ink">342</div>
-            <Stamp label="Issued" />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ---------- Mini ticket-stub feature card ---------- */
-
-function MiniTicket({
-  no,
-  tag,
-  title,
-  body,
-}: {
-  no: string;
-  tag: string;
-  title: string;
-  body: string;
-}) {
-  return (
-    <div
-      className="relative p-5 pl-7"
-      style={{
-        background:
-          "linear-gradient(180deg, hsl(195 45% 8%) 0%, hsl(195 50% 6%) 100%)",
-        borderRadius: 4,
-      }}
-    >
-      {/* outer double green border */}
-      <div className="absolute inset-0 border-2 border-double border-electric-green/40 pointer-events-none" style={{ borderRadius: 4 }} />
-      <div className="absolute inset-[5px] border border-electric-green/15 pointer-events-none" style={{ borderRadius: 2 }} />
-
-      {/* perforated stub on left */}
-      <div
-        className="absolute top-0 left-0 h-full w-3 pointer-events-none"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 6px 50%, hsl(var(--background)) 3px, transparent 3.5px)",
-          backgroundSize: "10px 12px",
-          backgroundRepeat: "repeat-y",
-        }}
-      />
-
-      {/* corner stars */}
-      <Star className="absolute top-2 left-4 w-2.5 h-2.5 text-electric-green/70" />
-      <Star className="absolute top-2 right-3 w-2.5 h-2.5 text-electric-green/70" />
-      <Star className="absolute bottom-2 left-4 w-2.5 h-2.5 text-electric-green/70" />
-      <Star className="absolute bottom-2 right-3 w-2.5 h-2.5 text-electric-green/70" />
-
-      <div className="flex items-baseline justify-between">
-        <div className="font-mono-num text-xs uppercase tracking-[0.2em] text-electric-green/80">
-          № {no}
-        </div>
-        <div className="font-mono-num text-[10px] uppercase tracking-[0.2em] text-foreground/50">
-          {tag}
-        </div>
-      </div>
-
-      <div className="mt-3 border-t border-dashed border-electric-green/25" />
-
-      <div className="mt-4 font-serif-display text-xl leading-tight text-foreground">
-        {title}
-      </div>
-      <p className="mt-2 font-mono-num text-[12px] leading-relaxed text-foreground/65 uppercase tracking-wide">
-        {body}
-      </p>
-
-      <div className="mt-4 flex items-center justify-between">
-        <div className="font-mono-num text-[10px] text-electric-green/70 tracking-widest">
-          ADMIT · ONE
-        </div>
-        <Star className="w-2.5 h-2.5 text-electric-green/60" />
-      </div>
-    </div>
-  );
-}
-
-/* ---------- Flip-clock style counter ---------- */
-
-function FlipCounter() {
-  const [n, setN] = useState(totalClaimedDisplay());
-  useEffect(() => {
-    const id = setInterval(() => setN((v) => v + 1), 4000 + Math.random() * 5000);
-    return () => clearInterval(id);
-  }, []);
-  const digits = n.toLocaleString("en-US").split("");
-
-  return (
-    <div className="inline-flex flex-col items-center">
-      <div className="label-caps text-electric-green/80 mb-3 tracking-[0.3em]">
-        ★ Tickets Claimed ★
-      </div>
-      <div className="flex gap-1.5">
-        {digits.map((d, i) =>
-          d === "," ? (
-            <div key={i} className="self-end pb-2 text-electric-green/70 font-mono-num text-3xl">·</div>
-          ) : (
-            <FlipDigit key={`${i}-${d}`} d={d} />
-          )
-        )}
-      </div>
-      <div className="mt-3 font-mono-num text-[10px] tracking-[0.3em] uppercase text-foreground/50">
-        Live · Booth № 01 · Season One
-      </div>
-    </div>
-  );
-}
-
-function FlipDigit({ d }: { d: string }) {
-  return (
-    <div
-      className="relative w-12 h-16 sm:w-14 sm:h-20 flex items-center justify-center font-mono-num text-4xl sm:text-5xl text-electric-green"
-      style={{
-        background:
-          "linear-gradient(180deg, hsl(195 50% 9%) 0%, hsl(195 60% 5%) 49%, hsl(195 50% 8%) 50%, hsl(195 55% 6%) 100%)",
-        border: "1px solid hsl(var(--electric-green) / 0.35)",
-        boxShadow:
-          "inset 0 1px 0 hsl(var(--electric-green) / 0.15), 0 8px 24px -10px hsl(var(--electric-green) / 0.35)",
-        borderRadius: 4,
-      }}
-    >
-      <span className="inline-block animate-tick">{d}</span>
-      <div className="absolute left-0 right-0 top-1/2 h-px bg-black/60" />
-    </div>
-  );
-}
-
 /* ---------- Page ---------- */
-
 export default function Landing() {
   const nav = useNavigate();
   const [loading, setLoading] = useState(false);
-  const days = useDaysUntil(WC_KICKOFF);
+  const { d, h, m, s } = useCountdown(DRAW_DATE);
 
   async function onConnect() {
     setLoading(true);
@@ -271,148 +192,181 @@ export default function Landing() {
   }
 
   return (
-    <main
-      className="min-h-screen text-foreground relative overflow-hidden"
-      style={{
-        background:
-          "radial-gradient(ellipse 90% 60% at 50% 0%, hsl(160 70% 12% / 0.9) 0%, transparent 60%), radial-gradient(ellipse 70% 60% at 50% 100%, hsl(145 70% 14% / 0.5) 0%, transparent 60%), hsl(195 55% 4%)",
-      }}
-    >
-      {/* subtle paper grain overlay */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-overlay"
-        style={{
-          backgroundImage:
-            "radial-gradient(hsl(145 80% 60%) 1px, transparent 1px), radial-gradient(hsl(0 0% 100%) 1px, transparent 1px)",
-          backgroundSize: "5px 5px, 11px 11px",
-          backgroundPosition: "0 0, 2px 3px",
-        }}
-      />
-
-      <header className="container relative flex items-center justify-between py-6">
-        <div className="flex items-center gap-3">
-          <Star className="w-4 h-4 text-electric-green" />
-          <div className="font-serif-display text-xl tracking-wide">DIVVY</div>
-        </div>
-        <div className="hidden sm:flex items-center gap-3 font-mono-num text-[10px] uppercase tracking-[0.25em] text-foreground/60">
-          <span className="text-electric-green">●</span>
-          Season One · Claim Window Open
-          <span className="text-foreground/30">|</span>
-          <span>Kickoff in <span className="text-electric-green">{days}</span> days</span>
+    <main className="min-h-screen divvy-page text-white">
+      {/* Header */}
+      <header className="container flex items-center justify-between py-6">
+        <a href="https://divvy.bet" className="font-serif-display text-xl tracking-wide text-white">
+          Divvy<span className="text-white/60">.bet</span>
+        </a>
+        <div className="font-mono-num text-[11px] sm:text-xs text-white/85 tracking-tight">
+          <span className="text-white">{d}d {String(h).padStart(2, "0")}h {String(m).padStart(2, "0")}m {String(s).padStart(2, "0")}s</span>
+          <span className="hidden sm:inline text-white/40"> · Closes 26 July 2026</span>
         </div>
       </header>
 
       {/* Hero */}
-      <section className="container relative pt-10 pb-20 text-center">
-        <div className="flex items-center justify-center gap-3 mb-6 animate-fade-up">
-          <Star className="w-3 h-3 text-electric-green" />
-          <div className="font-mono-num text-[10px] uppercase tracking-[0.3em] text-electric-green/80">
-            Free · X Auth · No Wallet · Season One
+      <section className="container pt-10 pb-20 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="text-left">
+          <h1 className="font-sans font-bold text-[2.25rem] sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-white">
+            CLAIM YOUR ENTRY TO THE
+            <br />
+            <span className="divvy-gradient-text">WORLD CUP 2026 GRAND JACKPOT</span>
+          </h1>
+
+          <p className="mt-6 text-lg text-white/75 max-w-xl leading-relaxed">
+            70 days. One leaderboard. The biggest prize at the World Cup Final.
+          </p>
+
+          <p className="mt-4 text-sm text-win-green leading-relaxed max-w-xl">
+            Divvy.bet is a non-custodial sportsbook on Solana. Bet from your wallet, no account needed.
+          </p>
+
+          <div className="mt-10">
+            <Button
+              size="lg"
+              onClick={onConnect}
+              disabled={loading}
+              className="divvy-glow divvy-gradient text-white h-14 px-10 text-base font-semibold tracking-wide rounded-md hover:opacity-95 hover:text-white border-0"
+            >
+              {loading ? "Claiming…" : "Claim Your Entry →"}
+            </Button>
+            <div className="mt-4 text-xs text-white/55 font-mono-num tracking-wide">
+              <span className="text-white/85">12,481 entries claimed</span>
+              <span className="text-white/30 mx-2">·</span>
+              Free to claim
+            </div>
           </div>
-          <Star className="w-3 h-3 text-electric-green" />
         </div>
 
-        <h1
-          className="font-serif-display text-[2.2rem] sm:text-5xl md:text-6xl leading-[1.05] max-w-4xl mx-auto animate-fade-up"
-          style={{
-            animationDelay: "60ms",
-            background:
-              "linear-gradient(180deg, hsl(145 90% 75%) 0%, hsl(145 85% 55%) 60%, hsl(145 80% 45%) 100%)",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-            color: "transparent",
-            textShadow: "0 0 60px hsl(145 85% 55% / 0.25)",
-          }}
-        >
-          CLAIM YOUR DIVVY SEASON ONE LOTTERY TICKET
-        </h1>
-
-        <p
-          className="mt-6 italic text-foreground/60 text-lg sm:text-xl font-serif-display font-normal animate-fade-up"
-          style={{ animationDelay: "140ms" }}
-        >
-          Stack tickets. Win the pool. World Cup 2026.
-        </p>
-        <p
-          className="mt-2 font-mono-num text-[11px] uppercase tracking-[0.25em] text-foreground/45 animate-fade-up"
-          style={{ animationDelay: "180ms" }}
-        >
-          Bet from your wallet · Win onchain · Be the house
-        </p>
-
-        {/* Big ticket */}
-        <div className="mt-16 animate-fade-up" style={{ animationDelay: "240ms" }}>
-          <HeroTicket />
-        </div>
-
-        <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up" style={{ animationDelay: "320ms" }}>
-          <Button
-            size="lg"
-            onClick={onConnect}
-            disabled={loading}
-            className="h-14 px-10 text-base font-semibold tracking-[0.15em] uppercase rounded-none bg-electric-green text-background hover:bg-electric-green/90 glow-green"
-          >
-            {loading ? "Issuing Ticket…" : "Connect X · Claim Ticket"}
-          </Button>
-          <Stamp label="Free Entry" />
+        <div className="relative">
+          <TicketPreview />
         </div>
       </section>
 
       <div className="container">
-        <PerfDivider />
+        <div className="border-t border-white/10" />
       </div>
 
-      {/* Mechanic mini-tickets */}
-      <section className="container relative pb-8">
-        <div className="text-center mb-10">
-          <div className="font-mono-num text-[10px] uppercase tracking-[0.3em] text-electric-green/80">
-            ★ Three Ways to Stack ★
-          </div>
-          <h2 className="mt-3 font-serif-display text-3xl sm:text-4xl">
-            How the Lottery Works
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <MiniTicket
-            no="001"
-            tag="Claim"
-            title="Your Starting Ticket"
-            body="Connect X. Get your first lottery ticket. Free entry to Season One."
+      {/* How it works */}
+      <section className="container py-20">
+        <div className="grid md:grid-cols-3 gap-6">
+          <HowCard
+            icon={<DMark glow className="h-12 w-12" />}
+            title="Claim your entry"
+            body="Connect your Solana wallet. Mint your free Grand Jackpot entry. Get your ticket number for life."
           />
-          <MiniTicket
-            no="002"
-            tag="Stack"
-            title="Wager. Earn Tickets."
-            body="Every $5 wagered on Divvy stacks one ticket. 0.05 SOL on WC Champions Series stacks more."
+          <HowCard
+            icon={<StackIcon className="h-10 w-10 text-white" />}
+            title="Earn more entries"
+            body="Every bet on Divvy.bet earns you additional entries. More tickets, more chances to win."
           />
-          <MiniTicket
-            no="003"
-            tag="Win"
-            title="The Season Pool"
-            body="Top ticket holders win the Season One pool. Drawn at season close. Real money. Onchain."
+          <HowCard
+            icon={<TrophyIcon className="h-10 w-10 text-white" />}
+            title="Win across the season"
+            body="Top wallets win every week. The Grand Jackpot drops at the World Cup Final on 26 July 2026."
           />
         </div>
       </section>
 
       <div className="container">
-        <PerfDivider />
+        <div className="border-t border-white/10" />
       </div>
 
-      {/* Counter */}
-      <section className="container relative py-12 text-center">
-        <FlipCounter />
-        <div className="mt-10 flex justify-center gap-6 opacity-70">
-          <Stamp label="Verified" />
-          <Stamp label="Onchain" />
-          <Stamp label="Season One" />
+      {/* Two pools */}
+      <section className="container py-20">
+        <h2 className="font-sans font-bold text-3xl sm:text-5xl tracking-tight text-white text-center">
+          Two ways to win.
+        </h2>
+
+        <div className="mt-12 grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          <PoolPanel
+            label="EVERY WEEK"
+            title="Weekly Matchday Pool"
+            body="Someone wins every week. Top wallets and lucky holders both eligible. Prizes refresh each matchday across the tournament."
+          />
+          <PoolPanel
+            label="ONE BIG DROP"
+            title="World Cup Grand Jackpot"
+            body="The biggest pool of the season. Grows with every match. Drawn at the World Cup Final. Every entry you stack across the season counts."
+          />
+        </div>
+
+        <div className="mt-10 text-center">
+          <div className="inline-flex items-baseline gap-3 px-5 py-3 rounded-md border border-white/10 bg-white/[0.02]">
+            <span className="text-[10px] uppercase tracking-[0.25em] text-white/55 font-mono-num">
+              Grand Jackpot Pool
+            </span>
+            <span className="font-mono-num text-2xl divvy-gradient-text font-semibold">
+              142.6 SOL
+            </span>
+            <span className="text-xs text-white/45">· growing every match</span>
+          </div>
         </div>
       </section>
 
-      <footer className="container relative py-10 border-t border-dashed border-electric-green/20 mt-8 flex flex-col sm:flex-row gap-2 justify-between font-mono-num text-[11px] uppercase tracking-[0.2em] text-foreground/50">
-        <span>© Divvy · Built for fans, not bookies.</span>
-        <span className="text-electric-green/70">★ Claim · Stack · Win ★</span>
+      <div className="container">
+        <div className="border-t border-white/10" />
+      </div>
+
+      {/* Live counters */}
+      <section className="container py-16">
+        <div className="grid grid-cols-3 gap-px bg-white/10 border border-white/10 rounded-md overflow-hidden">
+          <Metric label="Entries Claimed" value="12,481" />
+          <Metric label="Active Wallets" value="3,204" />
+          <Metric label="Days Until Final" value={String(d)} />
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="container py-10 border-t border-white/10 mt-4">
+        <div className="grid sm:grid-cols-3 gap-6 items-center text-sm">
+          <div className="font-serif-display text-white text-base">
+            Divvy<span className="text-white/60">.bet</span>
+          </div>
+          <div className="text-white/65 text-center text-xs sm:text-sm">
+            Non-custodial sportsbook on Solana. Built for fans, not bookies.
+          </div>
+          <div className="flex items-center gap-4 sm:justify-end text-white/75">
+            <a href="https://x.com/divvybet" aria-label="X" className="hover:text-white"><XIcon className="h-4 w-4" /></a>
+            <a href="https://discord.gg/divvy" aria-label="Discord" className="hover:text-white"><DiscordIcon className="h-5 w-5" /></a>
+            <a href="https://t.me/divvybet" aria-label="Telegram" className="hover:text-white"><TelegramIcon className="h-5 w-5" /></a>
+          </div>
+        </div>
+        <div className="mt-8 text-center text-[11px] text-white/35 font-mono-num tracking-wide">
+          © Divvy.bet 2026
+        </div>
       </footer>
     </main>
+  );
+}
+
+function HowCard({ icon, title, body }: { icon: React.ReactNode; title: string; body: string }) {
+  return (
+    <div className="p-7 rounded-md border border-white/10 bg-white/[0.02] hover:bg-white/[0.035] transition-colors">
+      <div className="h-12 flex items-center">{icon}</div>
+      <div className="mt-5 font-sans font-bold text-xl text-white">{title}</div>
+      <p className="mt-3 text-sm text-white/65 leading-relaxed">{body}</p>
+    </div>
+  );
+}
+
+function PoolPanel({ label, title, body }: { label: string; title: string; body: string }) {
+  return (
+    <div className="p-8 rounded-md border border-white/10 bg-white/[0.02]">
+      <div className="text-[10px] uppercase tracking-[0.3em] text-win-green font-mono-num font-semibold">
+        {label}
+      </div>
+      <div className="mt-3 font-sans font-bold text-2xl text-white">{title}</div>
+      <p className="mt-4 text-sm text-white/65 leading-relaxed">{body}</p>
+    </div>
+  );
+}
+
+function Metric({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="bg-[#121212] p-6 text-center">
+      <div className="text-[10px] uppercase tracking-[0.25em] text-white/50 font-mono-num">{label}</div>
+      <div className="mt-2 font-mono-num text-3xl text-white font-semibold">{value}</div>
+    </div>
   );
 }
