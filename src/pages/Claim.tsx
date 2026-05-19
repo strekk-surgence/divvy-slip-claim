@@ -151,7 +151,7 @@ export default function Claim() {
           </div>
         )}
 
-        <div className="relative w-full max-w-xl my-8 surface border hairline shadow-[0_40px_80px_-20px_rgba(0,0,0,0.7)] bg-background/95 backdrop-blur-xl">
+        <div className="relative w-full max-w-3xl my-8 surface border hairline shadow-[0_40px_80px_-20px_rgba(0,0,0,0.7)] bg-background/95 backdrop-blur-xl">
           <button
             onClick={() => nav("/dashboard")}
             aria-label="Close and go to dashboard"
@@ -176,7 +176,7 @@ export default function Claim() {
 
             <div className="animate-fade-up relative" style={{ animationDelay: "120ms" }}>
               <div className="absolute -inset-8 bg-electric-green/10 blur-3xl rounded-full pointer-events-none" />
-              <div ref={cardRef} className="relative mx-auto max-w-sm">
+              <div ref={cardRef} className="relative mx-auto max-w-2xl">
                 <img src={slipImage} alt={`Divvy Season 1 Slip No. ${slip.slip_no}`} className="w-full h-auto block" />
               </div>
             </div>
