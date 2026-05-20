@@ -88,7 +88,7 @@ export default function Claim() {
                     Connect your <span className="italic text-electric-green">X account</span>
                   </h2>
                   <p className="text-foreground/70 text-sm mt-3 leading-relaxed">
-                    We link your Slip to your handle so points, referrals, and leaderboard rank stick to you.
+                    We link your Slip to your handle so tickets, referrals, and leaderboard rank stick to you.
                   </p>
                   <div className="mt-7 space-y-3">
                     <Button
