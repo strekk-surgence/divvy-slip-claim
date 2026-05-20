@@ -54,7 +54,19 @@ export default function Dashboard() {
 
   function claimEarn(p: EarnPath) {
     if (claimed[p.id]) return;
-    if (p.url) window.open(p.url, "_blank", "noopener,noreferrer");
+    if (p.id === "submit_email") {
+      const email = window.prompt("Enter your email to claim 3 tickets:");
+      if (!email) return;
+      const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+      if (!ok) {
+        toast({ title: "Invalid email", description: "Please enter a valid email address." });
+        return;
+      }
+      localStorage.setItem("divvy_email", email.trim());
+      toast({ title: "Email saved", description: "+3 tickets credited." });
+    } else if (p.url) {
+      window.open(p.url, "_blank", "noopener,noreferrer");
+    }
     const next = { ...claimed, [p.id]: true };
     setClaimed(next);
     localStorage.setItem("divvy_earn_claimed", JSON.stringify(next));
