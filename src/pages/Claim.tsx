@@ -170,7 +170,7 @@ export default function Claim() {
                 You now hold one of the first <span className="font-mono-num not-italic">{Number(slip.slip_no).toLocaleString()}</span> slips issued.
               </p>
               <p className="text-foreground/70 mt-3 max-w-md mx-auto">
-                You're in Season One. <span className="text-electric-green font-semibold">100 Slip Points</span> credited. Climb the leaderboard.
+                You're in Season One. <span className="text-electric-green font-semibold">100 Slip Tickets</span> credited. Climb the leaderboard.
               </p>
             </div>
 
