@@ -221,8 +221,6 @@ export default function Dashboard() {
               {[
                 { tag: "Prize Pool", title: "Season prize pool", sub: "Top wallets paid out at season close." },
                 { tag: "Status", title: "Founder status", sub: "Permanent badge for early Season One holders." },
-                { tag: "Access", title: "Exclusive perks", sub: "Private drops, early features, gated rooms." },
-                { tag: "Seasonal", title: "Seasonal rewards", sub: "Recurring drops across the season." },
               ].map((r) => (
                 <div key={r.title} className="bg-background p-5">
                   <div className="label-caps text-electric-green">{r.tag}</div>
