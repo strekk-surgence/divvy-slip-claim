@@ -35,7 +35,7 @@ export default function Claim() {
   }
 
   const referralUrl = buildReferralUrl(slip.referral_code);
-  const tweet = `Just claimed my Divvy Season One Slip — No. ${slip.slip_no}. 100 Slip Points locked in. Climb the standings with me → ${referralUrl}`;
+  const tweet = `Just claimed my Divvy Season One Slip — No. ${slip.slip_no}. 100 Slip Tickets locked in. Climb the standings with me → ${referralUrl}`;
 
   async function downloadAndShare(intent: "share" | "download") {
     if (!cardRef.current) return;
