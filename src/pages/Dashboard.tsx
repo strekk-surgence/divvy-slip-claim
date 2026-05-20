@@ -133,7 +133,7 @@ export default function Dashboard() {
             <div>
               <div className="label-caps">From referrals</div>
               <div className="font-mono-num text-2xl mt-1">
-                +<span className="text-electric-green">{animRefPts.toLocaleString()}</span> pts
+                +<span className="text-electric-green">{animRefPts.toLocaleString()}</span> tickets
               </div>
               <div className="text-right sm:text-left mt-3">
                 <div className="label-caps">Friends claimed</div>
