@@ -247,7 +247,7 @@ export default function Dashboard() {
             </p>
             <div className="mt-4">
               <div className="grid grid-cols-[60px_1fr_80px_100px] label-caps px-5 pb-2 border-b hairline">
-                <div>Rank</div><div>Handle</div><div className="text-right">Refs</div><div className="text-right">Points</div>
+                <div>Rank</div><div>Handle</div><div className="text-right">Refs</div><div className="text-right">Tickets</div>
               </div>
               {board.map((row, i) => {
                 const isMe = row.handle === slip.x_handle;
