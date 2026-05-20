@@ -291,7 +291,7 @@ export default function Dashboard() {
       </section>
 
       <footer className="container py-8 text-sm text-foreground/55 border-t hairline">
-        Slip Points credit to your wallet when you connect on Divvy. Season One standings TBD.
+        Slip Tickets credit to your wallet when you connect on Divvy. Season One standings TBD.
       </footer>
     </main>
   );
