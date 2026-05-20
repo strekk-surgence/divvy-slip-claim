@@ -274,54 +274,8 @@ export default function Landing() {
         </div>
       </section>
 
-      <div className="container">
-        <div className="border-t border-white/10" />
-      </div>
 
-      {/* Two pools */}
-      <section className="container py-20">
-        <h2 className="font-sans font-bold text-3xl sm:text-5xl tracking-tight text-white text-center">
-          Two ways to win.
-        </h2>
 
-        <div className="mt-12 grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          <PoolPanel
-            label="EVERY WEEK"
-            title="Weekly Matchday Pool"
-            body="Someone wins every week. Top wallets and lucky holders both eligible. Prizes refresh each matchday across the tournament."
-          />
-          <PoolPanel
-            label="ONE BIG DROP"
-            title="World Cup Grand Jackpot"
-            body="The biggest pool of the season. Grows with every match. Drawn at the World Cup Final. Every entry you stack across the season counts."
-          />
-        </div>
-
-        <div className="mt-10 text-center">
-          <div className="inline-flex items-baseline gap-3 px-5 py-3 rounded-md border border-white/10 bg-white/[0.02]">
-            <span className="text-[10px] uppercase tracking-[0.25em] text-white/55 font-mono-num">
-              Grand Jackpot Pool
-            </span>
-            <span className="font-mono-num text-2xl divvy-gradient-text font-semibold">
-              142.6 SOL
-            </span>
-            <span className="text-xs text-white/45">· growing every match</span>
-          </div>
-        </div>
-      </section>
-
-      <div className="container">
-        <div className="border-t border-white/10" />
-      </div>
-
-      {/* Live counters */}
-      <section className="container py-16">
-        <div className="grid grid-cols-3 gap-px bg-white/10 border border-white/10 rounded-md overflow-hidden">
-          <Metric label="Entries Claimed" value="12,481" />
-          <Metric label="Active Wallets" value="3,204" />
-          <Metric label="Days Until Final" value={String(d)} />
-        </div>
-      </section>
 
       {/* Footer */}
       <footer className="container py-10 border-t border-white/10 mt-4">
