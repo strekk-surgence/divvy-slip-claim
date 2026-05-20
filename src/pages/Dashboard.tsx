@@ -109,7 +109,7 @@ export default function Dashboard() {
         </div>
       </section>
 
-      <section className="container py-10 md:py-14 grid lg:grid-cols-[minmax(0,560px)_1fr] gap-6 lg:gap-8 items-start">
+      <section className="container py-10 md:py-14 grid lg:grid-cols-[minmax(0,560px)_1fr] gap-12 lg:gap-16 items-start">
         <div className="lg:sticky lg:top-8">
           <div className="label-caps mb-3">Your Slip</div>
           <div className="relative">
