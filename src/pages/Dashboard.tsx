@@ -27,6 +27,7 @@ function useCountUp(target: number, duration = 900) {
 type EarnPath = { id: string; label: string; pts: string; url?: string; group: "social" | "wager" };
 
 const EARN_PATHS: EarnPath[] = [
+  { id: "submit_email", group: "social", label: "Submit your email", pts: "3 tickets" },
   { id: "share_x", group: "social", label: "Share Slip on X (one-time)", pts: "1 ticket", url: "https://twitter.com/intent/tweet?text=Just%20claimed%20my%20Divvy%20Season%20One%20Lottery%20Ticket" },
   { id: "refer_claim", group: "social", label: "Refer a Slip claim", pts: "1 ticket each" },
   { id: "refer_wallet", group: "social", label: "Refer a wallet connect on Divvy", pts: "3 tickets each" },
