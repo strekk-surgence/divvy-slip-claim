@@ -35,7 +35,7 @@ export default function Claim() {
   }
 
   const referralUrl = buildReferralUrl(slip.referral_code);
-  const tweet = `Just claimed my Divvy Season One Slip — No. ${slip.slip_no}. 100 Slip Points locked in. Climb the standings with me → ${referralUrl}`;
+  const tweet = `Just claimed my Divvy Season One Slip — No. ${slip.slip_no}. 100 Slip Tickets locked in. Climb the standings with me → ${referralUrl}`;
 
   async function downloadAndShare(intent: "share" | "download") {
     if (!cardRef.current) return;
@@ -88,7 +88,7 @@ export default function Claim() {
                     Connect your <span className="italic text-electric-green">X account</span>
                   </h2>
                   <p className="text-foreground/70 text-sm mt-3 leading-relaxed">
-                    We link your Slip to your handle so points, referrals, and leaderboard rank stick to you.
+                    We link your Slip to your handle so tickets, referrals, and leaderboard rank stick to you.
                   </p>
                   <div className="mt-7 space-y-3">
                     <Button
@@ -170,7 +170,7 @@ export default function Claim() {
                 You now hold one of the first <span className="font-mono-num not-italic">{Number(slip.slip_no).toLocaleString()}</span> slips issued.
               </p>
               <p className="text-foreground/70 mt-3 max-w-md mx-auto">
-                You're in Season One. <span className="text-electric-green font-semibold">100 Slip Points</span> credited. Climb the leaderboard.
+                You're in Season One. <span className="text-electric-green font-semibold">100 Slip Tickets</span> credited. Climb the leaderboard.
               </p>
             </div>
 

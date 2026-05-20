@@ -133,7 +133,7 @@ export default function Dashboard() {
             <div>
               <div className="label-caps">From referrals</div>
               <div className="font-mono-num text-2xl mt-1">
-                +<span className="text-electric-green">{animRefPts.toLocaleString()}</span> pts
+                +<span className="text-electric-green">{animRefPts.toLocaleString()}</span> tickets
               </div>
               <div className="text-right sm:text-left mt-3">
                 <div className="label-caps">Friends claimed</div>
@@ -247,7 +247,7 @@ export default function Dashboard() {
             </p>
             <div className="mt-4">
               <div className="grid grid-cols-[60px_1fr_80px_100px] label-caps px-5 pb-2 border-b hairline">
-                <div>Rank</div><div>Handle</div><div className="text-right">Refs</div><div className="text-right">Points</div>
+                <div>Rank</div><div>Handle</div><div className="text-right">Refs</div><div className="text-right">Tickets</div>
               </div>
               {board.map((row, i) => {
                 const isMe = row.handle === slip.x_handle;
@@ -291,7 +291,7 @@ export default function Dashboard() {
       </section>
 
       <footer className="container py-8 text-sm text-foreground/55 border-t hairline">
-        Slip Points credit to your wallet when you connect on Divvy. Season One standings TBD.
+        Slip Tickets credit to your wallet when you connect on Divvy. Season One standings TBD.
       </footer>
     </main>
   );
