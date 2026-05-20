@@ -27,6 +27,7 @@ function useCountUp(target: number, duration = 900) {
 type EarnPath = { id: string; label: string; pts: string; url?: string; group: "social" | "wager" };
 
 const EARN_PATHS: EarnPath[] = [
+  { id: "submit_email", group: "social", label: "Submit your email", pts: "3 tickets" },
   { id: "share_x", group: "social", label: "Share Slip on X (one-time)", pts: "1 ticket", url: "https://twitter.com/intent/tweet?text=Just%20claimed%20my%20Divvy%20Season%20One%20Lottery%20Ticket" },
   { id: "refer_claim", group: "social", label: "Refer a Slip claim", pts: "1 ticket each" },
   { id: "refer_wallet", group: "social", label: "Refer a wallet connect on Divvy", pts: "3 tickets each" },
@@ -53,7 +54,19 @@ export default function Dashboard() {
 
   function claimEarn(p: EarnPath) {
     if (claimed[p.id]) return;
-    if (p.url) window.open(p.url, "_blank", "noopener,noreferrer");
+    if (p.id === "submit_email") {
+      const email = window.prompt("Enter your email to claim 3 tickets:");
+      if (!email) return;
+      const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+      if (!ok) {
+        toast({ title: "Invalid email", description: "Please enter a valid email address." });
+        return;
+      }
+      localStorage.setItem("divvy_email", email.trim());
+      toast({ title: "Email saved", description: "+3 tickets credited." });
+    } else if (p.url) {
+      window.open(p.url, "_blank", "noopener,noreferrer");
+    }
     const next = { ...claimed, [p.id]: true };
     setClaimed(next);
     localStorage.setItem("divvy_earn_claimed", JSON.stringify(next));
@@ -221,8 +234,6 @@ export default function Dashboard() {
               {[
                 { tag: "Prize Pool", title: "Season prize pool", sub: "Top wallets paid out at season close." },
                 { tag: "Status", title: "Founder status", sub: "Permanent badge for early Season One holders." },
-                { tag: "Access", title: "Exclusive perks", sub: "Private drops, early features, gated rooms." },
-                { tag: "Seasonal", title: "Seasonal rewards", sub: "Recurring drops across the season." },
               ].map((r) => (
                 <div key={r.title} className="bg-background p-5">
                   <div className="label-caps text-electric-green">{r.tag}</div>
