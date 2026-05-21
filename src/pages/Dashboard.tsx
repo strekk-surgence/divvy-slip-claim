@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Copy, Check } from "lucide-react";
+import { Copy, Check, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import slipImage from "@/assets/ticket.png";
 import { Flywheel } from "@/components/Flywheel";
-import { buildReferralUrl, getCurrentSlip, getLeaderboard, getLeaderboardPosition, getReferralsFor } from "@/lib/divvy";
+import { buildReferralUrl, clearCurrentSlip, getCurrentSlip, getLeaderboard, getLeaderboardPosition, getReferralsFor } from "@/lib/divvy";
 import { toast } from "@/hooks/use-toast";
 
 function useCountUp(target: number, duration = 900) {
@@ -97,6 +97,20 @@ export default function Dashboard() {
     <main className="min-h-screen divvy-bg">
       <header className="container flex items-center justify-between py-6 border-b hairline">
         <Link to="/" className="font-serif-display text-xl tracking-wide">DIVVY</Link>
+        <Button
+          onClick={() => {
+            clearCurrentSlip();
+            localStorage.removeItem("divvy_followed_x");
+            localStorage.removeItem("divvy_shared_x");
+            toast({ title: "Disconnected", description: `@${slip.x_handle} signed out.` });
+            nav("/");
+          }}
+          variant="outline"
+          className="h-10 rounded-none border-foreground/20 hover:bg-foreground/5 px-4"
+        >
+          <LogOut className="h-4 w-4" />
+          Disconnect
+        </Button>
       </header>
 
       {/* Top CTA bar: referral link + claim on Divvy */}
