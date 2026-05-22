@@ -254,8 +254,8 @@ export default function Dashboard() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-foreground/10 mt-4 border-t hairline">
               {[
-                { tag: "Prize Pool", title: "Season prize pool", sub: "Top wallets paid out at season close." },
-                { tag: "Status", title: "Founder status", sub: "Permanent badge for early Season One holders." },
+                { tag: "Prize Pool", title: "Season prize pool", sub: "Drawn at the World Cup Final. More Tickets, more chances." },
+                { tag: "Status", title: "Founder status", sub: "Permanent badge for early holders." },
               ].map((r) => (
                 <div key={r.title} className="bg-background p-5">
                   <div className="label-caps text-electric-green">{r.tag}</div>
@@ -270,29 +270,29 @@ export default function Dashboard() {
           <div className="surface">
             <div className="flex items-baseline justify-between px-5 pt-5">
               <div>
-                <div className="label-caps">Season One Leaderboard</div>
+                <div className="label-caps">Leaderboard</div>
                 <div className="font-serif-display text-2xl mt-1">Top Ticket Holders</div>
               </div>
               <div className="label-caps">You · #{String(position).padStart(3, "0")}</div>
             </div>
             <p className="px-5 mt-3 text-xs text-foreground/60 leading-relaxed">
-              Season One standings TBD.
+              Live activity.
             </p>
             <div className="mt-4">
-              <div className="grid grid-cols-[60px_1fr_80px_100px] label-caps px-5 pb-2 border-b hairline">
-                <div>Rank</div><div>Handle</div><div className="text-right">Refs</div><div className="text-right">Tickets</div>
+              <div className="grid grid-cols-[40px_1fr_80px_100px] label-caps px-5 pb-2 border-b hairline">
+                <div>#</div><div>Handle</div><div className="text-right">Refs</div><div className="text-right">Tickets</div>
               </div>
               {board.map((row, i) => {
                 const isMe = row.handle === slip.x_handle;
                 return (
                   <div
                     key={row.handle}
-                    className={`grid grid-cols-[60px_1fr_80px_100px] px-5 py-3 border-b hairline last:border-b-0 items-center ${
+                    className={`grid grid-cols-[40px_1fr_80px_100px] px-5 py-3 border-b hairline last:border-b-0 items-center ${
                       isMe ? "bg-electric-green/10" : ""
                     }`}
                   >
                     <div className={`font-mono-num ${i < 3 ? "text-electric-green" : "text-foreground/70"}`}>
-                      #{String(i + 1).padStart(2, "0")}
+                      {String(i + 1).padStart(2, "0")}
                     </div>
                     <div className="truncate">
                       @{row.handle}{" "}
@@ -304,6 +304,9 @@ export default function Dashboard() {
                 );
               })}
             </div>
+            <p className="px-5 py-4 text-xs italic text-foreground/55 border-t hairline">
+              Display only. Winners drawn randomly. More Tickets weight your odds.
+            </p>
             {fullBoard.length > 10 && (
               <div className="px-5 py-4 border-t hairline">
                 <button
