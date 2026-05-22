@@ -138,9 +138,6 @@ export default function Dashboard() {
               {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
               {copied ? "Copied" : "Copy link"}
             </Button>
-            <Button asChild className="h-11 rounded-none bg-electric-green text-background hover:bg-electric-green/90 font-semibold tracking-wide px-5 glow-green">
-              <a href={referralUrl} target="_blank" rel="noreferrer">Claim on Divvy →</a>
-            </Button>
           </div>
         </div>
       </section>
@@ -219,7 +216,7 @@ export default function Dashboard() {
 
               <div className="px-5 py-2 border-y hairline flex items-center justify-between bg-foreground/[0.02]">
                 <div className="label-caps">Social actions</div>
-                <div className="label-caps text-foreground/50">Lighter weight</div>
+                
               </div>
               {EARN_PATHS.filter((p) => p.group === "social").map((p) => {
                 const isClaimed = !!claimed[p.id];
