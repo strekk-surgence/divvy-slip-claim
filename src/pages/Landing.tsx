@@ -266,7 +266,7 @@ export default function Landing() {
         <div className="grid md:grid-cols-3 gap-6">
           <HowCard
             icon={<DMark glow className="h-12 w-12" />}
-            title="Claim your entry"
+            title="Connect your X account"
             body="Connect X. Claim your free Ticket and start stacking."
           />
           <HowCard
