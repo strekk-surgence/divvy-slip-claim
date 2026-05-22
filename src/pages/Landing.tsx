@@ -194,6 +194,15 @@ export default function Landing() {
 
   return (
     <main className="min-h-screen divvy-page text-white">
+      {/* Top tagline strip */}
+      <div className="border-b border-white/10 bg-white/[0.02]">
+        <div className="container py-2 text-center text-[11px] sm:text-xs text-white/70 font-mono-num tracking-tight">
+          <span className="text-white">Divvy.bet</span>
+          <span className="text-white/30 mx-2">·</span>
+          Non-custodial sportsbook on Solana. Bet from your wallet, settle instantly. No signups, no deposits.
+        </div>
+      </div>
+
       {/* Header */}
       <header className="container flex items-center justify-between py-6">
         <a href="https://divvy.bet" className="font-serif-display text-xl tracking-wide text-white">
@@ -218,9 +227,8 @@ export default function Landing() {
             Your first Ticket is free. Bet, mint, refer and share to stack more. The biggest prize drops at the World Cup Final.
           </p>
 
-          <p className="mt-4 text-sm text-win-green leading-relaxed max-w-xl">
-            On-chain sportsbook on Solana. Bet from your wallet, settle instantly. No signups, no deposits.
-          </p>
+
+
 
           <div className="mt-10">
             <Button
