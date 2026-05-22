@@ -24,12 +24,12 @@ function useCountUp(target: number, duration = 900) {
   return n;
 }
 
-type EarnPath = { id: string; label: string; pts: string; url?: string; group: "social" | "wager" };
+type EarnPath = { id: string; label: string; pts: string; url?: string; group: "social" | "wager"; soon?: boolean };
 
 const EARN_PATHS: EarnPath[] = [
   { id: "wallet_connect", group: "wager", label: "Connect wallet on divvy.bet", pts: "5 tickets", url: "https://divvy.bet" },
   { id: "wager_sol", group: "wager", label: "Every 0.05 SOL wagered on Divvy (auto-synced)", pts: "10 tickets", url: "https://divvy.bet" },
-  { id: "match_night", group: "wager", label: "Bet on the weekly Match Night fixture", pts: "20 tickets", url: "https://divvy.bet" },
+  { id: "match_night", group: "wager", label: "Bet on the weekly Match Night fixture", pts: "20 tickets", url: "https://divvy.bet", soon: true },
   { id: "mint_champ", group: "wager", label: "Mint your 1st Champions Series entry", pts: "20 tickets", url: "https://divvy.bet" },
   { id: "mint_champ_more", group: "wager", label: "Mint additional Champions Series entries", pts: "10 tickets each", url: "https://divvy.bet" },
   { id: "refer", group: "social", label: "Refer a friend", pts: "1 ticket each" },
@@ -194,21 +194,26 @@ export default function Dashboard() {
               </div>
               {EARN_PATHS.filter((p) => p.group === "wager").map((p) => {
                 const isClaimed = !!claimed[p.id];
+                const isSoon = !!p.soon;
                 return (
                   <button
                     key={p.id}
-                    onClick={() => claimEarn(p)}
-                    disabled={isClaimed}
-                    className={`w-full flex items-center justify-between px-5 py-3 border-b hairline last:border-b-0 text-left transition-colors border-l-2 border-l-electric-green/60 ${
-                      isClaimed ? "opacity-50 cursor-not-allowed" : "hover:bg-electric-green/5 cursor-pointer"
+                    onClick={() => { if (!isSoon) claimEarn(p); }}
+                    disabled={isClaimed || isSoon}
+                    className={`w-full flex items-center justify-between px-5 py-3 border-b hairline last:border-b-0 text-left transition-colors border-l-2 ${
+                      isSoon
+                        ? "border-l-foreground/30 bg-foreground/[0.03] cursor-not-allowed"
+                        : isClaimed
+                          ? "border-l-electric-green/60 opacity-50 cursor-not-allowed"
+                          : "border-l-electric-green/60 hover:bg-electric-green/5 cursor-pointer"
                     }`}
                   >
-                    <div className={`text-sm md:text-[15px] flex items-center gap-2 font-medium ${isClaimed ? "text-foreground/50 line-through" : "text-foreground/90"}`}>
+                    <div className={`text-sm md:text-[15px] flex items-center gap-2 font-medium ${isSoon ? "text-foreground/55" : isClaimed ? "text-foreground/50 line-through" : "text-foreground/90"}`}>
                       {p.label}
-                      {isClaimed && <Check className="h-3.5 w-3.5 text-electric-green" />}
+                      {isClaimed && !isSoon && <Check className="h-3.5 w-3.5 text-electric-green" />}
                     </div>
-                    <div className={`font-mono-num text-sm shrink-0 ml-4 ${isClaimed ? "text-foreground/40" : "text-electric-green"}`}>
-                      {isClaimed ? "Claimed" : p.pts}
+                    <div className={`font-mono-num text-sm shrink-0 ml-4 ${isSoon ? "text-foreground/50" : isClaimed ? "text-foreground/40" : "text-electric-green"}`}>
+                      {isSoon ? "Coming soon" : isClaimed ? "Claimed" : p.pts}
                     </div>
                   </button>
                 );
