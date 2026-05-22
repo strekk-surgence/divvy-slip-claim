@@ -1,10 +1,10 @@
 type Stage = { key: string; title: string; desc: string };
 
 const STAGES: Stage[] = [
-  { key: "01", title: "Seed", desc: "Claim your Ticket on X. Sequential, signed, yours." },
-  { key: "02", title: "Discover", desc: "Friends spot the Ticket on the timeline and want one." },
-  { key: "03", title: "Create", desc: "They claim via your code. Your referrals stack." },
-  { key: "04", title: "Convert", desc: "Tickets win prizes." },
+  { key: "01", title: "Claim", desc: "Claim your free Ticket on X." },
+  { key: "02", title: "Stack", desc: "Bet, mint, refer, share. Every action stacks more Tickets." },
+  { key: "03", title: "Enter", desc: "Every Ticket enters you into the Weekly Pool and Grand Jackpot." },
+  { key: "04", title: "Win", desc: "Multiple winners every week. Grand Jackpot drawn at the World Cup Final." },
 ];
 
 export function Flywheel() {
