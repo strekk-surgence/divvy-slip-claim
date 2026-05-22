@@ -80,40 +80,69 @@ export default function Claim() {
         {gateOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/70 backdrop-blur-md animate-fade-in p-4">
             <div className="surface relative max-w-md w-full p-8 text-center border hairline">
-              <div className="label-caps text-electric-green">Unlock your Slip</div>
+              <div className="label-caps text-electric-green">Claim your Ticket</div>
               <h2 className="font-serif-display text-3xl mt-3">
                 Connect <span className="italic text-electric-green">X</span> & follow <span className="italic text-electric-green">@divvybet</span>
               </h2>
               <p className="text-foreground/70 text-sm mt-3 leading-relaxed">
-                We link your Slip to your handle so tickets, referrals, and leaderboard rank stick to you. Follow to stay in the loop on Season 1 drops.
+                We link your Ticket to your handle so Tickets and referrals stick to you. Follow to stay in the loop on draws and prize windows.
               </p>
-              <div className="mt-7 space-y-3">
-                <Button
+              <div className="mt-7 space-y-3 text-left">
+                <button
                   onClick={() => {
+                    if (connected) return;
                     window.open("https://x.com/i/oauth2/authorize", "_blank", "noopener,noreferrer");
                     setConnected(true);
                   }}
-                  className="w-full h-12 rounded-none bg-electric-green text-background hover:bg-electric-green/90 font-semibold tracking-wide glow-green"
+                  className={`w-full h-12 px-4 flex items-center gap-3 border transition-colors ${
+                    connected
+                      ? "border-electric-green/40 bg-electric-green/10 text-foreground cursor-default"
+                      : "border-foreground/20 bg-transparent text-foreground hover:bg-foreground/5"
+                  }`}
                 >
-                  {connected ? "X account connected ✓" : "Connect X account"}
-                </Button>
-                <Button
-                  onClick={openFollow}
-                  className="w-full h-12 rounded-none bg-electric-green text-background hover:bg-electric-green/90 font-semibold tracking-wide glow-green"
+                  <span
+                    className={`inline-flex h-5 w-5 items-center justify-center border ${
+                      connected ? "border-electric-green bg-electric-green text-background" : "border-foreground/30"
+                    }`}
+                  >
+                    {connected ? "✓" : ""}
+                  </span>
+                  <span className="font-semibold tracking-wide text-sm">
+                    {connected ? "Connected" : "Connect X account"}
+                  </span>
+                </button>
+                <button
+                  onClick={() => {
+                    if (followClicked) return;
+                    openFollow();
+                  }}
+                  className={`w-full h-12 px-4 flex items-center gap-3 border transition-colors ${
+                    followClicked
+                      ? "border-electric-green/40 bg-electric-green/10 text-foreground cursor-default"
+                      : "border-foreground/20 bg-transparent text-foreground hover:bg-foreground/5"
+                  }`}
                 >
-                  {followClicked ? "Followed @divvybet ✓" : "Follow @divvybet on X"}
-                </Button>
+                  <span
+                    className={`inline-flex h-5 w-5 items-center justify-center border ${
+                      followClicked ? "border-electric-green bg-electric-green text-background" : "border-foreground/30"
+                    }`}
+                  >
+                    {followClicked ? "✓" : ""}
+                  </span>
+                  <span className="font-semibold tracking-wide text-sm">
+                    {followClicked ? "Following" : "Follow @divvybet on X"}
+                  </span>
+                </button>
                 <Button
                   onClick={revealSlip}
                   disabled={!connected || !followClicked}
-                  variant="outline"
-                  className="w-full h-12 rounded-none border-foreground/30 bg-transparent text-foreground hover:bg-foreground/5 font-semibold tracking-wide disabled:opacity-40"
+                  className="w-full h-12 rounded-none bg-electric-green text-background hover:bg-electric-green/90 font-semibold tracking-wide glow-green disabled:opacity-40 disabled:cursor-not-allowed disabled:bg-foreground/10 disabled:text-foreground/40 disabled:shadow-none"
                 >
-                  {connected && followClicked ? "Reveal my Slip →" : "Complete both to reveal"}
+                  Reveal my Ticket →
                 </Button>
               </div>
               <p className="text-xs text-foreground/40 mt-5">
-                We can't verify the follow — please don't unfollow after.
+                Once you're in, stay in. Unfollows reduce your standing.
               </p>
             </div>
           </div>
