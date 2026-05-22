@@ -194,25 +194,23 @@ export default function Landing() {
 
   return (
     <main className="min-h-screen divvy-page text-white">
-      {/* Top tagline strip */}
-      <div className="border-b border-white/10 bg-white/[0.02]">
-        <div className="container py-2 text-center text-[11px] sm:text-xs text-white/70 font-mono-num tracking-tight">
-          <span className="text-white">Divvy.bet</span>
-          <span className="text-white/30 mx-2">·</span>
-          Non-custodial sportsbook on Solana. Bet from your wallet, settle instantly. No signups, no deposits.
-        </div>
-      </div>
-
       {/* Header */}
-      <header className="container flex items-center justify-between py-6">
-        <a href="https://divvy.bet" className="font-serif-display text-xl tracking-wide text-white">
-          Divvy<span className="text-white/60">.bet</span>
-        </a>
-        <div className="font-mono-num text-[11px] sm:text-xs text-white/85 tracking-tight">
+      <header className="container flex items-center justify-between py-6 gap-4">
+        <div className="flex items-center gap-3 min-w-0">
+          <a href="https://divvy.bet" className="font-serif-display text-xl tracking-wide text-white shrink-0">
+            Divvy<span className="text-white/60">.bet</span>
+          </a>
+          <span className="hidden md:inline text-white/30">·</span>
+          <span className="hidden md:inline text-xs text-white/65 font-mono-num tracking-tight truncate">
+            Non-custodial sportsbook on Solana. Bet from your wallet, settle instantly. No signups, no deposits.
+          </span>
+        </div>
+        <div className="font-mono-num text-[11px] sm:text-xs text-white/85 tracking-tight shrink-0">
           <span className="text-white">{d}d {String(h).padStart(2, "0")}h {String(m).padStart(2, "0")}m {String(s).padStart(2, "0")}s</span>
           <span className="hidden sm:inline text-white/40"> · Closes 26 July 2026</span>
         </div>
       </header>
+
 
       {/* Hero */}
       <section className="container pt-10 pb-20 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
