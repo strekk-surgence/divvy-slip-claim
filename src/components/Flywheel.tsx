@@ -3,8 +3,8 @@ type Stage = { key: string; title: string; desc: string };
 const STAGES: Stage[] = [
   { key: "01", title: "Claim", desc: "Claim your free Ticket on X." },
   { key: "02", title: "Stack", desc: "Bet, mint, refer, share. Every action stacks more Tickets." },
-  { key: "03", title: "Enter", desc: "Every Ticket enters you into the Weekly Pool and Grand Jackpot." },
-  { key: "04", title: "Win", desc: "Multiple winners every week. Grand Jackpot drawn at the World Cup Final." },
+  { key: "03", title: "Streak", desc: "Qualifying wagers count toward the Streak Pool. Hit 20 days to qualify." },
+  { key: "04", title: "Win", desc: "Weekly draws every Sunday. Streak Pool at season close. Grand Jackpot drawn 26 July." },
 ];
 
 export function Flywheel() {
