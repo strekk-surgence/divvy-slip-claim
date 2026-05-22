@@ -139,7 +139,7 @@ export default function Claim() {
                 </Button>
               </div>
               <p className="text-xs text-foreground/40 mt-5">
-                Once you're in, stay in. Unfollows reduce your standing.
+                Once you're in, stay in.
               </p>
             </div>
           </div>
