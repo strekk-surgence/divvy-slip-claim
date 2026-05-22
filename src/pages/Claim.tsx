@@ -84,9 +84,6 @@ export default function Claim() {
               <h2 className="font-serif-display text-3xl mt-3">
                 Connect <span className="italic text-electric-green">X</span> & follow <span className="italic text-electric-green">@divvybet</span>
               </h2>
-              <p className="text-foreground/70 text-sm mt-3 leading-relaxed">
-                We link your Ticket to your handle so Tickets and referrals stick to you. Follow to stay in the loop on draws and prize windows.
-              </p>
               <div className="mt-7 space-y-3 text-left">
                 <button
                   onClick={() => {
@@ -142,7 +139,7 @@ export default function Claim() {
                 </Button>
               </div>
               <p className="text-xs text-foreground/40 mt-5">
-                Once you're in, stay in. Unfollows reduce your standing.
+                Once you're in, stay in.
               </p>
             </div>
           </div>
