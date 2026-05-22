@@ -271,7 +271,7 @@ export default function Dashboard() {
             <div className="flex items-baseline justify-between px-5 pt-5">
               <div>
                 <div className="label-caps">Season One Leaderboard</div>
-                <div className="font-serif-display text-2xl mt-1">Top Slippers</div>
+                <div className="font-serif-display text-2xl mt-1">Top Ticket Holders</div>
               </div>
               <div className="label-caps">You · #{String(position).padStart(3, "0")}</div>
             </div>
