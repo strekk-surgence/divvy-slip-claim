@@ -222,7 +222,7 @@ export default function Landing() {
           </h1>
 
           <p className="mt-6 text-lg text-white/75 max-w-xl leading-relaxed">
-            Your first Ticket is free. Bet, mint, refer and share to stack more. The biggest prize drops at the World Cup Final.
+            Your first Ticket is free. Bet, mint and refer to earn more entries. Grand Jackpot drawn at the World Cup Final.
           </p>
 
 
@@ -235,7 +235,7 @@ export default function Landing() {
               disabled={loading}
               className="divvy-glow divvy-gradient text-white h-14 px-10 text-base font-semibold tracking-wide rounded-md hover:opacity-95 hover:text-white border-0"
             >
-              {loading ? "Claiming…" : "Claim Your Entry →"}
+              {loading ? "Claiming…" : "Claim Your Free Ticket →"}
             </Button>
             <div className="mt-4 text-xs text-white/55 font-mono-num tracking-wide">
               <span className="text-white/85">12,481 entries claimed</span>
