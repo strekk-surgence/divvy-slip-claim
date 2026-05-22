@@ -276,15 +276,15 @@ export default function Dashboard() {
               Live activity.
             </p>
             <div className="mt-4">
-              <div className="grid grid-cols-[40px_1fr_80px_100px] label-caps px-5 pb-2 border-b hairline">
-                <div>#</div><div>Handle</div><div className="text-right">Refs</div><div className="text-right">Tickets</div>
+              <div className="grid grid-cols-[40px_1fr_100px] label-caps px-5 pb-2 border-b hairline">
+                <div>#</div><div>Handle</div><div className="text-right">Tickets</div>
               </div>
               {board.map((row, i) => {
                 const isMe = row.handle === slip.x_handle;
                 return (
                   <div
                     key={row.handle}
-                    className={`grid grid-cols-[40px_1fr_80px_100px] px-5 py-3 border-b hairline last:border-b-0 items-center ${
+                    className={`grid grid-cols-[40px_1fr_100px] px-5 py-3 border-b hairline last:border-b-0 items-center ${
                       isMe ? "bg-electric-green/10" : ""
                     }`}
                   >
@@ -295,7 +295,6 @@ export default function Dashboard() {
                       @{row.handle}{" "}
                       {isMe && <span className="ml-2 text-xs label-caps text-electric-green">You</span>}
                     </div>
-                    <div className="font-mono-num text-right">{row.referrals}</div>
                     <div className="font-mono-num text-right">{row.points.toLocaleString()}</div>
                   </div>
                 );
