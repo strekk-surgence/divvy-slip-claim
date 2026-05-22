@@ -147,7 +147,7 @@ export default function Dashboard() {
 
       <section className="container py-10 md:py-14 grid lg:grid-cols-[minmax(0,560px)_1fr] gap-12 lg:gap-16 items-start">
         <div className="lg:sticky lg:top-8">
-          <div className="label-caps mb-3">Your Slip</div>
+          <div className="label-caps mb-3">Your Ticket</div>
           <div className="relative">
             <img src={slipImage} alt={`Divvy Season 1 Slip No. ${slip.slip_no}`} className="w-full h-auto block" />
           </div>
