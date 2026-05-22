@@ -29,6 +29,7 @@ type EarnPath = { id: string; label: string; pts: string; url?: string; group: "
 const EARN_PATHS: EarnPath[] = [
   { id: "wallet_connect", group: "wager", label: "Connect wallet on divvy.bet", pts: "5 tickets", url: "https://divvy.bet" },
   { id: "wager_sol", group: "wager", label: "Every 0.05 SOL wagered on Divvy (auto-synced)", pts: "10 tickets", url: "https://divvy.bet" },
+  { id: "qualifying_wager", group: "wager", label: "Place a qualifying wager (min stake + min odds)", pts: "+1 Streak day", url: "https://divvy.bet" },
   { id: "match_night", group: "wager", label: "Bet on the weekly Match Night fixture", pts: "20 tickets", url: "https://divvy.bet", soon: true },
   { id: "mint_champ", group: "wager", label: "Mint your 1st Champions Series entry", pts: "20 tickets", url: "https://divvy.bet" },
   { id: "mint_champ_more", group: "wager", label: "Mint additional Champions Series entries", pts: "10 tickets each", url: "https://divvy.bet" },
