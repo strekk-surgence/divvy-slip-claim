@@ -227,9 +227,8 @@ export default function Landing() {
             Your first Ticket is free. Bet, mint, refer and share to stack more. The biggest prize drops at the World Cup Final.
           </p>
 
-          <p className="mt-4 text-sm text-win-green leading-relaxed max-w-xl">
-            On-chain sportsbook on Solana. Bet from your wallet, settle instantly. No signups, no deposits.
-          </p>
+
+
 
           <div className="mt-10">
             <Button
