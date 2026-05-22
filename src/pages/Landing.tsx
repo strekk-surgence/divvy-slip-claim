@@ -215,7 +215,7 @@ export default function Landing() {
           </h1>
 
           <p className="mt-6 text-lg text-white/75 max-w-xl leading-relaxed">
-            70 days. One leaderboard. The biggest prize at the World Cup Final.
+            Your first Ticket is free. Bet, mint, refer, share, stack more across the season.
           </p>
 
           <p className="mt-4 text-sm text-win-green leading-relaxed max-w-xl">
@@ -259,17 +259,17 @@ export default function Landing() {
           <HowCard
             icon={<DMark glow className="h-12 w-12" />}
             title="Claim your entry"
-            body="Connect your Solana wallet. Mint your free Grand Jackpot entry. Get your ticket number for life."
+            body="Connect X. Your first Ticket is free. Numbered, yours for the season."
           />
           <HowCard
             icon={<StackIcon className="h-10 w-10 text-white" />}
             title="Earn more entries"
-            body="Every bet on Divvy.bet earns you additional entries. More tickets, more chances to win."
+            body="Every bet on Divvy.bet earns you more entries in the draw."
           />
           <HowCard
             icon={<TrophyIcon className="h-10 w-10 text-white" />}
             title="Win across the season"
-            body="Top wallets win every week. The Grand Jackpot drops at the World Cup Final on 26 July 2026."
+            body="Multiple winners drawn each week. Grand Jackpot drawn at the World Cup Final. More Tickets, more chances."
           />
         </div>
       </section>

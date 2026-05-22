@@ -96,7 +96,17 @@ export default function Dashboard() {
   return (
     <main className="min-h-screen divvy-bg">
       <header className="container flex items-center justify-between py-6 border-b hairline">
-        <Link to="/" className="font-serif-display text-xl tracking-wide">DIVVY</Link>
+        <Link to="/" className="flex items-center gap-2">
+          <span
+            className="h-7 w-7 rounded-md flex items-center justify-center font-serif-display text-white font-bold text-sm"
+            style={{ background: "linear-gradient(135deg, #7C02FF 0%, #00D87E 100%)" }}
+          >
+            D
+          </span>
+          <span className="font-serif-display text-xl tracking-wide text-white">
+            Divvy<span className="text-white/60">.bet</span>
+          </span>
+        </Link>
         <Button
           onClick={() => {
             clearCurrentSlip();
