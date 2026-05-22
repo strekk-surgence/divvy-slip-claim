@@ -29,6 +29,7 @@ type EarnPath = { id: string; label: string; pts: string; url?: string; group: "
 const EARN_PATHS: EarnPath[] = [
   { id: "wallet_connect", group: "wager", label: "Connect wallet on divvy.bet", pts: "5 tickets", url: "https://divvy.bet" },
   { id: "wager_sol", group: "wager", label: "Every 0.05 SOL wagered on Divvy (auto-synced)", pts: "10 tickets", url: "https://divvy.bet" },
+  { id: "qualifying_wager", group: "wager", label: "Place a qualifying wager (min stake + min odds)", pts: "+1 Streak day", url: "https://divvy.bet" },
   { id: "match_night", group: "wager", label: "Bet on the weekly Match Night fixture", pts: "20 tickets", url: "https://divvy.bet", soon: true },
   { id: "mint_champ", group: "wager", label: "Mint your 1st Champions Series entry", pts: "20 tickets", url: "https://divvy.bet" },
   { id: "mint_champ_more", group: "wager", label: "Mint additional Champions Series entries", pts: "10 tickets each", url: "https://divvy.bet" },
@@ -158,8 +159,34 @@ export default function Dashboard() {
 
           <div className="grid grid-cols-3 gap-3">
             <Stat label="Tickets" value={animPoints.toLocaleString()} accent="green" />
-            <Stat label="Weekly Winnings" value="$0" />
-            <Stat label="Grand Jackpot" value="1 entry pending" accent="green" sub="Draw at WC Final" />
+            <Stat label="Weekly Entries" value="1" sub="this week" />
+            <Stat label="Grand Jackpot" value="Entered" accent="green" sub="Draw 26 July" />
+          </div>
+
+          {/* Streak Progress */}
+          <div className="surface p-5">
+            <div className="flex items-baseline justify-between">
+              <div>
+                <div className="label-caps text-electric-green">Streak Progress</div>
+                <div className="font-serif-display text-2xl mt-1">7 of 20 qualifying days</div>
+              </div>
+              <div className="font-mono-num text-sm text-foreground/60">35%</div>
+            </div>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {Array.from({ length: 20 }).map((_, i) => (
+                <div
+                  key={i}
+                  className={`h-5 w-5 rounded-full border ${
+                    i < 7
+                      ? "bg-electric-green border-electric-green glow-green"
+                      : "border-foreground/25 bg-transparent"
+                  }`}
+                />
+              ))}
+            </div>
+            <p className="mt-4 text-xs text-foreground/60 leading-relaxed">
+              Hit 20 qualifying days during the campaign to split the Streak Pool with all other qualifiers. Min stake + min odds apply per wager. Days don't need to be consecutive.
+            </p>
           </div>
 
           <div className="surface p-5 flex items-center justify-between gap-4">
@@ -255,10 +282,11 @@ export default function Dashboard() {
               <div className="font-serif-display text-2xl mt-1">What you're climbing for</div>
               
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-foreground/10 mt-4 border-t hairline">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-foreground/10 mt-4 border-t hairline">
               {[
-                { tag: "Every week", title: "Weekly Pool", sub: "Multiple winners drawn each week throughout the World Cup. Tickets earned that week qualify." },
-                { tag: "One big drop", title: "World Cup Grand Jackpot", sub: "Multiple winners drawn at the World Cup Final. Every Ticket from the whole season counts." },
+                { tag: "Every week", title: "Weekly Pool", sub: "Multiple winners drawn each Sunday throughout the campaign." },
+                { tag: "Consistency reward", title: "Streak Pool", sub: "Hit 20 qualifying days to split the pool equally with all other qualifiers. Drawn at season close." },
+                { tag: "One big drop", title: "World Cup Grand Jackpot", sub: "One winner drawn 26 July 2026, one week after the World Cup Final." },
               ].map((r) => (
                 <div key={r.title} className="bg-background p-5">
                   <div className="label-caps text-electric-green">{r.tag}</div>
@@ -329,7 +357,7 @@ export default function Dashboard() {
       </section>
 
       <footer className="container py-8 text-sm text-foreground/55 border-t hairline">
-        Tickets track on your dashboard. Connect your wallet on Divvy to stack more through wagering.
+        Every wager stacks Tickets and counts toward your Streak. Tickets feed the Weekly Pool and Grand Jackpot draws. Hit the Streak to split the Streak Pool.
       </footer>
     </main>
   );
