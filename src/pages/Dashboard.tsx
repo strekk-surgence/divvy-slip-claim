@@ -357,7 +357,7 @@ export default function Dashboard() {
       </section>
 
       <footer className="container py-8 text-sm text-foreground/55 border-t hairline">
-        Tickets track on your dashboard. Connect your wallet on Divvy to stack more through wagering.
+        Every wager stacks Tickets and counts toward your Streak. Tickets feed the Weekly Pool and Grand Jackpot draws. Hit the Streak to split the Streak Pool.
       </footer>
     </main>
   );
