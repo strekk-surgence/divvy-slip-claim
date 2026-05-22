@@ -247,7 +247,7 @@ export default function Dashboard() {
             <div className="px-5 pt-5">
               <div className="label-caps text-electric-green">Top Rewards This Season</div>
               <div className="font-serif-display text-2xl mt-1">What you're climbing for</div>
-              <p className="text-xs text-foreground/55 mt-2">Rewards revealed soon. Placeholders below.</p>
+              
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-foreground/10 mt-4 border-t hairline">
               {[
