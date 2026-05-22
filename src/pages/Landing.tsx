@@ -259,12 +259,12 @@ export default function Landing() {
           <HowCard
             icon={<DMark glow className="h-12 w-12" />}
             title="Claim your entry"
-            body="Connect X. Your first Ticket is free. Numbered, yours for the season."
+            body="Connect X. Claim your free Ticket and start stacking."
           />
           <HowCard
             icon={<StackIcon className="h-10 w-10 text-white" />}
             title="Earn more entries"
-            body="Every bet on Divvy.bet earns you more entries in the draw."
+            body="Bet, mint, refer, share. Every action stacks more entries in the draw."
           />
           <HowCard
             icon={<TrophyIcon className="h-10 w-10 text-white" />}
