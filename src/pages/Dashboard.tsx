@@ -80,8 +80,8 @@ export default function Dashboard() {
   const board = showAllBoard ? fullBoard : fullBoard.slice(0, 10);
   const referralUrl = buildReferralUrl(slip.referral_code);
 
-  const slipPoints = 100 + refs.length * 100;
-  const refPoints = refs.length * 100;
+  const slipPoints = 1 + refs.length;
+  const refPoints = refs.length;
 
   const animPoints = useCountUp(slipPoints);
   const animRefPts = useCountUp(refPoints);

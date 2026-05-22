@@ -36,14 +36,14 @@ export const SlipCard = forwardRef<HTMLDivElement, Props>(({ slip, animate }, re
         {/* Header */}
         <div className="border-b border-dashed border-ink/40 pb-3">
           <div className="font-serif-display text-[1.35rem] leading-none tracking-wide">
-            DIVVY <span className="text-ink-soft">·</span> SEASON 1
+            DIVVY <span className="text-ink-soft">·</span> TICKET
           </div>
           <div className="label-caps-paper mt-2">Official Claim Receipt</div>
         </div>
 
-        {/* Slip No */}
+        {/* Ticket No */}
         <div className="mt-5">
-          <div className="label-caps-paper">Slip No.</div>
+          <div className="label-caps-paper">Ticket No.</div>
           <div className="font-mono-num text-[2.6rem] leading-none tracking-tight mt-1">
             {slip.slip_no}
           </div>
@@ -52,9 +52,9 @@ export const SlipCard = forwardRef<HTMLDivElement, Props>(({ slip, animate }, re
         <div className="mt-5 grid grid-cols-2 gap-y-4 gap-x-3">
           <Field label="Issued To" value={`@${slip.x_handle}`} mono />
           <Field label="Issued" value={formatDate(slip.issued_at)} mono />
-          <Field label="Selection" value="Season 1 · World Cup" />
+          <Field label="Selection" value="World Cup Draw" />
           <Field label="Stake" value="your call" italic />
-          <Field label="Potential" value="Slip Tickets" className="col-span-2" />
+          <Field label="Potential" value="Tickets" className="col-span-2" />
         </div>
 
         <div className="my-4 border-t border-dashed border-ink/40" />

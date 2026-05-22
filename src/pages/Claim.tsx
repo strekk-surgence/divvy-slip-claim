@@ -6,7 +6,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { buildReferralUrl, getCurrentSlip } from "@/lib/divvy";
 import { toast } from "@/hooks/use-toast";
 import Dashboard from "./Dashboard";
-import slipImage from "@/assets/ticket.png";
+import { SlipCard } from "@/components/SlipCard";
 
 export default function Claim() {
   const slip = getCurrentSlip();
@@ -34,7 +34,7 @@ export default function Claim() {
   }
 
   const referralUrl = buildReferralUrl(slip.referral_code);
-  const tweet = `Just claimed my Divvy Season One Slip — No. ${slip.slip_no}. 100 Slip Tickets locked in. Climb the standings with me → ${referralUrl}`;
+  const tweet = `Just claimed my Divvy Ticket No. ${slip.slip_no}. 1 Ticket credited. Stack more to fill the draw. → ${referralUrl}`;
 
   async function downloadAndShare(intent: "share" | "download") {
     if (!cardRef.current) return;
@@ -46,7 +46,7 @@ export default function Claim() {
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = `divvy-slip-${slip!.slip_no}.png`;
+        a.download = `divvy-ticket-${slip!.slip_no}.png`;
         a.click();
         URL.revokeObjectURL(url);
       }
@@ -57,7 +57,7 @@ export default function Claim() {
         nav("/dashboard");
       }
     } catch {
-      toast({ title: "Couldn't render slip", description: "Try Copy Link instead." });
+      toast({ title: "Couldn't render ticket", description: "Try Copy Link instead." });
     } finally {
       setBusy(false);
     }
@@ -158,20 +158,20 @@ export default function Claim() {
             <div className="text-center mb-8 animate-fade-up">
               <div className="label-caps text-electric-green">Stamped & issued</div>
               <h1 className="font-serif-display text-3xl md:text-4xl mt-3">
-                Slip No. <span className="font-mono-num align-middle">{slip.slip_no}</span> claimed.
+                Ticket No. <span className="font-mono-num align-middle">{slip.slip_no}</span> claimed.
               </h1>
               <p className="font-serif-display italic text-foreground/85 mt-3 text-base md:text-lg">
-                You now hold one of the first <span className="font-mono-num not-italic">{Number(slip.slip_no).toLocaleString()}</span> slips issued.
+                You now hold one of the first <span className="font-mono-num not-italic">{Number(slip.slip_no).toLocaleString()}</span> Tickets issued.
               </p>
               <p className="text-foreground/70 mt-3 max-w-md mx-auto">
-                You're in Season One. <span className="text-electric-green font-semibold">100 Slip Tickets</span> credited. Climb the leaderboard.
+                <span className="text-electric-green font-semibold">1 Ticket</span> credited. Stack more to fill the draw.
               </p>
             </div>
 
             <div className="animate-fade-up relative" style={{ animationDelay: "120ms" }}>
               <div className="absolute -inset-8 bg-electric-green/10 blur-3xl rounded-full pointer-events-none" />
-              <div ref={cardRef} className="relative mx-auto max-w-2xl">
-                <img src={slipImage} alt={`Divvy Season 1 Slip No. ${slip.slip_no}`} className="w-full h-auto block" />
+              <div className="relative mx-auto max-w-2xl">
+                <SlipCard ref={cardRef} slip={slip} />
               </div>
             </div>
 
@@ -201,7 +201,7 @@ export default function Claim() {
             </button>
 
             <p className="text-xs text-foreground/50 text-center mt-6 leading-relaxed">
-              Your Slip image will download. Attach it to the X compose window for best timeline preview.
+              Your Ticket image will download. Attach it to the X compose window for best preview.
             </p>
           </section>
         </div>
