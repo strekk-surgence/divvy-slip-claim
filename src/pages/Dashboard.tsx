@@ -156,9 +156,10 @@ export default function Dashboard() {
             <h1 className="font-serif-display text-4xl md:text-5xl mt-1">@{slip.x_handle}</h1>
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-3 gap-3">
             <Stat label="Tickets" value={animPoints.toLocaleString()} accent="green" />
-            <Stat label="Grand Jackpot Pool" value="TBD" accent="green" />
+            <Stat label="Weekly Winnings" value="$0" />
+            <Stat label="Grand Jackpot" value="1 entry pending" accent="green" sub="Draw at WC Final" />
           </div>
 
           <div className="surface p-5 flex items-center justify-between gap-4">
@@ -334,12 +335,13 @@ export default function Dashboard() {
   );
 }
 
-function Stat({ label, value, accent }: { label: string; value: string; accent?: "green" | "blue" }) {
+function Stat({ label, value, accent, sub }: { label: string; value: string; accent?: "green" | "blue"; sub?: string }) {
   const color = accent === "green" ? "text-electric-green" : accent === "blue" ? "text-electric-blue" : "";
   return (
     <div className="surface-soft p-4">
       <div className="label-caps">{label}</div>
       <div className={`font-mono-num text-2xl md:text-3xl mt-1 ${color}`}>{value}</div>
+      {sub && <div className="text-xs text-foreground/55 mt-1">{sub}</div>}
     </div>
   );
 }
