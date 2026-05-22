@@ -170,8 +170,8 @@ export default function Claim() {
 
             <div className="animate-fade-up relative" style={{ animationDelay: "120ms" }}>
               <div className="absolute -inset-8 bg-electric-green/10 blur-3xl rounded-full pointer-events-none" />
-              <div ref={cardRef} className="relative mx-auto max-w-2xl">
-                <SlipCard slip={slip} />
+              <div className="relative mx-auto max-w-2xl">
+                <SlipCard ref={cardRef} slip={slip} />
               </div>
             </div>
 
