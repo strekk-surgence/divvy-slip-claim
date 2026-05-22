@@ -252,7 +252,7 @@ export default function Dashboard() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-foreground/10 mt-4 border-t hairline">
               {[
                 { tag: "Every week", title: "Weekly Pool", sub: "Multiple winners drawn each week throughout the World Cup. Tickets earned that week qualify." },
-                { tag: "One big drop", title: "World Cup Grand Jackpot", sub: "One winner drawn at the World Cup Final. Every Ticket from the whole season counts." },
+                { tag: "One big drop", title: "World Cup Grand Jackpot", sub: "Multiple winners drawn at the World Cup Final. Every Ticket from the whole season counts." },
               ].map((r) => (
                 <div key={r.title} className="bg-background p-5">
                   <div className="label-caps text-electric-green">{r.tag}</div>
