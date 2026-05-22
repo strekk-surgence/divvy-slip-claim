@@ -300,7 +300,7 @@ export default function Landing() {
             { q: "Is the first Ticket really free?", a: "Yes. Your first Ticket is free to claim. You can stack more entries by betting, minting, referring and sharing." },
             { q: "Why do I need to connect X?", a: "X connection helps verify your entry, track referrals and keep the draw fair." },
             { q: "How do I earn more Tickets?", a: "You can earn more entries by betting on Divvy, minting, referring friends and sharing the campaign." },
-            { q: "When are winners drawn?", a: "Weekly winners are drawn every Sunday throughout the campaign, starting Sunday May 31. Winners are announced live in the Divvy Discord. Grand Jackpot is drawn at the World Cup Final on July 19, 2026." },
+            { q: "When are winners drawn?", a: "Weekly winners are drawn every Sunday throughout the campaign, starting Sunday May 31. Winners are announced live in the Divvy Discord. Grand Jackpot is drawn on July 26, 2026, one week after the World Cup Final." },
             { q: "What is Divvy.bet?", a: "Divvy is a non-custodial sportsbook on Solana. You bet from your wallet, settle instantly and stay in control of your funds." },
             { q: "Who can participate?", a: "18+ only. Availability may vary by jurisdiction. Terms apply." },
           ].map((item, i) => (
