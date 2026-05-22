@@ -156,9 +156,10 @@ export default function Dashboard() {
             <h1 className="font-serif-display text-4xl md:text-5xl mt-1">@{slip.x_handle}</h1>
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-3 gap-3">
             <Stat label="Tickets" value={animPoints.toLocaleString()} accent="green" />
-            <Stat label="Grand Jackpot Pool" value="TBD" accent="green" />
+            <Stat label="Weekly Winnings" value="$0" />
+            <Stat label="Grand Jackpot" value="1 entry pending" accent="green" sub="Draw at WC Final" />
           </div>
 
           <div className="surface p-5 flex items-center justify-between gap-4">
