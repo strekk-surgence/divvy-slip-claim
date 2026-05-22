@@ -185,7 +185,7 @@ export default function Dashboard() {
               ))}
             </div>
             <p className="mt-4 text-xs text-foreground/60 leading-relaxed">
-              Hit 20 qualifying days during the campaign to split the Streak Pool with all other qualifiers. Min stake + min odds apply per wager. Days don't need to be consecutive.
+              Hit 20 qualifying days during the campaign to split the Streak Pool with all other qualifiers. Place a wager of 0.05 SOL or more on Divvy each day to count. Days don't need to be consecutive.
             </p>
           </div>
 
