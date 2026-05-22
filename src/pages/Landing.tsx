@@ -216,13 +216,13 @@ export default function Landing() {
       <section className="container pt-10 pb-20 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <div className="text-left">
           <h1 className="font-sans font-bold text-[2.25rem] sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-white">
-            CLAIM YOUR ENTRY TO THE
+            CLAIM YOUR FREE TICKET TO THE
             <br />
             <span className="divvy-gradient-text">WORLD CUP 2026 GRAND JACKPOT</span>
           </h1>
 
           <p className="mt-6 text-lg text-white/75 max-w-xl leading-relaxed">
-            Your first Ticket is free. Bet, mint and refer to earn more entries. Grand Jackpot drawn at the World Cup Final.
+            Your first Ticket is free. Bet, mint, refer and share to stack more entries. Weekly winners will be drawn throughout the tournament, with the Grand Jackpot drawn at the World Cup Final.
           </p>
 
 
@@ -240,7 +240,9 @@ export default function Landing() {
             <div className="mt-4 text-xs text-white/55 font-mono-num tracking-wide">
               <span className="text-white/85">12,481 entries claimed</span>
               <span className="text-white/30 mx-2">·</span>
-              Free to claim
+              First Ticket free
+              <span className="text-white/30 mx-2">·</span>
+              X connection required
             </div>
           </div>
         </div>
