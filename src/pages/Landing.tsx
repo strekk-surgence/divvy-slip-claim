@@ -216,13 +216,13 @@ export default function Landing() {
       <section className="container pt-10 pb-20 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <div className="text-left">
           <h1 className="font-sans font-bold text-[2.25rem] sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-white">
-            CLAIM YOUR ENTRY TO THE
+            CLAIM YOUR FREE TICKET TO THE
             <br />
             <span className="divvy-gradient-text">WORLD CUP 2026 GRAND JACKPOT</span>
           </h1>
 
           <p className="mt-6 text-lg text-white/75 max-w-xl leading-relaxed">
-            Your first Ticket is free. Bet, mint and refer to earn more entries. Grand Jackpot drawn at the World Cup Final.
+            Your first Ticket is free. Bet, mint, refer and share to stack more entries. Weekly winners will be drawn throughout the tournament, with the Grand Jackpot drawn at the World Cup Final.
           </p>
 
 
@@ -240,7 +240,9 @@ export default function Landing() {
             <div className="mt-4 text-xs text-white/55 font-mono-num tracking-wide">
               <span className="text-white/85">12,481 entries claimed</span>
               <span className="text-white/30 mx-2">·</span>
-              Free to claim
+              First Ticket free
+              <span className="text-white/30 mx-2">·</span>
+              X connection required
             </div>
           </div>
         </div>
@@ -264,7 +266,7 @@ export default function Landing() {
         <div className="grid md:grid-cols-3 gap-6">
           <HowCard
             icon={<DMark glow className="h-12 w-12" />}
-            title="Claim your entry"
+            title="Connect your X account"
             body="Connect X. Claim your free Ticket and start stacking."
           />
           <HowCard
@@ -282,6 +284,37 @@ export default function Landing() {
 
 
 
+      <div className="container">
+        <div className="border-t border-white/10" />
+      </div>
+
+      {/* FAQ */}
+      <section className="container py-20">
+        <h2 className="font-sans font-bold text-3xl sm:text-4xl text-white tracking-tight">
+          Questions, answered
+        </h2>
+        <p className="mt-3 text-white/60 text-sm">The rules, the draw, and what you need to know before claiming.</p>
+        <div className="mt-10 max-w-3xl divide-y divide-white/10 border-t border-b border-white/10">
+          {[
+            { q: "Do I need a Divvy account to enter?", a: "No traditional signup is needed. Connect your X account to claim your free Ticket." },
+            { q: "Is the first Ticket really free?", a: "Yes. Your first Ticket is free to claim. You can stack more entries by betting, minting, referring and sharing." },
+            { q: "Why do I need to connect X?", a: "X connection helps verify your entry, track referrals and keep the draw fair." },
+            { q: "How do I earn more Tickets?", a: "You can earn more entries by betting on Divvy, minting, referring friends and sharing the campaign." },
+            { q: "When are winners drawn?", a: "Weekly winners will be drawn throughout the World Cup, starting June 11, 2026. The Grand Jackpot will be drawn at the World Cup Final on July 19, 2026." },
+            { q: "What is Divvy.bet?", a: "Divvy is a non-custodial sportsbook on Solana. You bet from your wallet, settle instantly and stay in control of your funds." },
+            { q: "Who can participate?", a: "18+ only. Availability may vary by jurisdiction. Terms apply." },
+          ].map((item, i) => (
+            <details key={i} className="group py-5">
+              <summary className="flex items-center justify-between cursor-pointer list-none text-white text-base font-medium">
+                <span>{item.q}</span>
+                <span className="ml-4 text-white/40 group-open:rotate-45 transition-transform text-xl leading-none">+</span>
+              </summary>
+              <p className="mt-3 text-sm text-white/65 leading-relaxed pr-8">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
 
       {/* Footer */}
       <footer className="container py-10 border-t border-white/10 mt-4">
@@ -290,7 +323,7 @@ export default function Landing() {
             Divvy<span className="text-white/60">.bet</span>
           </div>
           <div className="text-white/65 text-center text-xs sm:text-sm">
-            Non-custodial sportsbook on Solana. Built for fans, not bookies.
+            Non-custodial sportsbook on Solana.
           </div>
           <div className="flex items-center gap-4 sm:justify-end text-white/75">
             <a href="https://x.com/divvybet" aria-label="X" className="hover:text-white"><XIcon className="h-4 w-4" /></a>
