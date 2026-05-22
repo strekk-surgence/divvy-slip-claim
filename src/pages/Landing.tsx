@@ -215,11 +215,11 @@ export default function Landing() {
           </h1>
 
           <p className="mt-6 text-lg text-white/75 max-w-xl leading-relaxed">
-            Your first Ticket is free. Bet, mint, refer, share, stack more across the season.
+            Your first Ticket is free. Bet, mint, refer and share to stack more. The biggest prize drops at the World Cup Final.
           </p>
 
           <p className="mt-4 text-sm text-win-green leading-relaxed max-w-xl">
-            Divvy.bet is a non-custodial sportsbook on Solana. Bet from your wallet, no account needed.
+            On-chain sportsbook on Solana. Bet from your wallet, settle instantly. No signups, no deposits.
           </p>
 
           <div className="mt-10">
