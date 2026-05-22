@@ -6,7 +6,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { buildReferralUrl, getCurrentSlip } from "@/lib/divvy";
 import { toast } from "@/hooks/use-toast";
 import Dashboard from "./Dashboard";
-import { SlipCard } from "@/components/SlipCard";
+import ticketImage from "@/assets/ticket.png";
 
 export default function Claim() {
   const slip = getCurrentSlip();
@@ -170,8 +170,8 @@ export default function Claim() {
 
             <div className="animate-fade-up relative" style={{ animationDelay: "120ms" }}>
               <div className="absolute -inset-8 bg-electric-green/10 blur-3xl rounded-full pointer-events-none" />
-              <div className="relative mx-auto max-w-2xl">
-                <SlipCard ref={cardRef} slip={slip} />
+              <div ref={cardRef} className="relative mx-auto max-w-2xl">
+                <img src={ticketImage} alt={`Divvy Ticket No. ${slip.slip_no}`} className="w-full h-auto block" />
               </div>
             </div>
 
