@@ -158,8 +158,34 @@ export default function Dashboard() {
 
           <div className="grid grid-cols-3 gap-3">
             <Stat label="Tickets" value={animPoints.toLocaleString()} accent="green" />
-            <Stat label="Weekly Winnings" value="$0" />
-            <Stat label="Grand Jackpot" value="1 entry pending" accent="green" sub="Draw at WC Final" />
+            <Stat label="Weekly Entries" value="1" sub="this week" />
+            <Stat label="Grand Jackpot" value="Entered" accent="green" sub="Draw 26 July" />
+          </div>
+
+          {/* Streak Progress */}
+          <div className="surface p-5">
+            <div className="flex items-baseline justify-between">
+              <div>
+                <div className="label-caps text-electric-green">Streak Progress</div>
+                <div className="font-serif-display text-2xl mt-1">7 of 20 qualifying days</div>
+              </div>
+              <div className="font-mono-num text-sm text-foreground/60">35%</div>
+            </div>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {Array.from({ length: 20 }).map((_, i) => (
+                <div
+                  key={i}
+                  className={`h-5 w-5 rounded-full border ${
+                    i < 7
+                      ? "bg-electric-green border-electric-green glow-green"
+                      : "border-foreground/25 bg-transparent"
+                  }`}
+                />
+              ))}
+            </div>
+            <p className="mt-4 text-xs text-foreground/60 leading-relaxed">
+              Hit 20 qualifying days during the campaign to split the Streak Pool with all other qualifiers. Min stake + min odds apply per wager. Days don't need to be consecutive.
+            </p>
           </div>
 
           <div className="surface p-5 flex items-center justify-between gap-4">
