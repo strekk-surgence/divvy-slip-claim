@@ -27,19 +27,18 @@ function useCountUp(target: number, duration = 900) {
 type EarnPath = { id: string; label: string; pts: string; url?: string; group: "social" | "wager" };
 
 const EARN_PATHS: EarnPath[] = [
-  { id: "submit_email", group: "social", label: "Submit your email", pts: "3 tickets" },
-  { id: "share_x", group: "social", label: "Share Slip on X (one-time)", pts: "1 ticket", url: "https://twitter.com/intent/tweet?text=Just%20claimed%20my%20Divvy%20Season%20One%20Lottery%20Ticket" },
-  { id: "refer_claim", group: "social", label: "Refer a Slip claim", pts: "1 ticket each" },
-  { id: "refer_wallet", group: "social", label: "Refer a wallet connect on Divvy", pts: "3 tickets each" },
-  { id: "share_ig", group: "social", label: "Share on Instagram", pts: "1 ticket", url: "https://www.instagram.com/" },
-  { id: "share_tg", group: "social", label: "Share on Telegram", pts: "1 ticket", url: "https://t.me/share/url?url=https://divvy.bet" },
-  { id: "join_discord", group: "social", label: "Join Divvy Discord", pts: "2 tickets", url: "https://discord.gg/divvy" },
-  { id: "join_tg", group: "social", label: "Join Divvy Telegram", pts: "2 tickets", url: "https://t.me/divvybet" },
-  { id: "wallet_connect", group: "social", label: "Sign up on divvy.bet", pts: "5 tickets", url: "https://divvy.bet" },
-  { id: "wager_5", group: "wager", label: "Every $5 wager on Divvy", pts: "10 tickets", url: "https://divvy.bet" },
-  { id: "wager_sol", group: "wager", label: "Every 0.05 SOL on WC Champions Series", pts: "10 tickets", url: "https://divvy.bet" },
-  { id: "mint_champ", group: "wager", label: "Mint a Champions Series entry", pts: "30 tickets per entry", url: "https://divvy.bet" },
-  { id: "match_night", group: "wager", label: "Place a Match Night wager", pts: "20 tickets per wager", url: "https://divvy.bet" },
+  { id: "wallet_connect", group: "wager", label: "Connect wallet on divvy.bet", pts: "5 tickets", url: "https://divvy.bet" },
+  { id: "wager_sol", group: "wager", label: "Every 0.05 SOL wagered on Divvy (auto-synced)", pts: "10 tickets", url: "https://divvy.bet" },
+  { id: "match_night", group: "wager", label: "Bet on the weekly Match Night fixture", pts: "20 tickets", url: "https://divvy.bet" },
+  { id: "mint_champ", group: "wager", label: "Mint your 1st Champions Series entry", pts: "20 tickets", url: "https://divvy.bet" },
+  { id: "mint_champ_more", group: "wager", label: "Mint additional Champions Series entries", pts: "10 tickets each", url: "https://divvy.bet" },
+  { id: "refer", group: "social", label: "Refer a friend", pts: "1 ticket each" },
+  { id: "submit_email", group: "social", label: "Submit your email", pts: "1 ticket" },
+  { id: "follow_x", group: "social", label: "Follow @divvybet on X", pts: "1 ticket", url: "https://x.com/intent/follow?screen_name=divvybet" },
+  { id: "share_x", group: "social", label: "Share Ticket on X", pts: "5 tickets", url: "https://twitter.com/intent/tweet?text=Just%20claimed%20my%20Divvy%20Ticket" },
+  { id: "share_ig", group: "social", label: "Share on Instagram", pts: "5 tickets", url: "https://www.instagram.com/" },
+  { id: "join_discord", group: "social", label: "Join Divvy Discord", pts: "1 ticket", url: "https://discord.gg/divvy" },
+  { id: "join_tg", group: "social", label: "Join Divvy Telegram", pts: "1 ticket", url: "https://t.me/divvybet" },
 ];
 
 export default function Dashboard() {
@@ -55,7 +54,7 @@ export default function Dashboard() {
   function claimEarn(p: EarnPath) {
     if (claimed[p.id]) return;
     if (p.id === "submit_email") {
-      const email = window.prompt("Enter your email to claim 3 tickets:");
+      const email = window.prompt("Enter your email to claim 1 ticket:");
       if (!email) return;
       const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
       if (!ok) {
@@ -63,7 +62,7 @@ export default function Dashboard() {
         return;
       }
       localStorage.setItem("divvy_email", email.trim());
-      toast({ title: "Email saved", description: "+3 tickets credited." });
+      toast({ title: "Email saved", description: "+1 ticket credited." });
     } else if (p.url) {
       window.open(p.url, "_blank", "noopener,noreferrer");
     }
@@ -160,10 +159,9 @@ export default function Dashboard() {
             <h1 className="font-serif-display text-4xl md:text-5xl mt-1">@{slip.x_handle}</h1>
           </div>
 
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 gap-3">
             <Stat label="Tickets" value={animPoints.toLocaleString()} accent="green" />
-            <Stat label="Pool Entries" value={String(refs.length + 1).padStart(2, "0")} />
-            <Stat label="Status" value="Active" accent="green" />
+            <Stat label="Grand Jackpot Pool" value="TBD" accent="green" />
           </div>
 
           <div className="surface p-5 flex items-center justify-between gap-4">
@@ -179,7 +177,7 @@ export default function Dashboard() {
             </div>
             <div className="text-right">
               <div className="font-mono-num font-bold text-electric-green text-5xl md:text-6xl leading-none glow-green">
-                50+
+                1
               </div>
               <div className="label-caps text-electric-green mt-2">per referral</div>
             </div>
