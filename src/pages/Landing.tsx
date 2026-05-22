@@ -215,7 +215,7 @@ export default function Landing() {
           </h1>
 
           <p className="mt-6 text-lg text-white/75 max-w-xl leading-relaxed">
-            70 days. One leaderboard. The biggest prize at the World Cup Final.
+            Your first Ticket is free. Bet, mint, refer, share, stack more across the season.
           </p>
 
           <p className="mt-4 text-sm text-win-green leading-relaxed max-w-xl">
