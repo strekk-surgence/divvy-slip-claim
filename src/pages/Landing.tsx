@@ -301,10 +301,7 @@ export default function Landing() {
             { q: "Why do I need to connect X?", a: "X connection helps verify your entry, track referrals and keep the draw fair." },
             { q: "How do I earn more Tickets?", a: "You can earn more entries by betting on Divvy, minting, referring friends and sharing the campaign." },
             { q: "When are winners drawn?", a: "Weekly winners every Sunday starting 31 May, announced live in the Divvy Discord. Grand Jackpot drawn 26 July 2026, one week after the World Cup Final. Streak Pool distributed at season close on 26 July 2026." },
-            { q: "What's the Streak Pool?", a: "A fixed SOL pool split equally among every wallet that hits 20 qualifying days during the campaign. Hit the streak, get your share." },
-            { q: "What counts as a qualifying day?", a: "One wager on Divvy that meets the minimum stake + minimum odds within a 24-hour window counts as one qualifying day. Multiple wagers in a single day still count as one day toward the streak." },
-            { q: "What if I miss a day?", a: "No problem. The streak doesn't have to be consecutive. Hit 20 qualifying days at any point during the campaign window to qualify." },
-            { q: "When does the Streak Pool get distributed?", a: "At season close on 26 July 2026. Equal share among all wallets that hit the threshold." },
+            { q: "What's the Streak Pool and how do I qualify?", a: "A fixed SOL pool split equally among every wallet that hits 20 qualifying days during the campaign. A qualifying day = one wager that meets the minimum stake (0.05 SOL) and minimum odds (1.50) within a 24-hour window. Days don't need to be consecutive — miss a day and pick up later. The pool is distributed at season close on 26 July alongside other rewards." },
             { q: "What is Divvy.bet?", a: "Divvy is a non-custodial sportsbook on Solana. You bet from your wallet, settle instantly and stay in control of your funds." },
             { q: "Who can participate?", a: "18+ only. Availability may vary by jurisdiction. Terms apply." },
           ].map((item, i) => (
