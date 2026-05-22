@@ -323,7 +323,7 @@ export default function Dashboard() {
       </section>
 
       <footer className="container py-8 text-sm text-foreground/55 border-t hairline">
-        Slip Tickets credit to your wallet when you connect on Divvy. Season One standings TBD.
+        Tickets track on your dashboard. Connect your wallet on Divvy to stack more through wagering.
       </footer>
     </main>
   );
