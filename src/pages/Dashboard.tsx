@@ -1,5 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
+// Single source of truth for the live Grand Jackpot pool (SOL).
+// Replace this with a backend fetch when revshare data is wired up.
+function useGrandJackpotSol() {
+  const [sol, setSol] = useState(100);
+  useEffect(() => {
+    // Placeholder for live updates from backend revshare feed.
+    // e.g. subscribe to a channel and call setSol(newValue)
+  }, []);
+  return sol;
+}
 import { Copy, Check, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import slipImage from "@/assets/ticket.png";
@@ -83,6 +94,9 @@ export default function Dashboard() {
   const slipPoints = 1 + refs.length;
   const refPoints = refs.length;
 
+  const grandJackpotSol = useGrandJackpotSol();
+  const grandJackpotDisplay = `${grandJackpotSol}+ SOL`;
+
   const animPoints = useCountUp(slipPoints);
   const animRefPts = useCountUp(refPoints);
 
@@ -159,8 +173,8 @@ export default function Dashboard() {
 
           <div className="grid grid-cols-3 gap-3">
             <Stat label="Tickets" value={animPoints.toLocaleString()} accent="green" />
-            <Stat label="Weekly Entries" value="1" sub="this week" />
-            <Stat label="Grand Jackpot" value="Entered" accent="green" sub="Draw 26 July" />
+            <Stat label="Weekly Entries" value="1" sub="this week" subExtra="→ 10 SOL pool" />
+            <Stat label="Grand Jackpot" value={grandJackpotDisplay} accent="green" sub="Entered ✓ Draw 26 July" />
           </div>
 
           {/* Streak Progress */}
@@ -185,7 +199,7 @@ export default function Dashboard() {
               ))}
             </div>
             <p className="mt-4 text-xs text-foreground/60 leading-relaxed">
-              Hit 20 qualifying days during the campaign to split the Streak Pool with all other qualifiers. Place a wager of 0.05 SOL or more on Divvy each day to count. Days don't need to be consecutive.
+              Hit 20 qualifying days during the campaign to split the 50 SOL Streak Pool with all other qualifiers. Place a wager of 0.05 SOL or more on Divvy each day to count. Days don't need to be consecutive.
             </p>
           </div>
 
@@ -279,18 +293,19 @@ export default function Dashboard() {
           <div className="surface">
             <div className="px-5 pt-5">
               <div className="label-caps text-electric-green">Top Rewards This Season</div>
-              <div className="font-serif-display text-2xl mt-1">What you're climbing for</div>
+              <div className="font-serif-display text-2xl mt-1">What you're playing for</div>
               
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-foreground/10 mt-4 border-t hairline">
               {[
-                { tag: "Every week", title: "Weekly Pool", sub: "Multiple winners drawn each Sunday throughout the campaign." },
-                { tag: "Consistency reward", title: "Streak Pool", sub: "Hit 20 qualifying days to split the pool equally with all other qualifiers. Drawn at season close." },
-                { tag: "One big drop", title: "World Cup Grand Jackpot", sub: "One winner drawn 26 July 2026, one week after the World Cup Final." },
+                { tag: "Every week", title: "Weekly Pool", headline: "10 SOL per draw", sub: "Multiple winners drawn each week throughout the World Cup. Tickets earned that week qualify." },
+                { tag: "Consistency reward", title: "Streak Pool", headline: "50 SOL split pool", sub: "Hit 20 qualifying days to split the pool equally with all other qualifiers. Drawn at season close." },
+                { tag: "One big drop", title: "World Cup Grand Jackpot", headline: grandJackpotDisplay + " growing", sub: "Multiple winners drawn at the World Cup Final. Every Ticket from the whole season counts." },
               ].map((r) => (
                 <div key={r.title} className="bg-background p-5">
                   <div className="label-caps text-electric-green">{r.tag}</div>
                   <div className="font-serif-display text-xl mt-1">{r.title}</div>
+                  <div className="font-mono-num text-sm text-electric-green mt-2">{r.headline}</div>
                   <p className="text-xs text-foreground/60 mt-2 leading-snug">{r.sub}</p>
                 </div>
               ))}
@@ -363,13 +378,14 @@ export default function Dashboard() {
   );
 }
 
-function Stat({ label, value, accent, sub }: { label: string; value: string; accent?: "green" | "blue"; sub?: string }) {
+function Stat({ label, value, accent, sub, subExtra }: { label: string; value: string; accent?: "green" | "blue"; sub?: string; subExtra?: string }) {
   const color = accent === "green" ? "text-electric-green" : accent === "blue" ? "text-electric-blue" : "";
   return (
     <div className="surface-soft p-4">
       <div className="label-caps">{label}</div>
       <div className={`font-mono-num text-2xl md:text-3xl mt-1 ${color}`}>{value}</div>
       {sub && <div className="text-xs text-foreground/55 mt-1">{sub}</div>}
+      {subExtra && <div className="text-xs text-foreground/45 mt-0.5">{subExtra}</div>}
     </div>
   );
 }
