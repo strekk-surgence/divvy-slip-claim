@@ -1,5 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
+// Single source of truth for the live Grand Jackpot pool (SOL).
+// Replace this with a backend fetch when revshare data is wired up.
+function useGrandJackpotSol() {
+  const [sol, setSol] = useState(100);
+  useEffect(() => {
+    // Placeholder for live updates from backend revshare feed.
+    // e.g. subscribe to a channel and call setSol(newValue)
+  }, []);
+  return sol;
+}
 import { Copy, Check, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import slipImage from "@/assets/ticket.png";
