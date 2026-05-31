@@ -293,18 +293,19 @@ export default function Dashboard() {
           <div className="surface">
             <div className="px-5 pt-5">
               <div className="label-caps text-electric-green">Top Rewards This Season</div>
-              <div className="font-serif-display text-2xl mt-1">What you're climbing for</div>
+              <div className="font-serif-display text-2xl mt-1">What you're playing for</div>
               
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-foreground/10 mt-4 border-t hairline">
               {[
-                { tag: "Every week", title: "Weekly Pool", sub: "Multiple winners drawn each Sunday throughout the campaign." },
-                { tag: "Consistency reward", title: "Streak Pool", sub: "Hit 20 qualifying days to split the pool equally with all other qualifiers. Drawn at season close." },
-                { tag: "One big drop", title: "World Cup Grand Jackpot", sub: "One winner drawn 26 July 2026, one week after the World Cup Final." },
+                { tag: "Every week", title: "Weekly Pool", headline: "10 SOL per draw", sub: "Multiple winners drawn each week throughout the World Cup. Tickets earned that week qualify." },
+                { tag: "Consistency reward", title: "Streak Pool", headline: "50 SOL split pool", sub: "Hit 20 qualifying days to split the pool equally with all other qualifiers. Drawn at season close." },
+                { tag: "One big drop", title: "World Cup Grand Jackpot", headline: grandJackpotDisplay + " growing", sub: "Multiple winners drawn at the World Cup Final. Every Ticket from the whole season counts." },
               ].map((r) => (
                 <div key={r.title} className="bg-background p-5">
                   <div className="label-caps text-electric-green">{r.tag}</div>
                   <div className="font-serif-display text-xl mt-1">{r.title}</div>
+                  <div className="font-mono-num text-sm text-electric-green mt-2">{r.headline}</div>
                   <p className="text-xs text-foreground/60 mt-2 leading-snug">{r.sub}</p>
                 </div>
               ))}
