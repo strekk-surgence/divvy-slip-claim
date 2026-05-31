@@ -94,6 +94,9 @@ export default function Dashboard() {
   const slipPoints = 1 + refs.length;
   const refPoints = refs.length;
 
+  const grandJackpotSol = useGrandJackpotSol();
+  const grandJackpotDisplay = `${grandJackpotSol}+ SOL`;
+
   const animPoints = useCountUp(slipPoints);
   const animRefPts = useCountUp(refPoints);
 
