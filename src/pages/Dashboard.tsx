@@ -377,13 +377,14 @@ export default function Dashboard() {
   );
 }
 
-function Stat({ label, value, accent, sub }: { label: string; value: string; accent?: "green" | "blue"; sub?: string }) {
+function Stat({ label, value, accent, sub, subExtra }: { label: string; value: string; accent?: "green" | "blue"; sub?: string; subExtra?: string }) {
   const color = accent === "green" ? "text-electric-green" : accent === "blue" ? "text-electric-blue" : "";
   return (
     <div className="surface-soft p-4">
       <div className="label-caps">{label}</div>
       <div className={`font-mono-num text-2xl md:text-3xl mt-1 ${color}`}>{value}</div>
       {sub && <div className="text-xs text-foreground/55 mt-1">{sub}</div>}
+      {subExtra && <div className="text-xs text-foreground/45 mt-0.5">{subExtra}</div>}
     </div>
   );
 }
