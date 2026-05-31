@@ -173,8 +173,8 @@ export default function Dashboard() {
 
           <div className="grid grid-cols-3 gap-3">
             <Stat label="Tickets" value={animPoints.toLocaleString()} accent="green" />
-            <Stat label="Weekly Entries" value="1" sub="this week" />
-            <Stat label="Grand Jackpot" value="Entered" accent="green" sub="Draw 26 July" />
+            <Stat label="Weekly Entries" value="1" sub="this week" subExtra="→ 10 SOL pool" />
+            <Stat label="Grand Jackpot" value={grandJackpotDisplay} accent="green" sub="Entered ✓ Draw 26 July" />
           </div>
 
           {/* Streak Progress */}
